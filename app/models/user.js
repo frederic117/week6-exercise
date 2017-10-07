@@ -3,39 +3,44 @@ var mongoose = require("mongoose");
 var bcrypt = require("bcrypt-nodejs");
 
 // define the schema for our user model
-var userSchema = mongoose.Schema({
-  local: {
-    email: {
-      type: String,
-      required: true,
-      unique: true
+var userSchema = mongoose.Schema(
+  {
+    local: {
+      email: {
+        type: String,
+        unique: true
+      },
+      password: {
+        type: String,
+        unique: true
+      },
+      username: {
+        type: String
+      }
     },
-    password: {
-      type: String,
-      required: true,
-      unique: true
+    facebook: {
+      id: String,
+      token: String,
+      email: String,
+      name: String
     },
-    username: String
+    twitter: {
+      id: String,
+      token: String,
+      displayName: String,
+      username: String
+    },
+    google: {
+      id: String,
+      token: String,
+      email: String,
+      name: String
+    }
   },
-  facebook: {
-    id: String,
-    token: String,
-    email: String,
-    name: String
-  },
-  twitter: {
-    id: String,
-    token: String,
-    displayName: String,
-    username: String
-  },
-  google: {
-    id: String,
-    token: String,
-    email: String,
-    name: String
+  {
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
   }
-});
+);
 
 // generating a hash
 userSchema.methods.generateHash = function(password) {
