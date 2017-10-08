@@ -1,0 +1,14 @@
+const express = require("express");
+const profileController = express.Router();
+const User = require("../models/user");
+const ensureLoggedIn = require("../../middlewares/user-roles-auth");
+const ensureLoggedOut = require("../../middlewares/user-roles-auth");
+
+// PROFILE SECTION =========================
+// profileController.get("/profile", ensureLoggedIn, function(req, res) {
+//   res.render("profile.ejs", {
+//     user: req.user
+//   });
+// });
+
+module.exports = profileController;

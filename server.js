@@ -14,6 +14,9 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 
+const profileController = require("./app/routes/profileController.js");
+const streamController = require("./app/routes/streamController.js");
+
 // configuration ===============================================================
 mongoose.connect("mongodb://localhost/insidersDb", {
   useMongoClient: true
@@ -42,7 +45,9 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require("./app/routes/auth.js")(app, passport); // load our routes and pass in our app and fully configured passport
+require("./app/routes/auth.js")(app, passport);
+app.use("/profile", profileController);
+app.use("/stream", streamController);
 
 // launch ======================================================================
 app.listen(port);
