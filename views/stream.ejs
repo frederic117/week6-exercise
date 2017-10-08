@@ -48,14 +48,31 @@
           Leaderboard
         </a>
 
-                <span class="nav-item">
-          <a class="button">
+        <span class="nav-item">
+          <% if(!user) { %>
+          <a href="/login" class="button">
             Log in
           </a>
-          <a class="button">
+          <a href="/signup" class="button">
             Sign up
           </a>
         </span>
+        <%} else { %>
+        <div class="nav-profile">
+        <a id="profile-pic" href="/profile">
+          <div class="nav-photo-profil">
+            <img  src="./images/Warren.jpg" alt="">
+          </div>
+        </a>
+          <div class="nav-user-profile">
+            <div id ="nav-username" class="nav-user-name">@<%= user.local.username%></div>
+            <div class="nav-status">
+              <div class="nav-status-light"></div>
+              <a href="/logout">Logout</a>
+            </div>
+          </div>
+
+      <%  } %>
             </div>
         </div>
     </nav>
@@ -255,6 +272,7 @@
                 </div>
             </div>
     </section>
+
 </body>
 
 </html>
