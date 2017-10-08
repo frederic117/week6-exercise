@@ -1,0 +1,89 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.section.main {
+    background-color: #f9f9f9;
+    padding-top: 5%;
+}
+
+#top {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+@media screen and (max-width: 768px) {
+    #top {
+        position: static;
+    }
+}
+
+.nav-item .button+.button {
+    margin-left: 10px;
+}
+
+#logo {
+    max-height: 3rem;
+}
+
+.nav-item a:not(.button).is-tab.is-active,
+a.nav-item:not(.button).is-tab.is-active {
+    border-bottom: 3px solid #192b41;
+    color: #192b41;
+}
+
+.nav-item a:not(.button).is-tab:hover,
+a.nav-item:not(.button).is-tab:hover {
+    border-bottom-color: #192b41;
+    border-top-color: transparent;
+}
+
+.button.is-hovered,
+.button:hover {
+    background-color: #4caf50;
+    border-color: transparent;
+    color: #fff;
+}
+
+.button:focus:not(:active) {
+    -webkit-box-shadow: 0 0 0 0.125em #192b41;
+    box-shadow: 0 0 0 0.125em rgba#192b41;
+}
+
+.button.is-focused,
+.button:focus {
+    border-color: #192b41;
+    color: #363636;
+}
+
+#formNav {
+    width: 47%;
+    margin-left: 3%;
+}
+
+#formNav1 {
+    width: 100%;
+}
+
+#formNav2 {
+    width: 100%;
+}
+
+.button:focus:not(:active),
+.button.is-active,
+.button:active,
+.button.is-focused,
+.button:focus,
+.input.is-active,
+.input.is-focused,
+.input:active,
+.input:focus,
+.textarea.is-active,
+.textarea.is-focused,
+.textarea:active,
+.textarea:focus {
+    box-shadow: 0 0 0 0.125em rgb(25, 43, 65);
+    border-color: #192b41;
+}

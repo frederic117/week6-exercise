@@ -1,31 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body         { padding-top:80px; }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Insiders landing page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
 </head>
+
 <body>
-<div class="container">
+    <nav class="nav has-shadow" id="top">
+        <div class="container">
+            <div class="nav">
+                <a class="nav-item" href="../index.html">
+                    <img id="logo" src="/images/logo.png" alt="Description">
+                </a>
+            </div>
+            <div class="nav" id="formNav">
+                <div class="nav-item field" id="formNav1">
+                    <form method="post" class="control has-icons-right" id="formNav2">
+                        <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <span id="loupe" class="icon is-small is-right">
+                    <button type="submit"  class=" button fa fa-search" ></button>
+                  </span>
+                    </form>
+                </div>
+            </div>
+            <span class="nav-toggle">
+        <span></span>
+            <span></span>
+            <span></span>
+            </span>
+            <div class="nav-right nav-menu">
+                <a class="nav-item is-tab is-active">
+          Home
+        </a>
+                <a class="nav-item is-tab">
+          Features
+        </a>
+                <a class="nav-item is-tab">
+          Team
+        </a>
+                <a class="nav-item is-tab">
+          Help
+        </a>
+                <span class="nav-item">
+          <a href="/login" class="button">
+            Log in
+          </a>
+          <a href="/signup" class="button">
+            Sign up
+          </a>
+        </span>
+            </div>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container content">
+            <p class="has-text-centered">Skeleton template for a basic layout.</p>
+        </div>
+    </section>
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
 
-        <p>Login or Register with:</p>
 
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-        <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-        <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
-    </div>
 
-    <div class="text-center">
-    </div>
-
-</div>
+    <script type="text/javascript" src="JSforCSS.js"></script>
 </body>
+
 </html>
