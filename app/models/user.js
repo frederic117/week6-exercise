@@ -10,11 +10,11 @@ var userSchema = mongoose.Schema(
         unique: true
       },
       password: {
-        type: String,
-        unique: true
+        type: String
       },
       username: {
-        type: String
+        type: String,
+        unique: true
       }
     },
     facebook: {
@@ -39,6 +39,10 @@ var userSchema = mongoose.Schema(
       type: String,
       enum: ["user", "admin"],
       default: "user"
+    },
+    picProfile: {
+      type: String,
+      default: "/images/warren.jpg"
     }
   },
   {

@@ -147,16 +147,16 @@
                                     <figure class="image is-32x32 is-circle"><img src="/images/warren.jpg" alt="Image"></figure>
                                 </div>
                                 <div class="media-content">
-                                    <form action="">
+                                    <form action="/stream" method="post">
                                         <div class="field">
-                                            <div class="control"><textarea maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
+                                            <div class="control"><textarea id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
                                             <!---->
                                         </div>
                                         <div class="level">
                                             <div class="level-left"><a class="has-text-grey-light"><span class="icon"><i class="fa fa-image"></i></span></a></div>
                                             <div class="level-right">
                                                 <div class="level-item has-text-grey">200</div>
-                                                <div class="level-item"><button class="button is-outlined is-primary">Babble</button>
+                                                <div class="level-item"><button id="babble-submit" type="submit" class="button is-outlined is-primary">Babble</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,33 +164,46 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tweets card-content p-x-1">
-                            <article class="media tweet">
-                                <figure class="media-left">
-                                    <p class="image is-64x64 is-circle">
-                                        <a href="#/@WBuffet" class=""><img src="/images/warren.jpg"></a>
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="content">
-                                        <p class="tweet-meta"><a href="#/@WBuffet" class="has-text-dark"><strong>Warren Buffet</strong></a> <small>@WBuffet</small> <small class="has-text-grey-light">1 month ago</small></p>
-                                        <div class="tweet-body has-text-grey">My first trying this apps, Awesome dude!</div>
-                                    </div>
-                                    <nav class="level is-mobile">
-                                        <div class="level-left">
-                                            <a class="level-item has-text-grey-light">
-                                                <span class="icon is-small"><i class="fa fa-comment-o"></i></span>
-                                                <small> 0</small>
-                                            </a>
-                                            <a class="level-item has-text-grey-light">
-                                                <span class="icon is-small"><i class="fa fa-heart"></i></span>
-                                                <small> 0</small></a>
-                                    </nav>
-                                    </div>
-                                    <div class="media-right"><button class="delete"></button></div>
-                            </article>
-                            </div>
-                        </div>
+<%# Zone of Babbles%>
+<div class="babbles-box" id="babble-container">
+
+  <% if (timeline.length > 0) { %>
+    <% timeline.forEach(function(babble) { %>
+      <div class="tweets card-content p-x-1">
+          <article class="media tweet">
+              <figure class="media-left">
+                  <p class="image is-64x64 is-circle">
+                      <a href="#" class=""><img src="<%= user.picProfile%>"></a>
+                  </p>
+              </figure>
+              <div class="media-content">
+                  <div class="content">
+                      <p class="tweet-meta"><a href="/profile/<%= babble.user_name %>" class="has-text-dark"><strong><%= user.local.username%></strong></a> <small class="has-text-grey-light"><%= moment(babble.created_at).format("LL, LTS") %></small></p>
+                      <div class="tweet-body has-text-grey"><%= babble.babble%></div>
+                  </div>
+                  <nav class="level is-mobile">
+                      <div class="level-left">
+                          <a class="level-item has-text-grey-light">
+                              <span class="icon is-small"><i class="fa fa-comment-o"></i></span>
+                              <small> 0</small>
+                          </a>
+                          <a class="level-item has-text-grey-light">
+                              <span class="icon is-small"><i class="fa fa-heart"></i></span>
+                              <small> 0</small></a>
+                  </nav>
+                  </div>
+                  <div class="media-right"><button class="delete"></button></div>
+          </article>
+          </div>
+      </div>
+          <% }) %>
+      <% } else { %>
+        <div class="babble-container no-babble">
+          <p>The timeline is empty</p>
+        </div>
+      <%  }%>
+</div>
+<%# End of babble container%>
                         <button class="button m-t-1 m-b-1 is-fullwidth">
             Load more...
         </button>
@@ -272,6 +285,9 @@
                 </div>
             </div>
     </section>
+
+
+<script type="text/javascript">
 
 </body>
 

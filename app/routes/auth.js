@@ -6,13 +6,6 @@ module.exports = function(app, passport) {
     res.render("index.ejs");
   });
 
-  // PROFILE SECTION =========================
-  // app.get("/stream", function(req, res) {
-  //   res.render("stream.ejs", {
-  //     user: req.user
-  //   });
-  // });
-
   // LOGOUT ==============================
   app.get("/logout", function(req, res) {
     req.logout();

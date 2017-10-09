@@ -44,6 +44,11 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+// Magic trick
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 // routes ======================================================================
 require("./app/routes/auth.js")(app, passport);
 app.use("/", profileController);
