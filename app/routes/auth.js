@@ -7,11 +7,11 @@ module.exports = function(app, passport) {
   });
 
   // PROFILE SECTION =========================
-  app.get("/stream", function(req, res) {
-    res.render("stream.ejs", {
-      user: req.user
-    });
-  });
+  // app.get("/stream", function(req, res) {
+  //   res.render("stream.ejs", {
+  //     user: req.user
+  //   });
+  // });
 
   // LOGOUT ==============================
   app.get("/logout", function(req, res) {

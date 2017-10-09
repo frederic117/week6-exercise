@@ -1,4 +1,3 @@
-// load the things we need
 var mongoose = require("mongoose");
 var bcrypt = require("bcrypt-nodejs");
 
@@ -35,6 +34,11 @@ var userSchema = mongoose.Schema(
       token: String,
       email: String,
       name: String
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user"
     }
   },
   {
