@@ -1,8 +1,9 @@
-var mongoose = require("mongoose");
-var bcrypt = require("bcrypt-nodejs");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt-nodejs");
+const Schema = mongoose.Schema;
 
 // define the schema for our user model
-var userSchema = mongoose.Schema(
+const userSchema = mongoose.Schema(
   {
     local: {
       email: {
@@ -43,7 +44,8 @@ var userSchema = mongoose.Schema(
     picProfile: {
       type: String,
       default: "/images/warren.jpg"
-    }
+    },
+    following: [{ type: Schema.Types.ObjectId, ref: "User" }]
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const babbleSchema = new Schema(
@@ -20,5 +20,5 @@ const babbleSchema = new Schema(
 
 //
 
-var Babble = mongoose.model("Babble", babbleSchema);
+const Babble = mongoose.model("Babble", babbleSchema);
 module.exports = Babble;
