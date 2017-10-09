@@ -46,7 +46,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 require("./app/routes/auth.js")(app, passport);
-app.use("/profile", profileController);
+app.use("/", profileController);
 app.use("/stream", streamController);
 
 // launch ======================================================================
