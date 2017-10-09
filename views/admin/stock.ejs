@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Insiders Administration</title>
+
+</head>
+
+<h1>Welcome to the user Admin.</h1>
+<br>
+<h2>Stock management</h2>
+<br>
+<fieldset>
+  <legend>Create a new stock</legend>
+  <form class="" action="/admin/stock" method="post">
+  <label>Stock (long name)
+    <input type="text" name="longName">
+  </label>
+  <label>Isin
+    <input type="text" name="isin">
+  </label>
+  <label>Stock (short name)
+    <input type="text" name="shortName">
+  </label>
+  <label>Description
+    <textarea name="description"></textarea>
+  </label>
+  <label>Price
+    <input type="Number" name="price">
+  </label>
+  <label>Price variation
+    <input type="Number" name="variation">
+  </label>
+  <label>Tendency
+    Bull <input type="range" min="0" max="100" step="10" value="50" id="tendency" name="tendency">Bear
+  </label>
+  </form>
+</fieldset>
+<br>
+<hr>
+<h1>Stock lists</h1>

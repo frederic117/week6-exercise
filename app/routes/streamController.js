@@ -23,7 +23,7 @@ streamController.get("/", ensureLoggedIn, function(req, res) {
     });
 });
 
-streamController.post("/", (req, res, next) => {
+streamController.post("/", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
 
   User.findOne({ username: user.username }).exec((err, user) => {
