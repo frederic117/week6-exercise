@@ -9,12 +9,13 @@
 
 </head>
 
-<h1>Welcome to the user Admin.</h1>
+<h1>Welcome to the user Administration.</h1>
+<a href="/admin">Home (admin)</a>
 <br>
-<h2>Stock management</h2>
+<h2>Stocks management</h2>
 <br>
 <fieldset>
-  <legend>Create a new stock</legend>
+  <legend><strong>Create a new stock</strong></legend>
   <form class="" action="/admin/stock" method="post">
   <label>Stock (long name)
     <input type="text" name="longName">
@@ -35,10 +36,35 @@
     <input type="Number" name="variation">
   </label>
   <label>Tendency
-    Bull <input type="range" min="0" max="100" step="10" value="50" id="tendency" name="tendency">Bear
+    Bull <input type="range" min="0" max="100" step="1" value="50" id="tendency" name="tendency">Bear
   </label>
+  <input type="submit" name="btn-stock-creation" value="Save!">
   </form>
 </fieldset>
 <br>
 <hr>
 <h1>Stock lists</h1>
+<table>
+<tr style="border: 1px solid black; padding: 5px;">
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Stock (long name) </th>
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Stock (short name)  </th>
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Isin </th>
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Current price </th>
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Variation </th>
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Trend (Bull) </th>
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Trend (Bear) </th>
+</tr>
+
+<% stocks.forEach((stock)=>{ %>
+  <tr>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.longName%> </td>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.shortName%> </td>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.isin%> </td>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.price%> </td>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.variation%> </td>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.trend[0]%> </td>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.trend[1]%> </td>
+  </tr>
+<% }) %>
+
+</table>
