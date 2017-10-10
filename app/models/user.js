@@ -49,7 +49,13 @@ const userSchema = mongoose.Schema(
     score: {
       type: Number,
       default: 0
-    }
+    },
+    watchList: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Stock"
+      }
+    ]
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

@@ -12,7 +12,19 @@ const babbleSchema = new Schema(
       ref: "User"
     },
     user_name: String,
-    babble_img: String
+    stockLink: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Stock"
+      }
+    ],
+    babble_img: String,
+    reply: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Babble"
+      }
+    ]
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
