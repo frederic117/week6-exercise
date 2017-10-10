@@ -92,6 +92,30 @@ a {
     font-size: 18px;
 }
 
+
+/*nav babbles*****************************************/
+
+.babblesMenu {
+    display: flex;
+}
+
+.navbar.is-dark {
+    background-color: #192b41;
+    color: #f9f9f9;
+}
+
+.navbar-item.is-tab.is-active {
+    background-color: transparent;
+    border-bottom-color: #f9f9f9;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    color: #f9f9f9;
+    padding-bottom: calc(.5rem - 3px);
+}
+
+
+/******************************************/
+
 .icon,
 .icon.is-large,
 .icon.is-medium,
@@ -114,6 +138,15 @@ a {
     }
     .nav-toggle {
         padding-top: 75px;
+    }
+    .level-right {
+        display: flex;
+    }
+    .level-item:not(:last-child) {
+        margin-bottom: 0px;
+    }
+    .babMenu {
+        padding-top: 12px;
     }
 }
 
