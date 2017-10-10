@@ -8,9 +8,19 @@
     <title> Insiders Stream page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="minireset.min.css">
+    <%# <link rel="stylesheet" type="text/css" href="minireset.min.css">%>
     <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+.ui-autocomplete-loading {
+  background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+}
+</style>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 </head>
 
@@ -25,9 +35,9 @@
             <div class="nav" id="formNav">
                 <div class="nav-item field" id="formNav1">
                     <form method="post" class="control has-icons-right" id="formNav2">
-                        <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <input id="search-query" class="input is-hovered" type="text" placeholder="Stock or Username">
                         <span id="loupe" class="icon is-small is-right">
-                    <i type="submit"  class="fa fa-search" ></i>
+                    <i id="quicksearch" type="submit"  class="fa fa-search" ></i>
                   </span>
                     </form>
                 </div>
@@ -88,7 +98,7 @@
 
 
 
-
+      <script type="text/javascript" src="JS/search.js"></script>
     <script type="text/javascript" src="JS/JSforCSS.js"></script>
 </body>
 

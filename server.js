@@ -18,6 +18,7 @@ const profileController = require("./app/routes/profileController.js");
 const streamController = require("./app/routes/streamController.js");
 const stockController = require("./app/routes/stockController.js");
 const adminController = require("./app/routes/adminController.js");
+const searchController = require("./app/routes/searchController.js");
 
 // configuration ===============================================================
 mongoose.connect("mongodb://localhost/insidersDb", {
@@ -57,6 +58,7 @@ app.use("/profile", profileController);
 app.use("/stream", streamController);
 app.use("/stock", stockController);
 app.use("/admin", adminController);
+app.use("/", searchController);
 
 // launch ======================================================================
 app.listen(port);
