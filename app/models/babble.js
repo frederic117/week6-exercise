@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const babbleSchema = new Schema(
@@ -11,7 +11,8 @@ const babbleSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User"
     },
-    user_name: String
+    user_name: String,
+    babble_img: String
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
@@ -20,5 +21,5 @@ const babbleSchema = new Schema(
 
 //
 
-var Babble = mongoose.model("Babble", babbleSchema);
+const Babble = mongoose.model("Babble", babbleSchema);
 module.exports = Babble;

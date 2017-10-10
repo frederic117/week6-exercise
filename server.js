@@ -16,6 +16,8 @@ const session = require("express-session");
 
 const profileController = require("./app/routes/profileController.js");
 const streamController = require("./app/routes/streamController.js");
+const stockController = require("./app/routes/stockController.js");
+const adminController = require("./app/routes/adminController.js");
 
 // configuration ===============================================================
 mongoose.connect("mongodb://localhost/insidersDb", {
@@ -53,6 +55,8 @@ app.use((req, res, next) => {
 require("./app/routes/auth.js")(app, passport);
 app.use("/", profileController);
 app.use("/stream", streamController);
+app.use("/stock", stockController);
+app.use("/admin", adminController);
 
 // launch ======================================================================
 app.listen(port);
