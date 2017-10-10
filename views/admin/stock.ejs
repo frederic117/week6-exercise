@@ -38,6 +38,12 @@
   <label>Tendency
     Bull <input type="range" min="0" max="100" step="1" value="50" id="tendency" name="tendency">Bear
   </label>
+  <label>URL of company image
+    <input type="text" name="stock_img">
+  </label>
+  <label>URL of API to get data
+    <input type="text" name="url_price">
+  </label>
   <input type="submit" name="btn-stock-creation" value="Save!">
   </form>
 </fieldset>
@@ -53,6 +59,8 @@
   <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Variation </th>
   <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Trend (Bull) </th>
   <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> Trend (Bear) </th>
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> URL Image </th>
+  <th style="border: 1px solid black; padding: 5px; background-color: lightgrey;"> URL API price </th>
 </tr>
 
 <% stocks.forEach((stock)=>{ %>
@@ -64,6 +72,8 @@
     <td style="border: 1px solid black; padding: 5px;"> <%= stock.variation%> </td>
     <td style="border: 1px solid black; padding: 5px;"> <%= stock.trend[0]%> </td>
     <td style="border: 1px solid black; padding: 5px;"> <%= stock.trend[1]%> </td>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.stock_img%> </td>
+    <td style="border: 1px solid black; padding: 5px;"> <%= stock.url_price%> </td>
   </tr>
 <% }) %>
 

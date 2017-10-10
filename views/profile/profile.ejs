@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Insiders My profile page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="minireset.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
+
+</head>
+
+<body>
+    <nav class="nav has-shadow " id="top">
+        <div class="container" id="top2">
+            <div class="nav">
+                <a class="nav-item" href="../index.html">
+                    <img id="logo" src="images/logo.png" alt="Description">
+                </a>
+            </div>
+            <div class="nav" id="formNav">
+                <div class="nav-item field" id="formNav1">
+                    <form method="post" class="control has-icons-right" id="formNav2">
+                        <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <span id="loupe" class="icon is-small is-right">
+                    <i type="submit"  class="fa fa-search" ></i>
+                  </span>
+                    </form>
+                </div>
+            </div>
+
+            <span class="nav-toggle">
+                    <span></span>
+            <span></span>
+            <span></span>
+            </span>
+            <div class="nav-right nav-menu">
+                <div id="menu">
+                    <a class="nav-item is-tab is-active">
+        Stream
+        </a>
+                    <a class="nav-item is-tab">
+        Trending
+        </a>
+                    <a class="nav-item is-tab">
+        Leaderboard
+        </a>
+                </div>
+                <span class="nav-item">
+                        <% if(!user) { %>
+                        <a href="/login" class="button">
+                          Log in
+                        </a>
+                        <a href="/signup" class="button">
+                          Sign up
+                        </a>
+                      </span>
+                <%} else { %>
+                    <div class="nav-profile">
+                        <a id="profile-pic" href="/profile">
+                            <div class="nav-photo-profil">
+                                <img src="./images/Warren.jpg" alt="">
+                            </div>
+                        </a>
+                        <div class="nav-user-profile">
+                            <div id="nav-username" class="nav-user-name">@
+                                <%= user.local.username%>
+                            </div>
+                            <div class="nav-status">
+                                <div class="nav-status-light"></div>
+                                <a href="/logout">Logout</a>
+                            </div>
+                        </div>
+
+                        <%  } %>
+                    </div>
+            </div>
+    </nav>
+    <section class="section main">
+        <div class="container">
+    <fieldset>
+      <legend>My profile</legend>
+      <%if (user.picProfile) { %>
+        <img src="<%= user.picProfile %>" alt="my picture">
+    <%  } else { %>
+        <img src="/images/avatar.png" alt="my picture">
+    <%  } %>
+
+      <p><strong>User name</strong></p>
+      <p><%= user.local.username %></p>
+      <br>
+      <p><strong>Email</strong></p>
+      <p><%= user.local.email %></p>
+      <br>
+      <p><strong>Location</strong></p>
+      <p><%= user.location ? user.location : "Secret..." %></p>
+      <br>
+      <p><strong>Website</strong></p>
+      <p><%= user.website ? user.website : "Secret..." %></p>
+      <br>
+      <p><strong>Bio</strong></p>
+      <p><%= user.bio ? user.bio : "Secret..." %></p>
+      <br>
+      <a href="/profile/edit"><button type="button" name="button">Update my profile</button></a>
+    </fieldset>
+    <br>
+    <br>
+
+    <fieldset>
+      <legend>My connect details</legend>
+      <div class="row">
+
+          <!-- LOCAL INFORMATION -->
+          <div class="col-sm-6">
+              <div class="well">
+                  <h3><span class="fa fa-user"></span> Local</h3>
+
+                  <% if (user.local.email) { %>
+                      <p>
+                          <strong>id</strong>: <%= user._id %><br>
+                          <strong>email</strong>: <%= user.local.email %><br>
+                          <strong>password</strong>: <%= user.local.password %>
+                      </p>
+
+                      <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                  <% } else { %>
+                      <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                  <% } %>
+
+              </div>
+          </div>
+
+          <!-- FACEBOOK INFORMATION -->
+          <div class="col-sm-6">
+              <div class="well">
+                  <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+
+                  <!-- check if the user has this token (is the user authenticated with this social account) -->
+                  <% if (user.facebook.token) { %>
+                      <p>
+                          <strong>id</strong>: <%= user.facebook.id %><br>
+                          <strong>token</strong>: <%= user.facebook.token %><br>
+                          <strong>email</strong>: <%= user.facebook.email %><br>
+                          <strong>name</strong>: <%= user.facebook.name %><br>
+                      </p>
+
+                      <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
+                  <% } else { %>
+                      <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+                  <% } %>
+
+              </div>
+          </div>
+      </div>
+      <div class="row">
+
+          <!-- TWITTER INFORMATION -->
+          <div class="col-sm-6">
+              <div class="well">
+                  <h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
+
+                  <% if (user.twitter.token) { %>
+                      <p>
+                          <strong>id</strong>: <%= user.twitter.id %><br>
+                          <strong>token</strong>: <%= user.twitter.token %><br>
+                          <strong>display name</strong>: <%= user.twitter.displayName %><br>
+                          <strong>username</strong>: <%= user.twitter.username %>
+                      </p>
+
+                      <a href="/unlink/twitter" class="btn btn-info">Unlink</a>
+                  <% } else { %>
+                      <a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
+                  <% } %>
+
+              </div>
+          </div>
+
+          <!-- GOOGLE INFORMATION -->
+          <div class="col-sm-6">
+              <div class="well">
+                  <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h3>
+
+                  <% if (user.google.token) { %>
+                      <p>
+                          <strong>id</strong>: <%= user.google.id %><br>
+                          <strong>token</strong>: <%= user.google.token %><br>
+                          <strong>email</strong>: <%= user.google.email %><br>
+                          <strong>name</strong>: <%= user.google.name %>
+                      </p>
+
+                      <a href="/unlink/google" class="btn btn-danger">Unlink</a>
+                  <% } else { %>
+                      <a href="/connect/google" class="btn btn-danger">Connect Google</a>
+                  <% } %>
+
+              </div>
+          </div>
+      </div>
+
+      <div class="text-center">
+      </div>
+    </fieldset>
+
+
+</div>
+</section>
+</body>
+</html>

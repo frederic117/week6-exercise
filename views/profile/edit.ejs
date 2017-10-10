@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Insiders My profile edit</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="minireset.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
+
+</head>
+
+<body>
+    <nav class="nav has-shadow " id="top">
+        <div class="container" id="top2">
+            <div class="nav">
+                <a class="nav-item" href="../index.html">
+                    <img id="logo" src="images/logo.png" alt="Description">
+                </a>
+            </div>
+            <div class="nav" id="formNav">
+                <div class="nav-item field" id="formNav1">
+                    <form method="post" class="control has-icons-right" id="formNav2">
+                        <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <span id="loupe" class="icon is-small is-right">
+                    <i type="submit"  class="fa fa-search" ></i>
+                  </span>
+                    </form>
+                </div>
+            </div>
+
+            <span class="nav-toggle">
+                    <span></span>
+            <span></span>
+            <span></span>
+            </span>
+            <div class="nav-right nav-menu">
+                <div id="menu">
+                    <a class="nav-item is-tab is-active">
+        Stream
+        </a>
+                    <a class="nav-item is-tab">
+        Trending
+        </a>
+                    <a class="nav-item is-tab">
+        Leaderboard
+        </a>
+                </div>
+                <span class="nav-item">
+                        <% if(!user) { %>
+                        <a href="/login" class="button">
+                          Log in
+                        </a>
+                        <a href="/signup" class="button">
+                          Sign up
+                        </a>
+                      </span>
+                <%} else { %>
+                    <div class="nav-profile">
+                        <a id="profile-pic" href="/profile">
+                            <div class="nav-photo-profil">
+                                <img src="./images/Warren.jpg" alt="">
+                            </div>
+                        </a>
+                        <div class="nav-user-profile">
+                            <div id="nav-username" class="nav-user-name">@
+                                <%= user.local.username%>
+                            </div>
+                            <div class="nav-status">
+                                <div class="nav-status-light"></div>
+                                <a href="/logout">Logout</a>
+                            </div>
+                        </div>
+
+                        <%  } %>
+                    </div>
+            </div>
+    </nav>
+    <section class="section main">
+        <div class="container">
+
+        <a href="/profile">Return to My profile</a>
+        <br>
+
+    <fieldset>
+      <legend>My profile</legend>
+      <form action="/profile/edit" method="post" enctype="multipart/form-data">
+        <%if (user.picProfile) { %>
+          <img src="<%= user.picProfile %>" alt="my picture">
+      <%  } else { %>
+          <img src="/images/avatar.png" alt="my picture">
+      <%  } %>
+      <label> Change your photo
+          <input type="file" name="picProfile" >
+        </label>
+      <br>
+        <br>
+        <p><strong>User name</strong></p>
+        <p><%= user.local.username %></p>
+        <br>
+        <p><strong>Email</strong></p>
+        <p><%= user.local.email %></p>
+        <br>
+        <label>Location
+          <input type="text" name="location" value="<%= user.location %>">
+        </label>
+        <br>
+        <label>Website
+          <input type="text" name="website" value="<%= user.website %>">
+        </label>
+        <br>
+        <label>Bio
+          <textarea type="text" name="bio" ><%= user.bio %></textarea>
+        </label>
+        <br>
+
+        <button type="submit" name="btn-update">Save my profile</button>
+
+      </form>
+    </fieldset>
+</div>
+</section>

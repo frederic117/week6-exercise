@@ -38,7 +38,9 @@ adminController.post("/stock", function(req, res) {
     description: req.body.description,
     price: req.body.price,
     variation: req.body.variation,
-    trend: [req.body.tendency, 100 - req.body.tendency]
+    trend: [req.body.tendency, 100 - req.body.tendency],
+    stock_img: req.body.price.stock_img,
+    url_price: req.body.price.url_price
   });
   newStock.save(err => {
     if (err) {
