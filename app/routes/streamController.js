@@ -26,16 +26,18 @@ streamController.get("/", ensureLoggedIn, function(req, res) {
 streamController.post("/", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
 
-  User.findOne({ username: user.username }).exec((err, user) => {
+  User.findOne({ _id: user._id }).exec((err, user) => {
     if (err) {
       return;
     }
-
+    console.log("LE USER ID EST", user._id);
     const newBabble = new Babble({
       user_id: user._id,
-      user_name: user.username,
+      user_name: user.local.username,
       babble: req.body.babble
     });
+
+    console.log("POST DE BABBLE", newBabble);
 
     newBabble.save(err => {
       if (err) {
@@ -47,6 +49,36 @@ streamController.post("/", ensureLoggedIn, (req, res, next) => {
         res.redirect("/stream");
       }
     });
+  });
+});
+
+streamController.post("/reply", ensureLoggedIn, (req, res, next) => {
+  const user = req.user;
+  const user_id = user._id;
+  const user_name = user.local.username;
+  const babble = req.body.parentModal;
+
+  Babble.findById(babble, (err, babble) => {
+    if (err) {
+      return next(err);
+    }
+
+    const newReply = new Babble({
+      user_id,
+      user_name,
+      babble: req.body.babble
+    });
+
+    Babble.findByIdAndUpdate(
+      { _id: babble._id },
+      { $push: { reply: newReply } },
+      err => {
+        if (err) {
+          return next(err);
+        }
+        return res.redirect("/stream");
+      }
+    );
   });
 });
 
