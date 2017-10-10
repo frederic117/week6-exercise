@@ -8,7 +8,7 @@ const {
 const multer = require("multer");
 const upload = multer({ dest: "./public/uploads/" });
 
-// PROFILE SECTION =========================
+// MY PROFILE SECTION =========================
 profileController.get("/", ensureLoggedIn, function(req, res) {
   res.render("profile/profile", {
     user: req.user
@@ -42,5 +42,16 @@ profileController.post(
     });
   }
 );
+
+// OTHER INSIDERS PROFILE SECTION =========================
+profileController.get("/:id", ensureLoggedIn, function(req, res, next) {
+  const id = req.params.id;
+  User.findById(id, (err, insider) => {
+    if (err) return next(err);
+    res.render("profile/insider", {
+      insider
+    });
+  });
+});
 
 module.exports = profileController;

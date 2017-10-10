@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Insiders My profile edit</title>
+    <title> Insider profile page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="minireset.min.css">
@@ -82,45 +82,28 @@
   </nav>
     <section class="section main">
         <div class="container">
-
-        <a href="/profile">Return to My profile</a>
-        <br>
-
     <fieldset>
-      <legend>My profile</legend>
-      <form action="/profile/edit" method="post" enctype="multipart/form-data">
-        <%if (user.picProfile) { %>
-          <img src="<%= user.picProfile %>" alt="my picture">
-      <%  } else { %>
-          <img src="/images/avatar.png" alt="my picture">
-      <%  } %>
-      <label> Change your photo
-          <input type="file" name="picProfile" >
-        </label>
+      <legend><%= insider.local.username %> profile</legend>
+      <%if (insider.picProfile) { %>
+        <img src="<%= insider.picProfile %>" alt=" picture">
+    <%  } else { %>
+        <img src="/images/avatar.png" alt=" picture">
+    <%  } %>
+
+      <p><strong>User name</strong></p>
+      <p><%= insider.local.username %></p>
       <br>
-        <br>
-        <p><strong>User name</strong></p>
-        <p><%= user.local.username %></p>
-        <br>
-        <p><strong>Email</strong></p>
-        <p><%= user.local.email %></p>
-        <br>
-        <label>Location
-          <input type="text" name="location" value="<%= user.location %>">
-        </label>
-        <br>
-        <label>Website
-          <input type="text" name="website" value="<%= user.website %>">
-        </label>
-        <br>
-        <label>Bio
-          <textarea type="text" name="bio" ><%= user.bio %></textarea>
-        </label>
-        <br>
-
-        <button type="submit" name="btn-update">Save my profile</button>
-
-      </form>
+      <p><strong>Email</strong></p>
+      <p><%= insider.local.email %></p>
+      <br>
+      <p><strong>Location</strong></p>
+      <p><%= insider.location ? insider.location : "Secret..." %></p>
+      <br>
+      <p><strong>Website</strong></p>
+      <p><%= insider.website ? insider.website : "Secret..." %></p>
+      <br>
+      <p><strong>Bio</strong></p>
+      <p><%= insider.bio ? insider.bio : "Secret..." %></p>
+      <br>
+      <a href="/follow"><button type="button" name="button">Follow</button></a>
     </fieldset>
-</div>
-</section>

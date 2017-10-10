@@ -25,71 +25,71 @@
 </head>
 
 <body>
-    <nav class="nav has-shadow " id="top">
-        <div class="container" id="top2">
-            <div class="nav">
-                <a class="nav-item" href="../index.html">
-                    <img id="logo" src="images/logo.png" alt="Description">
-                </a>
-            </div>
-            <div class="nav" id="formNav">
-                <div class="nav-item field" id="formNav1">
-                    <form method="post" class="control has-icons-right" id="formNav2">
-                        <input id="search-query" class="input is-hovered" type="text" placeholder="Stock or Username">
-                        <span id="loupe" class="icon is-small is-right">
-                    <i id="quicksearch" type="submit"  class="fa fa-search" ></i>
-                  </span>
-                    </form>
-                </div>
-            </div>
+  <nav class="nav has-shadow " id="top">
+      <div class="container" id="top2">
+          <div class="nav">
+              <a class="nav-item" href="/">
+                  <img id="logo" src="images/logo.png" alt="Description">
+              </a>
+          </div>
+          <div class="nav" id="formNav">
+              <div class="nav-item field" id="formNav1">
+                  <form method="post" class="control has-icons-right" id="formNav2">
+                      <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                      <span id="loupe" class="icon is-small is-right">
+                  <i type="submit"  class="fa fa-search" ></i>
+                </span>
+                  </form>
+              </div>
+          </div>
 
-            <span class="nav-toggle">
-                    <span></span>
-            <span></span>
-            <span></span>
-            </span>
-            <div class="nav-right nav-menu">
-                <div id="menu">
-                    <a class="nav-item is-tab is-active">
-        Stream
-        </a>
-                    <a class="nav-item is-tab">
-        Trending
-        </a>
-                    <a class="nav-item is-tab">
-        Leaderboard
-        </a>
-                </div>
-                <span class="nav-item">
-                        <% if(!user) { %>
-                        <a href="/login" class="button">
-                          Log in
-                        </a>
-                        <a href="/signup" class="button">
-                          Sign up
-                        </a>
-                      </span>
-                <%} else { %>
-                    <div class="nav-profile">
-                        <a id="profile-pic" href="/profile">
-                            <div class="nav-photo-profil">
-                                <img src="./images/Warren.jpg" alt="">
-                            </div>
-                        </a>
-                        <div class="nav-user-profile">
-                            <div id="nav-username" class="nav-user-name">@
-                                <%= user.local.username%>
-                            </div>
-                            <div class="nav-status">
-                                <div class="nav-status-light"></div>
-                                <a href="/logout">Logout</a>
-                            </div>
-                        </div>
+          <span class="nav-toggle">
+                  <span></span>
+          <span></span>
+          <span></span>
+          </span>
+          <div class="nav-right nav-menu">
+              <div id="menu">
+                  <a href="/stream" class="nav-item is-tab">
+      Stream
+      </a>
+                  <a href="/trending" class="nav-item is-tab">
+      Trending
+      </a>
+                  <a href="/leaderbord" class="nav-item is-tab">
+      Leaderboard
+      </a>
+              </div>
+              <span class="nav-item">
+                      <% if(!user) { %>
+                      <a href="/login" class="button">
+                        Log in
+                      </a>
+                      <a href="/signup" class="button">
+                        Sign up
+                      </a>
+                    </span>
+              <%} else { %>
+                  <div class="nav-profile">
+                      <a id="profile-pic" href="/profile">
+                          <div class="nav-photo-profil">
+                              <img src="<%= user.picProfile%>" alt="">
+                          </div>
+                      </a>
+                      <div class="nav-user-profile">
+                          <div id="nav-username" class="nav-user-name">@
+                              <%= user.local.username%>
+                          </div>
+                          <div class="nav-status">
+                              <div class="nav-status-light"></div>
+                              <a href="/logout">Logout</a>
+                          </div>
+                      </div>
 
-                        <%  } %>
-                    </div>
-            </div>
-    </nav>
+                      <%  } %>
+                  </div>
+          </div>
+  </nav>
     <section class="hero is-fullheight is-dark">
         <div class="has-text-right">
             <p class="citation title is-3" style="margin: 200 px"> "Anybody who plays the stock market not as an insider </br>is like a man buying cows in the moonlight." - Daniel Drew</p>
