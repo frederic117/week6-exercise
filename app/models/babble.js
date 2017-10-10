@@ -20,8 +20,8 @@ const babbleSchema = new Schema(
     ],
     like: {
       type: Number,
-      default:0
-    }
+      default: 0
+    },
     babble_img: String,
     reply: [
       {

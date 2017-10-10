@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <title>Insiders - My profile page - Edit</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+        <a href="/profile">Return to My profile</a>
+        <br>
+
+    <fieldset>
+      <legend>My profile</legend>
+      <form action="/profile/edit" method="post" enctype="multipart/form-data">
+        <%if (user.picProfile) { %>
+          <img src="<%= user.picProfile %>" alt="my picture">
+      <%  } else { %>
+          <img src="/images/avatar.png" alt="my picture">
+      <%  } %>
+      <label> Change your photo
+          <input type="file" name="picProfile" >
+        </label>
+      <br>
+        <br>
+        <p><strong>User name</strong></p>
+        <p><%= user.local.username %></p>
+        <br>
+        <p><strong>Email</strong></p>
+        <p><%= user.local.email %></p>
+        <br>
+        <label>Location
+          <input type="text" name="location" value="<%= user.location %>">
+        </label>
+        <br>
+        <label>Website
+          <input type="text" name="website" value="<%= user.website %>">
+        </label>
+        <br>
+        <label>Bio
+          <textarea type="text" name="bio" ><%= user.bio %></textarea>
+        </label>
+        <br>
+
+        <button type="submit" name="btn-update">Save my profile</button>
+
+      </form>
+    </fieldset>

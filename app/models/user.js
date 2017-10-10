@@ -43,7 +43,19 @@ const userSchema = mongoose.Schema(
     },
     picProfile: {
       type: String,
-      default: "/images/warren.jpg"
+      default: "/images/avatar.png"
+    },
+    location: {
+      type: String,
+      default: "****"
+    },
+    website: {
+      type: String,
+      default: "none"
+    },
+    bio: {
+      type: String,
+      default: "none"
     },
     following: [{ type: Schema.Types.ObjectId, ref: "User" }],
     score: {

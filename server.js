@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 });
 // routes ======================================================================
 require("./app/routes/auth.js")(app, passport);
-app.use("/", profileController);
+app.use("/profile", profileController);
 app.use("/stream", streamController);
 app.use("/stock", stockController);
 app.use("/admin", adminController);
