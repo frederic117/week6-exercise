@@ -18,6 +18,10 @@ const babbleSchema = new Schema(
         ref: "Stock"
       }
     ],
+    like: {
+      type: Number,
+      default:0
+    }
     babble_img: String,
     reply: [
       {
