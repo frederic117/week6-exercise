@@ -16,10 +16,10 @@
 
 <body>
     <nav class="nav has-shadow " id="top">
-        <div class="container">
+        <div class="container" id="top2">
             <div class="nav">
-                <a class="nav-item" href="/">
-                    <img id="logo" src="/images/logo.png" alt="Description">
+                <a class="nav-item" href="../index.html">
+                    <img id="logo" src="images/logo.png" alt="Description">
                 </a>
             </div>
             <div class="nav" id="formNav">
@@ -27,54 +27,58 @@
                     <form method="post" class="control has-icons-right" id="formNav2">
                         <input class="input is-hovered" type="text" placeholder="Stock or Username">
                         <span id="loupe" class="icon is-small is-right">
-                    <button type="submit"  class=" button fa fa-search" ></button>
+                    <i type="submit"  class="fa fa-search" ></i>
                   </span>
                     </form>
                 </div>
             </div>
+
             <span class="nav-toggle">
-        <span></span>
+                    <span></span>
             <span></span>
             <span></span>
             </span>
             <div class="nav-right nav-menu">
-                <a class="nav-item is-tab is-active">
-          Stream
+                <div id="menu">
+                    <a class="nav-item is-tab is-active">
+        Stream
         </a>
-                <a class="nav-item is-tab">
-          Treanding
+                    <a class="nav-item is-tab">
+        Trending
         </a>
-                <a class="nav-item is-tab">
-          Leaderboard
+                    <a class="nav-item is-tab">
+        Leaderboard
         </a>
+                </div>
+                <span class="nav-item">
+                        <% if(!user) { %>
+                        <a href="/login" class="button">
+                          Log in
+                        </a>
+                        <a href="/signup" class="button">
+                          Sign up
+                        </a>
+                      </span>
+                <%} else { %>
+                    <div class="nav-profile">
+                        <a id="profile-pic" href="/profile">
+                            <div class="nav-photo-profil">
+                                <img src="./images/Warren.jpg" alt="">
+                            </div>
+                        </a>
+                        <div class="nav-user-profile">
+                            <div id="nav-username" class="nav-user-name">@
+                                <%= user.local.username%>
+                            </div>
+                            <div class="nav-status">
+                                <div class="nav-status-light"></div>
+                                <a href="/logout">Logout</a>
+                            </div>
+                        </div>
 
-        <span class="nav-item">
-          <% if(!user) { %>
-          <a href="/login" class="button">
-            Log in
-          </a>
-          <a href="/signup" class="button">
-            Sign up
-          </a>
-        </span>
-        <%} else { %>
-        <div class="nav-profile">
-        <a id="profile-pic" href="/profile">
-          <div class="nav-photo-profil">
-            <img  src="./images/Warren.jpg" alt="">
-          </div>
-        </a>
-          <div class="nav-user-profile">
-            <div id ="nav-username" class="nav-user-name">@<%= user.local.username%></div>
-            <div class="nav-status">
-              <div class="nav-status-light"></div>
-              <a href="/logout">Logout</a>
+                        <%  } %>
+                    </div>
             </div>
-          </div>
-
-      <%  } %>
-            </div>
-        </div>
     </nav>
 
 
@@ -164,131 +168,161 @@
                                 </div>
                             </div>
                         </div>
-<%# Zone of Babbles%>
-<div class="babbles-box" id="babble-container">
+                    </div>
+                    <nav class="navbar is-dark">
+                        <div id="navMenuColordark-example" class="navbar-menu">
+                            <div class="navbar-start">
+                                <a class="navbar-item">
+                               Top
+                              </a>
+                                <a class="navbar-item is-tab is-active">
+                                  All
+                                  </a>
+                                <a class="navbar-item">
+                                     Charts
+                                      </a>
+                                <a class="navbar-item">
+                                           Link
+                                          </a>
+                            </div>
+                        </div>
+                    </nav>
 
-  <% if (timeline.length > 0) { %>
-    <% timeline.forEach(function(babble) { %>
-      <div class="tweets card-content p-x-1">
-          <article class="media tweet">
-              <figure class="media-left">
-                  <p class="image is-64x64 is-circle">
-                      <a href="#" class=""><img src="<%= user.picProfile%>"></a>
-                  </p>
-              </figure>
-              <div class="media-content">
-                  <div class="content">
-                      <p class="tweet-meta"><a href="/profile/<%= babble.user_name %>" class="has-text-dark"><strong><%= user.local.username%></strong></a> <small class="has-text-grey-light"><%= moment(babble.created_at).format("LL, LTS") %></small></p>
-                      <div class="tweet-body has-text-grey"><%= babble.babble%></div>
-                  </div>
-                  <nav class="level is-mobile">
-                      <div class="level-left">
-                          <a class="level-item has-text-grey-light">
-                              <span class="icon is-small"><i class="fa fa-comment-o"></i></span>
-                              <small> 0</small>
-                          </a>
-                          <a class="level-item has-text-grey-light">
-                              <span class="icon is-small"><i class="fa fa-heart"></i></span>
-                              <small> 0</small></a>
-                  </nav>
-                  </div>
-                  <div class="media-right"><button class="delete"></button></div>
-          </article>
-          </div>
-      </div>
-          <% }) %>
-      <% } else { %>
-        <div class="babble-container no-babble">
-          <p>The timeline is empty</p>
-        </div>
-      <%  }%>
-</div>
-<%# End of babble container%>
-                        <button class="button m-t-1 m-b-1 is-fullwidth">
+                    <%# Zone of Babbles%>
+                        <div class="card">
+                            <div class="babbles-box" id="babble-container">
+
+                                <% if (timeline.length > 0) { %>
+                                    <% timeline.forEach(function(babble) { %>
+
+                                        <div class="tweets card-content p-x-1">
+                                            <article class="media tweet">
+                                                <figure class="media-left">
+                                                    <p class="image is-64x64 is-circle">
+                                                        <a href="#" class=""><img src="<%= user.picProfile%>"></a>
+                                                    </p>
+                                                </figure>
+                                                <div class="media-content">
+                                                    <div class="content">
+                                                        <p class="tweet-meta">
+                                                            <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
+                                                                <strong><%= babble.user_id.local.username%></strong></a>
+                                                            <small class="media-right has-text-grey-light"><%= moment(babble.created_at).format("LL, LTS") %></small>
+                                                        </p>
+
+                                                        <p class="tweet-body has-text-grey">
+                                                            <%= babble.babble%>
+                                                        </p>
+                                                    </div>
+                                                    <nav class="media-right">
+                                                        <div class="level-right">
+                                                            <a class="level-item has-text-grey-light">
+                                                                <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                                                                <small>0</small>
+                                                            </a>
+                                                            <a class="level-item has-text-grey-light">
+                                                                <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
+                                                                <small>110000</small></a>
+                                                    </nav>
+                                                    </div>
+
+                                            </article>
+                                            </div>
+
+                                            <% }) %>
+                                                <% } else { %>
+                                                    <div class="babble-container no-babble">
+                                                        <p>The timeline is empty</p>
+                                                    </div>
+                                                    <%  }%>
+                                        </div>
+                            </div>
+
+                            <%# End of babble container%>
+                                <button class="button m-t-1 m-b-1 is-fullwidth">
             Load more...
         </button>
-                    </div>
-
-                    <div class="column is-3">
-                        <div class="box">
-                            <p><span class="title is-5">Who to follow</span> · <a href="#">Refresh</a> · <a href="#">View All</a></p>
-                            <hr>
-                            <div class="columns">
-                                <div class="column is-3 is-marginless">
-                                    <div class="image">
-                                        <img src="https://placehold.it/200x200">
-                                    </div>
-                                </div>
-                                <div class="column is-9">
-                                    <p>
-                                        <a href="#">
-                                            <strong>John Smith</strong> &commat;jsmith
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-times x"></i>
-                                        </a>
-                                    </p>
-                                    <a class="button is-primary is-small">
-                                        <span>
-                    + Follow
-                  </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column is-3 is-marginless">
-                                    <div class="image">
-                                        <img src="https://placehold.it/200x200">
-                                    </div>
-                                </div>
-                                <div class="column is-9">
-                                    <p>
-                                        <a href="#">
-                                            <strong>Jane Smith</strong> &commat;janesmith
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-times x"></i>
-                                        </a>
-                                    </p>
-                                    <a class="button is-primary is-small">
-                                        <span>
-                    + Follow
-                  </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column is-3 is-marginless">
-                                    <div class="image">
-                                        <img src="https://placehold.it/200x200">
-                                    </div>
-                                </div>
-                                <div class="column is-9">
-                                    <p>
-                                        <a href="#">
-                                            <strong>Mike Scott</strong> &commat;mscott
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-times x"></i>
-                                        </a>
-                                    </p>
-                                    <a class="button is-primary is-small">
-                                        <span>
-                    + Follow
-                  </span>
-                                    </a>
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
+
+                        <div class="column is-3">
+                            <div class="box">
+                                <p><span class="title is-5">Who to follow</span> · <a href="#">Refresh</a> · <a href="#">View All</a></p>
+                                <hr>
+                                <div class="columns">
+                                    <div class="column is-3 is-marginless">
+                                        <div class="image">
+                                            <img src="https://placehold.it/200x200">
+                                        </div>
+                                    </div>
+                                    <div class="column is-9">
+                                        <p>
+                                            <a href="#">
+                                                <strong>John Smith</strong> &commat;jsmith
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa fa-times x"></i>
+                                            </a>
+                                        </p>
+                                        <a class="button is-primary is-small">
+                                            <span>
+                    + Follow
+                  </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column is-3 is-marginless">
+                                        <div class="image">
+                                            <img src="https://placehold.it/200x200">
+                                        </div>
+                                    </div>
+                                    <div class="column is-9">
+                                        <p>
+                                            <a href="#">
+                                                <strong>Jane Smith</strong> &commat;janesmith
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa fa-times x"></i>
+                                            </a>
+                                        </p>
+                                        <a class="button is-primary is-small">
+                                            <span>
+                    + Follow
+                  </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column is-3 is-marginless">
+                                        <div class="image">
+                                            <img src="https://placehold.it/200x200">
+                                        </div>
+                                    </div>
+                                    <div class="column is-9">
+                                        <p>
+                                            <a href="#">
+                                                <strong>Mike Scott</strong> &commat;mscott
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa fa-times x"></i>
+                                            </a>
+                                        </p>
+                                        <a class="button is-primary is-small">
+                                            <span>
+                    + Follow
+                  </span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                 </div>
             </div>
-    </section>
+        </div>
 
 
-<script type="text/javascript">
-
+        <script type="text/javascript" src="/JS/JSforCSS.js"></script>
 </body>
 
 </html>

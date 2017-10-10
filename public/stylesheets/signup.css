@@ -1,34 +1,55 @@
 .hero.is-dark.is-bold {
-  background-image: linear-gradient(
-    141deg,
-    #f9f9f9 0,
-    #f9f9f9 71%,
-    #f9f9f9 100%
-  ) !important;
-  background-color: #f9f9f9 !important;
-  colOr: #f9f9f9 !important;
+    background-image: linear-gradient( 141deg, #f9f9f9 0, #f9f9f9 71%, #f9f9f9 100%) !important;
+    background-color: #f9f9f9 !important;
+    colOr: #f9f9f9 !important;
 }
 
 .button.is-primary.is-active,
 .button.is-primary:active {
-  background-color: #192b41;
-  border-color: transparent;
-  color: #fff;
+    background-color: #192b41;
+    border-color: transparent;
+    color: #fff;
+}
+
+.button.is-success.is-outlined {
+    background-color: transparent;
+    border-color: #192b41;
+    color: #192b41;
 }
 
 .button.is-primary.is-hovered,
 .button.is-primary:hover {
-  background-color: #4caf50;
-  border-color: transparent;
-  color: #fff;
+    background-color: #192b41;
+    border-color: transparent;
+    color: #fff;
 }
 
 .button.is-primary {
-  background-color: #192b41;
-  border-color: transparent;
-  color: #fff;
+    background-color: #192b41;
+    border-color: transparent;
+    color: #fff;
+}
+
+.input.is-active,
+.input.is-focused,
+.input:active,
+.input:focus,
+.textarea.is-active,
+.textarea.is-focused,
+.textarea:active,
+.textarea:focus {
+    border-color: #192b41;
+    box-shadow: 0 0 0 0.125em #192b41;
 }
 
 h1 {
-  color: #192b41 !important;
+    color: #192b41 !important;
+}
+
+.fa {
+    color: #192b41 !important;
+}
+
+p {
+    color: #192b41 !important;
 }
