@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Insiders Trending</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="minireset.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
+
+</head>
+
+<body>
+  <nav class="nav has-shadow " id="top">
+      <div class="container" id="top2">
+          <div class="nav">
+              <a class="nav-item" href="/">
+                  <img id="logo" src="images/logo.png" alt="Description">
+              </a>
+          </div>
+          <div class="nav" id="formNav">
+              <div class="nav-item field" id="formNav1">
+                  <form method="post" class="control has-icons-right" id="formNav2">
+                      <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                      <span id="loupe" class="icon is-small is-right">
+                  <i type="submit"  class="fa fa-search" ></i>
+                </span>
+                  </form>
+              </div>
+          </div>
+
+          <span class="nav-toggle">
+                  <span></span>
+          <span></span>
+          <span></span>
+          </span>
+          <div class="nav-right nav-menu">
+              <div id="menu">
+                  <a href="/stream" class="nav-item is-tab ">
+      Stream
+      </a>
+                  <a href="/trending" class="nav-item is-tab is-active">
+      Trending
+      </a>
+                  <a href="/leaderboard"class="nav-item is-tab">
+      Leaderboard
+      </a>
+              </div>
+              <span class="nav-item">
+                      <% if(!user) { %>
+                      <a href="/login" class="button">
+                        Log in
+                      </a>
+                      <a href="/signup" class="button">
+                        Sign up
+                      </a>
+                    </span>
+              <%} else { %>
+                  <div class="nav-profile">
+                      <a id="profile-pic" href="/profile">
+                          <div class="nav-photo-profil">
+                              <img src="<%= user.picProfile%>" alt="">
+                          </div>
+                      </a>
+                      <div class="nav-user-profile">
+                          <div id="nav-username" class="nav-user-name">@
+                              <%= user.local.username%>
+                          </div>
+                          <div class="nav-status">
+                              <div class="nav-status-light"></div>
+                              <a href="/logout">Logout</a>
+                          </div>
+                      </div>
+
+                      <%  } %>
+                  </div>
+          </div>
+  </nav>
+    <section class="section main">
+        <div class="container">
+
+          <!-- TradingView Widget BEGIN -->
+          <span id="tradingview-copyright"><a ref="nofollow noopener" target="_blank" href="http://www.tradingview.com" style="color: rgb(173, 174, 176); font-family: &quot;Trebuchet MS&quot;, Tahoma, Arial, sans-serif; font-size: 13px;">Market Quotes by <span style="color: #3BB3E4">TradingView</span></a></span>
+          <script src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js">{
+            "width": "770",
+            "height": "450",
+            "locale": "en",
+            "symbolsGroups": [
+              {
+                "symbols": [],
+                "name": "Equities"
+              },
+              {
+                "symbols": [
+                  {
+                    "displayName": "E-Mini S&P",
+                    "name": "CME_MINI:ES1!"
+                  },
+                  {
+                    "displayName": "Euro",
+                    "name": "CME:E61!"
+                  },
+                  {
+                    "displayName": "Gold",
+                    "name": "COMEX:GC1!"
+                  },
+                  {
+                    "displayName": "Crude Oil",
+                    "name": "NYMEX:CL1!"
+                  },
+                  {
+                    "displayName": "Natural Gas",
+                    "name": "NYMEX:NG1!"
+                  },
+                  {
+                    "displayName": "Corn",
+                    "name": "CBOT:ZC1!"
+                  }
+                ],
+                "name": "Commodities"
+              },
+              {
+                "symbols": [
+                  {
+                    "displayName": "Eurodollar",
+                    "name": "CME:GE1!"
+                  },
+                  {
+                    "displayName": "T-Bond",
+                    "name": "CBOT:ZB1!"
+                  },
+                  {
+                    "displayName": "Ultra T-Bond",
+                    "name": "CBOT:UD1!"
+                  },
+                  {
+                    "displayName": "Euro Bund",
+                    "name": "EUREX:GG1!"
+                  },
+                  {
+                    "displayName": "Euro BTP",
+                    "name": "EUREX:II1!"
+                  },
+                  {
+                    "displayName": "Euro BOBL",
+                    "name": "EUREX:HR1!"
+                  }
+                ],
+                "name": "Bonds"
+              },
+              {
+                "symbols": [
+                  {
+                    "name": "FX:EURUSD"
+                  },
+                  {
+                    "name": "FX:GBPUSD"
+                  },
+                  {
+                    "name": "FX:USDJPY"
+                  },
+                  {
+                    "name": "FX:USDCHF"
+                  },
+                  {
+                    "name": "FX:AUDUSD"
+                  },
+                  {
+                    "name": "FX:USDCAD"
+                  }
+                ],
+                "name": "Forex"
+              }
+            ]
+          }</script>
+          <!-- TradingView Widget END -->
+
+        </div>
+    </section>
+</body>
