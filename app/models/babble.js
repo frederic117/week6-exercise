@@ -11,7 +11,8 @@ const babbleSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User"
     },
-    user_name: String
+    user_name: String,
+    babble_img: String
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

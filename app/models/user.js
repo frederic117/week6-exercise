@@ -45,7 +45,11 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "/images/warren.jpg"
     },
-    following: [{ type: Schema.Types.ObjectId, ref: "User" }]
+    following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    score: {
+      type: Number,
+      default: 0
+    }
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

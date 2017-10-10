@@ -15,7 +15,9 @@ const stockSchema = new Schema(
     trend: {
       type: Array,
       default: [0.5, 0.5]
-    }
+    },
+    stock_img: String,
+    url_price: String
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
