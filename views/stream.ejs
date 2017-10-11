@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 
@@ -47,7 +47,7 @@
                     <a href="/stream" class="nav-item is-tab is-active">
         Stream
         </a>
-                    <a href="/trending"class="nav-item is-tab">
+                    <a href="/trending" class="nav-item is-tab">
         Trending
         </a>
                     <a href="/leaderboard" class="nav-item is-tab">
@@ -192,7 +192,7 @@
                         </div>
                     </nav>
 
-<%# Zone of Babbles%>
+                    <%# Zone of Babbles%>
                         <div class="card">
                             <div class="babbles-box" id="babble-container">
 
@@ -242,7 +242,7 @@
                                         </div>
                             </div>
 
-  <%# End of babble container%>
+                            <%# End of babble container%>
                                 <button class="button m-t-1 m-b-1 is-fullwidth">
             Load more...
         </button>
@@ -327,67 +327,93 @@
     </section>
 
     <!-- modal content -->
-<%# Retrieve the parent%>
+    <%# Retrieve the parent%>
 
 
 
 
-    <div id="modal" class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-            <%# Zone of Babbles%>
-                <div class="card">
-                    <div class="babbles-box" id="babble-container">
+        <div id="modal" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <%# Zone of Babbles%>
+                    <div class="card">
+                        <div class="babbles-box" id="babble-container">
 
 
 
-                        <% let babble = timeline[0]  %>
+                            <% let babble = timeline[0]  %>
 
 
-                            <div class="tweets card-content p-x-1">
-                                <article class="media tweet">
-                                    <figure class="media-left">
-                                        <p class="image is-64x64 is-circle">
-                                            <a href="#" class=""><img id="dynamiqueUserPic" src="<%= babble.user_id.picProfile%>"></a>
-                                        </p>
-                                    </figure>
-                                    <div class="media-content">
-                                        <div class="content">
-                                            <p class="tweet-meta">
-                                                <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
-                                                    <strong id="dynamiqueUserNameBabble"><%= babble.user_id.local.username%></strong></a>
-                                                <small id="dynamiqueTime" class="media-right has-text-grey-light"><%= babble.formattedDate %></small>
+                                <div class="tweets card-content p-x-1">
+                                    <article class="media tweet">
+                                        <figure class="media-left">
+                                            <p class="image is-64x64 is-circle">
+                                                <a href="#" class=""><img id="dynamiqueUserPic" src="<%= babble.user_id.picProfile%>"></a>
                                             </p>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p class="tweet-meta">
+                                                    <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
+                                                        <strong id="dynamiqueUserNameBabble"><%= babble.user_id.local.username%></strong></a>
+                                                    <small id="dynamiqueTime" class="media-right has-text-grey-light"><%= babble.formattedDate %></small>
+                                                </p>
 
-                                            <p id="dynamiqueContent" class="tweet-body has-text-grey">
-                                                <%= babble.babble%>
-                                            </p>
+                                                <p id="dynamiqueContent" class="tweet-body has-text-grey">
+                                                    <%= babble.babble%>
+                                                </p>
+                                            </div>
+                                            <nav class="media-right">
+                                                <div class="level-right">
+                                                    <a class="level-item has-text-grey-light">
+                                                        <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                                                        <small id="dynamiqueReply">0</small>
+                                                    </a>
+                                                    <a class="level-item has-text-grey-light">
+                                                        <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
+                                                        <small id="dynamiqueLike">110000</small></a>
+                                            </nav>
+                                            </div>
+
+                                    </article>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-content bg-light">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <figure class="image is-32x32 is-circle"><img src="/uploads/7f930ac78bf5a2b3498d6a3a82980d41" alt="Image"></figure>
+                                                </div>
+                                                <div class="media-content">
+                                                    <form action="/stream" method="post">
+                                                        <div class="field">
+                                                            <div class="control"><textarea id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
+                                                            <!---->
+                                                        </div>
+                                                        <div class="level">
+                                                            <div class="level-left"><a class="has-text-grey-light"><span class="icon"><i class="fa fa-image"></i></span></a></div>
+                                                            <div class="level-right">
+                                                                <div class="level-item has-text-grey">200</div>
+                                                                <div class="level-item"><button id="babble-submit" type="submit" class="button is-outlined is-primary">Babble</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <nav class="media-right">
-                                            <div class="level-right">
-                                                <a class="level-item has-text-grey-light">
-                                                    <span class="icon is-small"><i class="fa fa-reply"></i></span>
-                                                    <small id="dynamiqueReply">0</small>
-                                                </a>
-                                                <a class="level-item has-text-grey-light">
-                                                    <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
-                                                    <small id="dynamiqueLike">110000</small></a>
-                                        </nav>
-                                        </div>
+                                    </div>
 
-                                </article>
-                                </div>
+                                    <script>
+                                        const user = <%- JSON.stringify(user) %>;
+                                        const timeline = <%- JSON.stringify(timeline) %>;
+                                    </script>
 
-        <script>
-            const user = <%- JSON.stringify(user) %>;
-            const timeline = <%- JSON.stringify(timeline) %>;
-        </script>
+                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-        <script type="text/javascript" src="/JS/JSforCSS.js"></script>
-        <script type="text/javascript" src="/JS/modal.js"></script>
-        <script type="text/javascript" src="JS/search.js"></script>
+                                    <script type="text/javascript" src="/JS/JSforCSS.js"></script>
+                                    <script type="text/javascript" src="/JS/modal.js"></script>
+                                    <script type="text/javascript" src="JS/search.js"></script>
 </body>
 
 </html>
