@@ -33,8 +33,6 @@ streamController.post("/", ensureLoggedIn, (req, res, next) => {
     }
 
     findStock(req.body.babble).then(text => {
-      console.log("ACTION****************", text);
-
       const newBabble = new Babble({
         user_id: user._id,
         user_name: user.local.username,
@@ -42,7 +40,6 @@ streamController.post("/", ensureLoggedIn, (req, res, next) => {
         stockLink: text
       });
 
-      console.log("$$$$$$$***NEW BABBLE", newBabble);
       newBabble.save(err => {
         if (err) {
           res.render("stream", {
@@ -56,6 +53,7 @@ streamController.post("/", ensureLoggedIn, (req, res, next) => {
   });
 });
 
+// Reply
 streamController.post("/reply", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
   const user_id = user._id;
@@ -98,6 +96,33 @@ streamController.get("/newBabble", ensureLoggedIn, function(req, res) {
         moment: moment
       });
     });
+});
+
+// New like
+streamController.post("/like", ensureLoggedIn, (req, res, next) => {
+  const babble = req.body.parentModal;
+
+  Babble.findByIdAndUpdate(babble, { $inc: { like: 1 } })
+    .populate("user_id")
+    .exec((err, user) => {
+      User.findByIdAndUpdate(user._id, { $inc: { score: 10 } }, function(
+        err,
+        post
+      ) {
+        if (err) return next(err);
+        res.redirect("/stream");
+      });
+    });
+});
+
+//TEST
+streamController.get("/test", (req, res, next) => {
+  User.findByIdAndUpdate("59dcf4b83f917e288f00660b", {
+    $inc: { score: 20 }
+  }).exec(function(err, post) {
+    if (err) return next(err);
+    res.redirect("/profile/59dcf4b83f917e288f00660b");
+  });
 });
 
 module.exports = streamController;
