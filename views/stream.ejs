@@ -225,8 +225,9 @@
                                                                 <small> <%= babble.reply.length%></small>
                                                             </a>
                                                             <a class="level-item has-text-grey-light">
-                                                                <form id="like-btn" action="/stream/like" method="post"> <span class="icon is-small"><i onclick="submitform()" class="fa fa-thumbs-o-up"></i></span>
-                                                                    <small></small>
+                                                                <form id="like-form" action="/stream/like" method="post"> <span class="icon is-small"><i id=<%=i%> class="fa fa-thumbs-o-up like-btn"></i></span>
+                                                                    <small><%= babble.like%></small>
+                                                                    <input class="like-input" name="likeInput" val="">
                                                                 </form>
                                                             </a>
                                                     </nav>

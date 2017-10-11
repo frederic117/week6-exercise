@@ -53,6 +53,7 @@ function createReplyHtml(reply) {
 // modal BUTTON
 $(".modal-button").click(function() {
   let current = $(this).attr("id");
+  console.log(current);
   updateModal(current);
   var target = $(this).data("target");
   $("html").addClass("is-clipped");
@@ -73,6 +74,15 @@ $(".modal-background").click(function() {
     .removeClass("is-active");
 });
 
-function submitform() {
-  document.getElementById("myForm").submit();
+// Like button
+$(".like-input").hide();
+function updateLike(index) {
+  $(".like-input").val(timeline[index]._id);
 }
+$(".like-btn").click(function() {
+  const current = $(this).attr("id");
+  console.log(current);
+
+  updateLike(current);
+  let form = $("#like-form").submit();
+});

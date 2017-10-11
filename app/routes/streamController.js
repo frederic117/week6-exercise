@@ -42,7 +42,6 @@ streamController.post("/", ensureLoggedIn, (req, res, next) => {
         return;
       }
 
-      console.log("$$$$$$$***NEW BABBLE", newBabble);
       newBabble.save(err => {
         if (err) {
           res.render("stream", {
@@ -102,7 +101,9 @@ streamController.get("/newBabble", ensureLoggedIn, function(req, res) {
 
 // New like
 streamController.post("/like", ensureLoggedIn, (req, res, next) => {
-  const babble = req.body.parentModal;
+  const babble = req.body.likeInput;
+
+  console.log("JE PASSE DANS LA BOUCLE /like", babble);
 
   Babble.findByIdAndUpdate(babble, { $inc: { like: 1 } })
     .populate("user_id")
