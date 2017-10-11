@@ -7,8 +7,12 @@ const {
 } = require("../../middlewares/user-roles-auth");
 
 // STOCK SECTION =========================
-stockController.get("/", ensureLoggedIn, function(req, res) {
-  res.render("stock", {});
+stockController.get("/:name", ensureLoggedIn, function(req, res) {
+  const name = req.params.name;
+  Stock.findOne(name, (err, stock) => {
+    if (err) return next(err);
+    res.render("stock", {});
+  });
 });
 
 module.exports = stockController;
