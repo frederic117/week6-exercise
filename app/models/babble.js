@@ -20,10 +20,7 @@ const babbleSchema = new Schema({
         default: 0
     },
     babble_img: String,
-    reply: [{
-        type: Schema.Types.ObjectId,
-        ref: "Babble"
-    }]
+    reply: Array
 }, {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
