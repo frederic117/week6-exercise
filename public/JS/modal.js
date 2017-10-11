@@ -3,7 +3,51 @@ function updateModal(index) {
   $("#dynamiqueContent").html(timeline[index].babble);
   $("#dynamiqueTime").html(moments[index]);
   $("#dynamiqueUserPic").attr("src", timeline[index].user_id.picProfile);
+  $("#dynamiqueReply").attr("src", timeline[index].reply.length);
+  $("#dynamiqueLike").attr("src", timeline[index].like.length);
   $("#parent-modal").val(timeline[index]._id);
+
+  const currentReplies = timeline[index].reply;
+  currentReplies.forEach(createReplyHtml);
+}
+
+function createReplyHtml(reply) {
+  console.log("reply", reply);
+  console.log(reply.length);
+
+  $("#babbleModal").before(`
+<div id="modalSecondParent" class="tweets card-content p-x-1">
+  <article id ="modalThirdParent" class="media tweet">
+      <figure class="media-left">
+          <p class="image is-64x64 is-circle">
+              <a href="" class=""><img id="dynamiqueReplyUserPic" src="" alt="picture"></a>
+          </p>
+      </figure>
+      <div class="media-content">
+          <div class="content">
+              <p class="tweet-meta">
+                  <a href="" class="has-text-dark">
+                      <strong id="dynamiqueReplyUserNameBabble">${reply.user_name}</strong></a>
+                  <small id="dynamiqueReplyTime" class="media-right has-text-grey-light"></small>
+              </p>
+              <p id="dynamiqueReplyContent" class="tweet-body has-text-grey">
+                ${reply.babble}
+              </p>
+          </div>
+          <nav class="media-right">
+              <div class="level-right">
+                  <a class="level-item has-text-grey-light">
+                      <span class="icon is-small"><i class="fa fa-reply modal-button" data-target="#modal"></i></span>
+                      <small id="dynamiqueReplyReply"> </small>
+                  </a>
+                  <a class="level-item has-text-grey-light">
+                      <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
+                      <small id="dynamiqueReplyLike">110000</small></a>
+          </nav>
+          </div>
+  </article>
+  </div>
+</div>`);
 }
 
 // modal BUTTON
@@ -28,3 +72,7 @@ $(".modal-background").click(function() {
     .parent()
     .removeClass("is-active");
 });
+
+function submitform() {
+  document.getElementById("myForm").submit();
+}

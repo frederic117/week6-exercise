@@ -98,7 +98,7 @@
                     <div class="is-sticky">
                         <div class="card profile-card">
                             <div class="card-image">
-                                <figure class="image"><img src="https://lorempixel.com/800/220/nature/?70319" alt="" class="image"></figure>
+                                <figure class="image">My Watch List</figure>
                             </div>
                             <div class="card-content">
                                 <div class="media">
@@ -181,18 +181,11 @@
                     <nav class="navbar is-dark">
                         <div>
                             <div class="babblesMenu">
-                                <a class="babMenu navbar-item">
-                               Top
-                              </a>
-                                <a class="babMenu navbar-item is-tab is-active">
-                                  All
-                                  </a>
-                                <a class="babMenu navbar-item">
-                                     Charts
-                                      </a>
-                                <a class="babMenu navbar-item">
-                                           Link
-                                          </a>
+                                <a class="babMenu navbar-item is-tab is-active">All</a>
+                                <a class="babMenu navbar-item">Insiders Mates</a>
+                                <a class="babMenu navbar-item">Watch List</a>
+                                <a class="babMenu navbar-item">My Posts</a>
+                                <a><a id="reload1" class="babMenu navbar-item"><i href="/stream" id="reload" class="fa fa-refresh"></i></a></a>
                             </div>
                         </div>
                     </nav>
@@ -232,8 +225,10 @@
                                                                 <small> <%= babble.reply.length%></small>
                                                             </a>
                                                             <a class="level-item has-text-grey-light">
-                                                                <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
-                                                                <small>110000</small></a>
+                                                                <form id="like-btn" action="/stream/like" method="post"> <span class="icon is-small"><i onclick="submitform()" class="fa fa-thumbs-o-up"></i></span>
+                                                                    <small></small>
+                                                                </form>
+                                                            </a>
                                                     </nav>
                                                     </div>
                                             </article>
@@ -349,7 +344,7 @@
                             <% let babble = timeline[0]  %>
 
 
-                                <div class="tweets card-content p-x-1">
+                                <div id="modalFirstParent" class="tweets card-content p-x-1">
                                     <article class="media tweet">
                                         <figure class="media-left">
                                             <p class="image is-64x64 is-circle">
@@ -384,7 +379,7 @@
                                     </div>
 
 
-                                    <div class="card">
+                                    <div id="babbleModal" class="card">
                                         <div class="card-content bg-light">
                                             <div class="media">
                                                 <div class="media-left">
