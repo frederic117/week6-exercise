@@ -10,15 +10,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 
 <body>
+    <script>
+        let moments = [];
+    </script>
     <nav class="nav has-shadow " id="top">
         <div class="container" id="top2">
             <div class="nav">
@@ -29,9 +27,9 @@
             <div class="nav" id="formNav">
                 <div class="nav-item field" id="formNav1">
                     <form method="post" class="control has-icons-right" id="formNav2">
-                        <input id="search-query" class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <input class="input is-hovered" type="text" placeholder="Stock or Username">
                         <span id="loupe" class="icon is-small is-right">
-                    <i id ="quicksearch" type="submit"  class="fa fa-search" ></i>
+                    <i type="submit"  class="fa fa-search" ></i>
                   </span>
                     </form>
                 </div>
@@ -79,7 +77,6 @@
                                 <a href="/logout">Logout</a>
                             </div>
                         </div>
-
                         <%  } %>
                     </div>
             </div>
@@ -198,6 +195,10 @@
 
                                 <% if (timeline.length > 0) { %>
                                     <% timeline.forEach(function(babble, i) { %>
+                                        <script>
+                                            var m = (<%- JSON.stringify(moment(babble.created_at).format('llll')) %>)
+                                            moments.push(m);
+                                        </script>
                                         <div class="tweets card-content p-x-1">
                                             <article class="media tweet">
                                                 <figure class="media-left">
@@ -210,10 +211,8 @@
                                                         <p class="tweet-meta">
                                                             <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
                                                                 <strong><%= babble.user_id.local.username%></strong></a>
-                                                            <small class="media-right has-text-grey-light"><%= babble.formattedDate %></small>
-
+                                                            <small class="media-right has-text-grey-light"><%= moment(babble.created_at).format('llll') %></small>
                                                         </p>
-
                                                         <p class="tweet-body has-text-grey">
                                                             <%= babble.babble%>
                                                         </p>
@@ -229,10 +228,8 @@
                                                                 <small>110000</small></a>
                                                     </nav>
                                                     </div>
-
                                             </article>
                                             </div>
-
                                             <% }) %>
                                                 <% } else { %>
                                                     <div class="babble-container no-babble">
@@ -356,7 +353,7 @@
                                                 <p class="tweet-meta">
                                                     <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
                                                         <strong id="dynamiqueUserNameBabble"><%= babble.user_id.local.username%></strong></a>
-                                                    <small id="dynamiqueTime" class="media-right has-text-grey-light"><%= babble.formattedDate %></small>
+                                                    <small id="dynamiqueTime" class="media-right has-text-grey-light"><%= moment(babble.created_at).format('llll') %></small>
                                                 </p>
 
                                                 <p id="dynamiqueContent" class="tweet-body has-text-grey">
@@ -378,42 +375,52 @@
                                     </article>
                                     </div>
 
+
                                     <div class="card">
                                         <div class="card-content bg-light">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <figure class="image is-32x32 is-circle"><img src="/uploads/7f930ac78bf5a2b3498d6a3a82980d41" alt="Image"></figure>
+                                                    <figure class="image is-32x32 is-circle"><img src="<%= user.picProfile%>" alt="My picture"></figure>
                                                 </div>
                                                 <div class="media-content">
-                                                    <form action="/stream" method="post">
-                                                        <div class="field">
-                                                            <div class="control"><textarea id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
-                                                            <!---->
-                                                        </div>
-                                                        <div class="level">
-                                                            <div class="level-left"><a class="has-text-grey-light"><span class="icon"><i class="fa fa-image"></i></span></a></div>
-                                                            <div class="level-right">
-                                                                <div class="level-item has-text-grey">200</div>
-                                                                <div class="level-item"><button id="babble-submit" type="submit" class="button is-outlined is-primary">Babble</button>
+                                                    <form action="/stream/reply" method="post">
+                                                        <%# Gros hack%>
+                                                            <input id="parent-modal" name="parentModal" val="">
+                                                            <div class="field">
+                                                                <div class="control"><textarea id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
+                                                                <!---->
+                                                            </div>
+                                                            <div class="level">
+                                                                <div class="level-left"><a class="has-text-grey-light"><span class="icon"><i class="fa fa-image"></i></span></a></div>
+                                                                <div class="level-right">
+                                                                    <div class="level-item has-text-grey">200</div>
+                                                                    <div class="level-item"><button id="babble-submit" type="submit" class="button is-outlined is-primary">Babble</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                        </div>
 
-                                    <script>
-                                        const user = <%- JSON.stringify(user) %>;
-                                        const timeline = <%- JSON.stringify(timeline) %>;
-                                    </script>
+                    </div>
 
-                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <button class="modal-close"></button>
+            </div>
+            <!-- modal content -->
+            <script>
+                const user = <%- JSON.stringify(user) %>;
+                const timeline = <%- JSON.stringify(timeline) %>;
+                const moment = <%- (moment) %>;
+            </script>
 
-                                    <script type="text/javascript" src="/JS/JSforCSS.js"></script>
-                                    <script type="text/javascript" src="/JS/modal.js"></script>
-                                    <script type="text/javascript" src="JS/search.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+            <script type="text/javascript" src="/JS/JSforCSS.js"></script>
+            <script type="text/javascript" src="/JS/modal.js"></script>
 </body>
 
 </html>
