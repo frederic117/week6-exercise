@@ -11,10 +11,10 @@ const babbleSchema = new Schema({
         ref: "User"
     },
     user_name: String,
-    stockLink: [{
-        type: Schema.Types.ObjectId,
-        ref: "Stock"
-    }],
+    stockLink: {
+        type: Array,
+        default: ["news"]
+    },
     like: {
         type: Number,
         default: 0

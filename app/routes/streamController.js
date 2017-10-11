@@ -8,6 +8,7 @@ const {
     ensureLoggedIn,
     ensureLoggedOut
 } = require("../../middlewares/user-roles-auth");
+const findStock = require("../../config/stockIdentifier");
 
 // STREAM SECTION =========================
 streamController.get("/", ensureLoggedIn, function(req, res) {
@@ -28,28 +29,33 @@ streamController.get("/", ensureLoggedIn, function(req, res) {
 streamController.post("/", ensureLoggedIn, (req, res, next) => {
     const user = req.user;
 
+
     User.findOne({ _id: user._id }).exec((err, user) => {
         if (err) {
             return;
         }
-        console.log("LE USER ID EST", user._id);
-        const newBabble = new Babble({
-            user_id: user._id,
-            user_name: user.local.username,
-            babble: req.body.babble
-        });
 
-        console.log("POST DE BABBLE", newBabble);
+        findStock(req.body.babble).then(text => {
+            console.log("ACTION****************", text);
 
-        newBabble.save(err => {
-            if (err) {
-                res.render("stream", {
-                    username: user.username,
-                    errorMessage: err.errors.babble.message
-                });
-            } else {
-                res.redirect("/stream");
-            }
+            const newBabble = new Babble({
+                user_id: user._id,
+                user_name: user.local.username,
+                babble: req.body.babble,
+                stockLink: text
+            });
+
+            console.log("$$$$$$$***NEW BABBLE", newBabble);
+            newBabble.save(err => {
+                if (err) {
+                    res.render("stream", {
+                        username: user.username
+                    });
+                } else {
+                    res.redirect("/stream");
+                }
+            });
+
         });
     });
 });
