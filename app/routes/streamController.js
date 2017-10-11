@@ -15,10 +15,12 @@ streamController.get("/", ensureLoggedIn, function(req, res) {
     .sort({ created_at: -1 })
     .populate("user_id")
     .exec((err, timeline) => {
+      timeline.forEach(babble => {
+        babble.formattedDate = moment(babble.created_at).format("llll");
+      });
       res.render("stream", {
         user: req.user,
-        timeline: timeline,
-        moment: moment
+        timeline: timeline
       });
     });
 });

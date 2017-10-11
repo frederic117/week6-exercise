@@ -1,7 +1,7 @@
 function updateModal(index) {
   $("#dynamiqueUserNameBabble").html(timeline[index].user_name);
   $("#dynamiqueContent").html(timeline[index].babble);
-  $("#dynamiqueTime").html(moments[index]);
+  $("#dynamiqueTime").html(timeline[index].formattedDate);
   $("#dynamiqueUserPic").attr("src", timeline[index].user_id.picProfile);
   $("#parent-modal").val(timeline[index]._id);
 }

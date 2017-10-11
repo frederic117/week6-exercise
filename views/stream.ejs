@@ -14,9 +14,6 @@
 </head>
 
 <body>
-    <script>
-        let moments = [];
-    </script>
     <nav class="nav has-shadow " id="top">
         <div class="container" id="top2">
             <div class="nav">
@@ -196,10 +193,6 @@
 
                                 <% if (timeline.length > 0) { %>
                                     <% timeline.forEach(function(babble, i) { %>
-                                        <script>
-                                            var m = (<%- JSON.stringify(moment(babble.created_at).format('llll')) %>)
-                                            moments.push(m);
-                                        </script>
                                         <div class="tweets card-content p-x-1">
                                             <article class="media tweet">
                                                 <figure class="media-left">
@@ -212,7 +205,7 @@
                                                         <p class="tweet-meta">
                                                             <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
                                                                 <strong><%= babble.user_id.local.username%></strong></a>
-                                                            <small class="media-right has-text-grey-light"><%= moment(babble.created_at).format('llll') %></small>
+                                                            <small class="media-right has-text-grey-light"><%= babble.formattedDate %></small>
 
                                                         </p>
 
@@ -358,7 +351,7 @@
                                             <p class="tweet-meta">
                                                 <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
                                                     <strong id="dynamiqueUserNameBabble"><%= babble.user_id.local.username%></strong></a>
-                                                <small id="dynamiqueTime" class="media-right has-text-grey-light"><%= moment(babble.created_at).format('llll') %></small>
+                                                <small id="dynamiqueTime" class="media-right has-text-grey-light"><%= babble.formattedDate %></small>
                                             </p>
 
                                             <p id="dynamiqueContent" class="tweet-body has-text-grey">
@@ -419,7 +412,6 @@
         <script>
             const user = <%- JSON.stringify(user) %>;
             const timeline = <%- JSON.stringify(timeline) %>;
-            const moment = <%- (moment) %>;
         </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
