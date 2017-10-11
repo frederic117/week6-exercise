@@ -26,6 +26,7 @@ streamController.get("/", ensureLoggedIn, function(req, res) {
     });
 });
 
+// Post a babble
 streamController.post("/", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
 
@@ -55,6 +56,7 @@ streamController.post("/", ensureLoggedIn, (req, res, next) => {
   });
 });
 
+// Reply
 streamController.post("/reply", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
   const user_id = user._id;
