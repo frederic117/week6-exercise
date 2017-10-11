@@ -17,7 +17,6 @@ streamController.get("/", ensureLoggedIn, function(req, res) {
     .populate("user_id")
     .populate("reply.user_id")
     .exec((err, timeline) => {
-      console.log("DEBUG timeline", timeline);
       res.render("stream", {
         user: req.user,
         timeline: timeline,
@@ -40,18 +39,15 @@ streamController.post("/", ensureLoggedIn, (req, res, next) => {
 
     newBabble.save(err => {
       if (err) {
-        return;
+        res.render("stream", {
+          username: user.username
+        });
+      } else {
+        // GAMIFICATION => +20 points per babble  posted
+        User.findByIdAndUpdate(user._id, { $inc: { score: 20 } }).exec();
+        console.log("SCORE OF THE USER", user.score);
+        res.redirect("/stream");
       }
-
-      newBabble.save(err => {
-        if (err) {
-          res.render("stream", {
-            username: user.username
-          });
-        } else {
-          res.redirect("/stream");
-        }
-      });
     });
   });
 });
@@ -81,6 +77,8 @@ streamController.post("/reply", ensureLoggedIn, (req, res, next) => {
         if (err) {
           return next(err);
         }
+        // GAMIFICATION => +10 points per babble replied posted
+        User.findByIdAndUpdate(user._id, { $inc: { score: 10 } }).exec();
         return res.redirect("/stream");
       }
     );
@@ -88,35 +86,31 @@ streamController.post("/reply", ensureLoggedIn, (req, res, next) => {
 });
 
 // New babble
-streamController.get("/newBabble", ensureLoggedIn, function(req, res) {
-  Babble.find({})
-    .sort({ created_at: -1 })
-    .populate("user_id")
-    .exec((err, timeline) => {
-      res.render("stream", {
-        user: req.user,
-        timeline: timeline,
-        moment: moment
-      });
-    });
-});
+// streamController.get("/newBabble", ensureLoggedIn, function(req, res) {
+//   Babble.find({})
+//     .sort({ created_at: -1 })
+//     .populate("user_id")
+//     .exec((err, timeline) => {
+//       res.render("stream", {
+//         user: req.user,
+//         timeline: timeline,
+//         moment: moment
+//       });
+//     });
+// });
 
 // New like
 streamController.post("/like", ensureLoggedIn, (req, res, next) => {
   const babble = req.body.likeInput;
 
-  console.log("JE PASSE DANS LA BOUCLE /like", babble);
-
-  Babble.findByIdAndUpdate(babble, { $inc: { like: 1 } })
+  Babble.findByIdAndUpdate(babble, { $inc: { like: 1 } }).exec();
+  Babble.findByIdAndUpdate(babble)
     .populate("user_id")
     .exec((err, user) => {
-      User.findByIdAndUpdate(user._id, { $inc: { score: 10 } }, function(
-        err,
-        post
-      ) {
-        if (err) return next(err);
-        res.redirect("/stream");
-      });
+      // GAMIFICATION => receive 10 points because receive 1 like
+      User.findByIdAndUpdate(user.user_id._id, { $inc: { score: 10 } }).exec();
+      if (err) return next(err);
+      res.redirect("/stream");
     });
 });
 

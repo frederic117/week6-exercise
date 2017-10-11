@@ -55,6 +55,8 @@ stockController.post("/:name", ensureLoggedIn, (req, res, next) => {
             username: user.username
           });
         } else {
+          // GAMIFICATION => +20 points per babble posted
+          User.findByIdAndUpdate(user._id, { $inc: { score: 20 } }).exec();
           res.redirect(`/stock/${stockId}`);
         }
       });
@@ -88,6 +90,8 @@ stockController.post("/:name/reply", ensureLoggedIn, (req, res, next) => {
         if (err) {
           return next(err);
         }
+        // GAMIFICATION => +10 points per babble replied posted
+        User.findByIdAndUpdate(user._id, { $inc: { score: 10 } }).exec();
         return res.redirect(`/stock/${stockId}`);
       }
     );
@@ -99,16 +103,14 @@ stockController.post("/:name/like", ensureLoggedIn, (req, res, next) => {
   const babble = req.body.likeInput;
   const stockId = req.params.name;
 
-  Babble.findByIdAndUpdate(babble, { $inc: { like: 1 } })
+  Babble.findByIdAndUpdate(babble, { $inc: { like: 1 } }).exec();
+  Babble.findByIdAndUpdate(babble)
     .populate("user_id")
     .exec((err, user) => {
-      User.findByIdAndUpdate(user._id, { $inc: { score: 10 } }, function(
-        err,
-        post
-      ) {
-        if (err) return next(err);
-        res.redirect(`stock/${stockId}`);
-      });
+      // GAMIFICATION => receive 10 points because receive 1 like
+      User.findByIdAndUpdate(user.user_id._id, { $inc: { score: 10 } }).exec();
+      if (err) return next(err);
+      res.redirect(`stock/${stockId}`);
     });
 });
 
