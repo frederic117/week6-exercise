@@ -4,6 +4,7 @@ const Stock = require("../app/models/stock");
 
 // Find all word used with an # in a text (babble)
 function findHashtags(babble) {
+  babble = babble.toUpperCase();
   const regex = /#(\w+)(?:\W|$)/g;
   const hashtags = [];
   while (true) {
