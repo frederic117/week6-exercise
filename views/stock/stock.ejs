@@ -29,7 +29,7 @@
         <div class="container" id="top2">
             <div class="nav">
                 <a class="nav-item" href="/">
-                    <img id="logo" src="images/logo.png" alt="Description">
+                    <img id="logo" src="../images/logo.png" alt="Description">
                 </a>
             </div>
             <div class="nav" id="formNav">
@@ -92,7 +92,22 @@
     </nav>
     <section class="section main">
         <div class="container">
-          <h1>Page ACTION</h1>
+          <h1><%= stock.longName%></h1>
+          <br>
+          <p><%= stock.isin%></p>
+          <p><%= stock.shortName%></p>
+          <p><%= stock.price%></p>
+          <p><%= stock.variation%></p>
+          <br>
+          <h3>About <%= stock.longName%></h3>
+          <p><%= stock.description%></p>
+          <br>
+          <br>
+          <p>Insiders consensus</p>
+          <p>Bull</p>
+          <%= stock.trend[0]%> %
+          <p>Bear</p>
+          <%= stock.trend[1]%> %
         </div>
     </section>
 
@@ -355,7 +370,7 @@
 
 
 
-                        <% let babble = timeline[0]  %>
+                        <% let babble; if (timeline[0]) {babble = timeline[0] %>
 
 
                             <div class="tweets card-content p-x-1">
@@ -421,6 +436,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <% } else {babble = {}} %>
                     </div>
 
                 </div>
