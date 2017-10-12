@@ -64,13 +64,13 @@ a {
 .button.is-primary:hover,
 .button.is-primary.is-active,
 .button.is-primary:active {
-    background-color: #4caf50;
+    background-color: #21ce99;
     border-color: transparent;
     color: #fff;
 }
 
 .button.is-primary {
-    background-color: #4caf50;
+    background-color: #21ce99;
     border-color: transparent;
     color: #fff;
 }
@@ -230,6 +230,7 @@ a {
     }
     .babMenu {
         padding-top: 12px;
+        color: #c9c9c9;
     }
 }
 

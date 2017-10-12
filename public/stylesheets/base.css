@@ -85,7 +85,7 @@ a.nav-item:not(.button).is-tab:hover {
 }
 .button.is-hovered,
 .button:hover {
-    background-color: #4caf50;
+    background-color: #21ce99;
     border-color: transparent;
     color: #fff;
 }

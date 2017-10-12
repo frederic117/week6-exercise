@@ -5,210 +5,256 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Insiders My profile page</title>
+    <title> Insiders Stream page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="minireset.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .ui-autocomplete-loading {
+            background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+        }
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
-  <nav class="nav has-shadow " id="top">
-      <div class="container" id="top2">
-          <div class="nav">
-              <a class="nav-item" href="/">
-                  <img id="logo" src="images/logo.png" alt="Description">
-              </a>
-          </div>
-          <div class="nav" id="formNav">
-              <div class="nav-item field" id="formNav1">
-                  <form method="post" class="control has-icons-right" id="formNav2">
-                      <input class="input is-hovered" type="text" placeholder="Stock or Username">
-                      <span id="loupe" class="icon is-small is-right">
+    <nav class="nav has-shadow " id="top">
+        <div class="container" id="top2">
+            <div class="nav">
+                <a class="nav-item" href="/">
+                    <img id="logo" src="images/logo.png" alt="Description">
+                </a>
+            </div>
+            <div class="nav" id="formNav">
+                <div class="nav-item field" id="formNav1">
+                    <form method="post" class="control has-icons-right" id="formNav2">
+                        <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <span id="loupe" class="icon is-small is-right">
                   <i type="submit"  class="fa fa-search" ></i>
                 </span>
-                  </form>
-              </div>
-          </div>
+                    </form>
+                </div>
+            </div>
 
-          <span class="nav-toggle">
+            <span class="nav-toggle">
                   <span></span>
-          <span></span>
-          <span></span>
-          </span>
-          <div class="nav-right nav-menu">
-              <div id="menu">
-                  <a href="/stream" class="nav-item is-tab ">
+            <span></span>
+            <span></span>
+            </span>
+            <div class="nav-right nav-menu">
+                <div id="menu">
+                    <a href="/stream" class="nav-item is-tab ">
       Stream
       </a>
-                  <a href="/trending" class="nav-item is-tab">
+                    <a href="/trending" class="nav-item is-tab">
       Trending
       </a>
-                  <a href="/leaderboard"class="nav-item is-tab">
+                    <a href="/leaderboard" class="nav-item is-tab">
       Leaderboard
       </a>
-              </div>
-              <span class="nav-item">
+                </div>
+                <span class="nav-item">
                       <% if(!user) { %>
                       <a href="/login" class="button">
                         Log in
                       </a>
-                      <a href="/signup" class="button">
-                        Sign up
-                      </a>
+                     
                     </span>
-              <%} else { %>
-                  <div class="nav-profile">
-                      <a id="profile-pic" href="/profile">
-                          <div class="nav-photo-profil">
-                              <img src="<%= user.picProfile%>" alt="">
-                          </div>
-                      </a>
-                      <div class="nav-user-profile">
-                          <div id="nav-username" class="nav-user-name">@
-                              <%= user.local.username%>
-                          </div>
-                          <div class="nav-status">
-                              <div class="nav-status-light"></div>
-                              <a href="/logout">Logout</a>
-                          </div>
-                      </div>
+                <%} else { %>
+                    <div class="nav-profile">
+                        <a id="profile-pic" href="/profile">
+                            <div class="nav-photo-profil">
+                                <img src="<%= user.picProfile%>" alt="">
+                            </div>
+                        </a>
+                        <div class="nav-user-profile">
+                            <div id="nav-username" class="nav-user-name">@
+                                <%= user.local.username%>
+                            </div>
+                            <div class="nav-status">
+                                <div class="nav-status-light"></div>
+                                <a href="/logout">Logout</a>
+                            </div>
+                        </div>
 
-                      <%  } %>
-                  </div>
-          </div>
-  </nav>
+                        <%  } %>
+                    </div>
+            </div>
+    </nav>
+
     <section class="section main">
+        <div class="column is-6" id="ActionCard">
+            <div class="card profile-card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64 is-circle">
+                                <%if (user.picProfile) { %>
+                                    <img src="<%= user.picProfile %>" alt="my picture">
+                                    <%  } else { %>
+                                        <img src="/images/avatar.png" alt="my picture">
+                                        <%  } %>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-5">
+                                <%= user.local.username %>
+                            </p>
+                            <p class="subtitle is-6">
+                                <%= user.local.email %>
+                            </p>
+                            <a href="/profile/edit"><button type="button" name="button">Update my profile</button></a>
+                        </div>
+                    </div>
+                    <nav class="level">
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="is-6 has-text-grey-light"><strong>REPUTATION POINTS</strong></p>
+                                <p class="is-4">
+                                    <%= user.score %>
+                                </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="is-6 has-text-grey-light"><small>Location</small></p>
+                                <p class="is-4">
+                                    <%= user.location ? user.location : "Secret..." %>
+                                </p>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="is-6 has-text-grey-light">Bio</p>
+                                <p class="is-4">
+                                    <%= user.bio ? user.bio : "Secret..." %>
+                                </p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="is-6 has-text-grey-light">Website</p>
+                                <p class="is-4">
+                                    <%= user.website ? user.website : "Secret..." %>
+                                </p>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        </div>
         <div class="container">
-    <fieldset>
-      <legend>My profile</legend>
-      <%if (user.picProfile) { %>
-        <img src="<%= user.picProfile %>" alt="my picture">
-    <%  } else { %>
-        <img src="/images/avatar.png" alt="my picture">
-    <%  } %>
-      <h1><strong>REPUTATION POINTS</strong></h1>
-      <p><%= user.score %></p>
-      <br>
-      <p><strong>User name</strong></p>
-      <p><%= user.local.username %></p>
-      <br>
-      <p><strong>Email</strong></p>
-      <p><%= user.local.email %></p>
-      <br>
-      <p><strong>Location</strong></p>
-      <p><%= user.location ? user.location : "Secret..." %></p>
-      <br>
-      <p><strong>Website</strong></p>
-      <p><%= user.website ? user.website : "Secret..." %></p>
-      <br>
-      <p><strong>Bio</strong></p>
-      <p><%= user.bio ? user.bio : "Secret..." %></p>
-      <br>
-      <a href="/profile/edit"><button type="button" name="button">Update my profile</button></a>
-    </fieldset>
-    <br>
-    <br>
+            <div class="columns">
+                <div class="column is-3">
+                    <div class="is-sticky">
+                        <div class="card-image">
+                            <nav class="navbar is-dark">
+                                <div>
+                                    <div class="babblesMenu">
+                                        <a id="WatchList" class="babMenu navbar-item is-tab "> My Watch List</a>
+                                        <a id="currentInsight" class="babMenu navbar-item is-tab is-active">Current Insights</a>
+                                    </div>
+                                </div>
+                            </nav>
 
-    <fieldset>
-      <legend>My connect details</legend>
-      <div class="row">
+                        </div>
+                        <div class="card profile-card">
 
-          <!-- LOCAL INFORMATION -->
-          <div class="col-sm-6">
-              <div class="well">
-                  <h3><span class="fa fa-user"></span> Local</h3>
+                            <div id="watchList" class="card-content">
+                                <div class="Symbol">
+                                    <h1 class="stockName" data-replace="Symbol">Air Liquide</h1>
+                                    <b class="price is-6">104.87</b><i data-replace="BidRealtime"></i>
+                                    <b id="variation" class="is-6 has-text-greEN"><span class= "indice">+20.7</span>&nbsp; <span class="indice">(10.8%)</span>
+                                            </b>
+                                </div>
+                                <div id="bullAndBear"><img src="/images/bulls.png" alt="bulls-and-bears"></div>
 
-                  <% if (user.local.email) { %>
-                      <p>
-                          <strong>id</strong>: <%= user._id %><br>
-                          <strong>email</strong>: <%= user.local.email %><br>
-                          <strong>password</strong>: <%= user.local.password %>
-                      </p>
-
-                      <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                  <% } else { %>
-                      <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                  <% } %>
-
-              </div>
-          </div>
-
-          <!-- FACEBOOK INFORMATION -->
-          <div class="col-sm-6">
-              <div class="well">
-                  <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-
-                  <!-- check if the user has this token (is the user authenticated with this social account) -->
-                  <% if (user.facebook.token) { %>
-                      <p>
-                          <strong>id</strong>: <%= user.facebook.id %><br>
-                          <strong>token</strong>: <%= user.facebook.token %><br>
-                          <strong>email</strong>: <%= user.facebook.email %><br>
-                          <strong>name</strong>: <%= user.facebook.name %><br>
-                      </p>
-
-                      <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-                  <% } else { %>
-                      <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-                  <% } %>
-
-              </div>
-          </div>
-      </div>
-      <div class="row">
-
-          <!-- TWITTER INFORMATION -->
-          <div class="col-sm-6">
-              <div class="well">
-                  <h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
-
-                  <% if (user.twitter.token) { %>
-                      <p>
-                          <strong>id</strong>: <%= user.twitter.id %><br>
-                          <strong>token</strong>: <%= user.twitter.token %><br>
-                          <strong>display name</strong>: <%= user.twitter.displayName %><br>
-                          <strong>username</strong>: <%= user.twitter.username %>
-                      </p>
-
-                      <a href="/unlink/twitter" class="btn btn-info">Unlink</a>
-                  <% } else { %>
-                      <a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
-                  <% } %>
-
-              </div>
-          </div>
-
-          <!-- GOOGLE INFORMATION -->
-          <div class="col-sm-6">
-              <div class="well">
-                  <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h3>
-
-                  <% if (user.google.token) { %>
-                      <p>
-                          <strong>id</strong>: <%= user.google.id %><br>
-                          <strong>token</strong>: <%= user.google.token %><br>
-                          <strong>email</strong>: <%= user.google.email %><br>
-                          <strong>name</strong>: <%= user.google.name %>
-                      </p>
-
-                      <a href="/unlink/google" class="btn btn-danger">Unlink</a>
-                  <% } else { %>
-                      <a href="/connect/google" class="btn btn-danger">Connect Google</a>
-                  <% } %>
-
-              </div>
-          </div>
-      </div>
-
-      <div class="text-center">
-      </div>
-    </fieldset>
+                                <div id="position">
+                                    <span class="stockName">Performance</span>
+                                    <h1 id="WinOrLoss">(10.8%)</h1>
+                                    <form id="close" action="/" method="post">
+                                        <button id="Bclose" type="submit" class="button is-small is-outlined is-primary">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
-</div>
-</section>
+                <div class="column is-6">
+
+                    <%# Zone of Babbles%>
+                        <div class="card">
+                            <div class="babbles-box" id="babble-container">
+
+                                <% if (timeline.length > 0) { %>
+                                    <% timeline.forEach(function(babble, i) { %>
+                                        <div class="tweets card-content p-x-1">
+                                            <article class="media tweet">
+                                                <figure class="media-left">
+                                                    <p class="image is-64x64 is-circle">
+                                                        <a href="/profile/<%= babble.user_id._id %>" class=""><img src="<%= babble.user_id.picProfile%>"></a>
+                                                    </p>
+                                                </figure>
+                                                <div class="media-content">
+                                                    <div class="content">
+                                                        <p class="tweet-meta">
+                                                            <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
+                                                                <strong><%= babble.user_id.local.username%></strong></a>
+                                                            <small class="media-right has-text-grey-light"><%= moment(babble.created_at).format('llll') %></small>
+                                                        </p>
+                                                        <p class="tweet-body has-text-grey">
+                                                            <%= babble.babble%>
+                                                        </p>
+                                                    </div>
+                                                    <nav class="media-right">
+                                                        <div class="level-right">
+                                                            <a class="level-item has-text-grey-light">
+                                                                <span class="icon is-small"><i id=<%=i%> class="fa fa-reply modal-button" data-target="#modal"></i></span>
+                                                                <small class="favicon"> <%= babble.reply.length%></small>
+                                                            </a>
+                                                            <a class="level-item has-text-grey-light">
+                                                                <form id="like-form" action="/stream/like" method="post"> <span class="icon is-small"><i id=<%=i%> class="fa fa-thumbs-o-up like-btn"></i></span>
+                                                                    <small><%= babble.like%></small>
+                                                                    <input class="like-input" name="likeInput" val="">
+                                                                </form>
+                                                            </a>
+                                                    </nav>
+                                                    </div>
+                                            </article>
+                                            </div>
+                                            <% }) %>
+                                                <% } else { %>
+                                                    <div class="babble-container no-babble">
+                                                        <p>The timeline is empty</p>
+                                                    </div>
+                                                    <%  }%>
+                                        </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <%# End of babble container%>
+            <button class="button m-t-1 m-b-1 is-fullwidth">
+Load more...
+</button>
+            </div>
+    </section>
+    <script type="text/javascript" src="/JS/search.js"></script>
+    <script type="text/javascript" src="/JS/JSforCSS.js"></script>
+    <script type="text/javascript" src="/JS/modal.js"></script>
 </body>
+
 </html>
