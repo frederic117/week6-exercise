@@ -16,11 +16,16 @@ function getStockPrice(url) {
       if (error) reject(error);
       if (!error && response.statusCode == 200) {
         // console.log(html);
+
+        // regex => <td class="label gras">Variation<\/td>[\s\n]+<td[^>]*><span[^>]*>([^<]+)%?
+        const percentRegex = /<td class="label gras">Variation<\/td>[\s\n]+<td[^>]*><span[^>]*>([^<]+)%?/;
         const priceRegex = /itemprop="price"\s+content="([^"]+)/;
-        const percentRegex = /<span class="color3 variation">([^"]+)%<\/span>/;
+        // const percentRegex = /<span class="color3 variation">([^"]+)%<\/span>/;
         // let $ = cheerio.load(html);
+
         const priceMatch = priceRegex.exec(html);
         const percentMatch = percentRegex.exec(html);
+        console.log("********HELLO REGEX", percentMatch);
         const data = {
           price: priceMatch ? priceMatch[1] : undefined,
           percent: percentMatch ? percentMatch[1] : undefined

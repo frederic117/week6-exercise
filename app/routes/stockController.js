@@ -124,8 +124,8 @@ stockController.post("/:name/like", ensureLoggedIn, (req, res, next) => {
 // Add to watchList
 stockController.post("/:name/watchlist", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
-  const stockId = req.params.name;
-  Stock.findOne({ longName: stockId.toUpperCase() })
+  const stockId = req.params.name.toUpperCase();
+  Stock.findOne({ longName: stockId })
     .then(stock => {
       if (!stock) {
         res.redirect("/stock/" + stockId);
@@ -155,13 +155,75 @@ stockController.post("/:name/watchlist", ensureLoggedIn, (req, res, next) => {
 
 // Post a bull
 stockController.post("/:name/bull", ensureLoggedIn, (req, res, next) => {
-  const stockId = req.params.name;
   const user = req.user;
+  const stockId = req.params.name.toUpperCase();
+  const price = req.body.priceToSend;
+  console.log("*********PRICE", price);
+  Stock.findOne({ longName: stockId })
+    .then(stock => {
+      if (!stock) {
+        res.redirect("/stock/" + stockId);
+      }
 
-  User.findByIdAndUpdate(user._id).exec((err, user) => {
-    if (err) return next(err);
-    res.redirect(`stock/${stockId}`);
-  });
+      const newWatchItem = new WatchItem({
+        username: user.local.username,
+        stockId: stock._id,
+        position: "bull",
+        initialPrice: price
+      });
+
+      newWatchItem.save().then(newItem => {
+        User.findByIdAndUpdate(
+          user._id,
+          {
+            $addToSet: { watchList: newItem._id }
+          },
+          { new: true }
+        ).then(user => {
+          req.user = user;
+          res.locals.user = user;
+          res.redirect(`/stock/${stockId}`);
+        });
+      });
+    })
+    .catch(err => console.error(err));
+});
+
+// Post a bear
+// Post a bull
+stockController.post("/:name/bull", ensureLoggedIn, (req, res, next) => {
+  const user = req.user;
+  const stockId = req.params.name.toUpperCase();
+  const price = req.body.priceToSend;
+  console.log("*********PRICE", price);
+  Stock.findOne({ longName: stockId })
+    .then(stock => {
+      if (!stock) {
+        res.redirect("/stock/" + stockId);
+      }
+
+      const newWatchItem = new WatchItem({
+        username: user.local.username,
+        stockId: stock._id,
+        position: "bear",
+        initialPrice: price
+      });
+
+      newWatchItem.save().then(newItem => {
+        User.findByIdAndUpdate(
+          user._id,
+          {
+            $addToSet: { watchList: newItem._id }
+          },
+          { new: true }
+        ).then(user => {
+          req.user = user;
+          res.locals.user = user;
+          res.redirect(`/stock/${stockId}`);
+        });
+      });
+    })
+    .catch(err => console.error(err));
 });
 
 module.exports = stockController;
