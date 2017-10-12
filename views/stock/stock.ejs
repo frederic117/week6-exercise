@@ -116,30 +116,32 @@
                                     <a href="/stock/<%= stock.description%>" class="">
                                         See description</a>
                                 </p>
-                                <form id="BBull" action="/" method="post">
-                                    <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Be Bull</button>
+                                <form id="watchList" action="/stock/<%=stockId%>/watchlist" method="post">
+                                    <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Add to Watchlist</button>
                                 </form>
                             </p>
 
                             <div class="media" id="priceStock">
-                                <strong class=""><%= stock.price%></strong> &nbsp &nbsp
-                                <small class=""><%= stock.variation%></small> &nbsp &nbsp
-                                <small class=""><%= stock.variationProcent%></small>
+                                <strong class=""><%= price%> &nbsp €</strong> &nbsp &nbsp
+
+                                <small class=""><%= percent%> &nbsp </small>
                             </div>
                         </div>
                     </div>
                     <nav id="bandB" class="level">
                         <div id="bullsAndBears">
-                            <form id="BBull" action="/" method="post">
+                            <form id="BBull" action="/stock/<%= stockId%>/bull" method="post">
                                 <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Be Bull</button>
+                                <input type="text" style="display: none;" name="priceToSend" value="<%=price%>">
                             </form>
-                            <span id="bandbdigit1"> <%= stock.trend[0]%> %</span>
+                            <span id="bandbdigit1"> <%= bullPercent%> %</span>
                             <div id="bullsAndBearsPic">
-                                <img src="/images/bulls-and-bears.png" alt="">
+                                <img src="/images/bulls-and-bears.png" alt="bull and bear">
                             </div>
-                            <span id="bandbdigit2"> <%= stock.trend[1]%> %</span>
-                            <form id="BBear" action="/" method="post">
+                            <span id="bandbdigit2"> <%= bearPercent%> %</span>
+                            <form id="BBear" action="/stock/<%= stockId%>/bear" method="post">
                                 <button id="Bbear" type="submit" class="button is-small is-outlined is-primary">Be Bear</button>
+                                <input type="text" style="display: none;" name="priceToSend" value="<%=price%>">
                             </form>
                         </div>
                     </nav>
@@ -465,6 +467,7 @@
                 const user = <%- JSON.stringify(user) %>;
                 const timeline = <%- JSON.stringify(timeline) %>;
                 const moment = <%- (moment) %>;
+                const price = <%- (price) %>;
             </script>
 
             <script type="text/javascript" src="/JS/search.js"></script>

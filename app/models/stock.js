@@ -14,7 +14,7 @@ const stockSchema = new Schema(
     variation: Number,
     trend: {
       type: Array,
-      default: [0.5, 0.5]
+      default: [50, 50]
     },
     stock_img: String,
     url_price: String

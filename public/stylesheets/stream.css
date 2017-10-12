@@ -1,7 +1,7 @@
 .card {
     background-color: #fff;
-    -webkit-box-shadow: 0 2px 5px hsla(0, 0%, 4%, .1), 0 0 1px 0 hsla(0, 0%, 4%, .1);
-    box-shadow: 0 2px 5px hsla(0, 0%, 4%, .1), 0 0 1px 0 hsla(0, 0%, 4%, .1);
+    -webkit-box-shadow: 0 2px 5px hsla(0, 0%, 4%, 0.1), 0 0 1px 0 hsla(0, 0%, 4%, 0.1);
+    box-shadow: 0 2px 5px hsla(0, 0%, 4%, 0.1), 0 0 1px 0 hsla(0, 0%, 4%, 0.1);
     color: #4a4a4a;
     max-width: 100%;
     position: relative;
@@ -26,11 +26,11 @@
 }
 
 .card .media:not(:last-child) {
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
 }
 
 .media+.media {
-    border-top: 1px solid hsla(0, 0%, 86%, .5);
+    border-top: 1px solid hsla(0, 0%, 86%, 0.5);
     margin-top: 1rem;
     padding-top: 1rem;
 }
@@ -138,7 +138,7 @@ a {
     border-bottom-style: solid;
     border-bottom-width: 3px;
     color: #f9f9f9;
-    padding-bottom: calc(.5rem - 3px);
+    padding-bottom: calc(0.5rem - 3px);
 }
 
 #vide {
@@ -168,16 +168,16 @@ a {
 .align-item-center {
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center
+    align-items: center;
 }
 
 .bg-light {
-    background-color: #f5f5f5
+    background-color: #f5f5f5;
 }
 
 .is-circle {
     overflow: hidden;
-    border-radius: 50%
+    border-radius: 50%;
 }
 
 .is-sticky {
@@ -187,7 +187,7 @@ a {
 }
 
 .card-equal-height {
-    height: 230px
+    height: 230px;
 }
 
 .popup-shown {
@@ -196,7 +196,7 @@ a {
     right: 0;
     bottom: 0;
     top: 0;
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 
 .profile-card .image.is-circle {
@@ -208,11 +208,11 @@ a {
 }
 
 .m-t-1 {
-    margin-top: 1rem!important;
+    margin-top: 1rem !important;
 }
 
 .m-b-1 {
-    margin-bottom: 1rem!important
+    margin-bottom: 1rem !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -246,7 +246,7 @@ a {
 #Stocks {
     display: flex;
     min-height: 1em;
-    background: #FFF;
+    background: #fff;
     color: #192b41;
     padding: 20px;
     vertical-align: middle;
@@ -260,7 +260,7 @@ a {
 }
 
 #variation {
-    display: flex
+    display: flex;
 }
 
 .Symbol {
@@ -318,16 +318,16 @@ a {
 }
 
 .indice {
-    font-size: 0.9rem
+    font-size: 0.9rem;
 }
 
 #currentInsight {
-    padding-left: 40px;
+    padding-left: 20px;
 }
 
 .navbar-item.is-tab:hover {
     background-color: transparent;
-    border-bottom-color: #F5F5F5;
+    border-bottom-color: #f5f5f5;
     background-color: #f5f5f5;
     color: #0a0a0a;
 }

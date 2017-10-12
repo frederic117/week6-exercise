@@ -34,8 +34,8 @@
             </div>
             <div class="nav" id="formNav">
                 <div class="nav-item field" id="formNav1">
-                    <form method="post" class="control has-icons-right" id="formNav2">
-                        <input id="search-query" class="input is-hovered" type="text" placeholder="Stock or Username">
+                    <form method="post" action="/search-stock" class="control has-icons-right" id="formNav2">
+                        <input id="search-query" name="search" class="input is-hovered" type="text" placeholder="Stock or Username">
                         <span id="loupe" class="icon is-small is-right">
                   <i id="quicksearch" type="submit"  class="fa fa-search" ></i>
                 </span>
@@ -227,74 +227,74 @@
 
                         <div class="column is-3">
                             <div class="box">
-                                <p><span class="title is-5">Who to follow</span> · <a href="#">Refresh</a></p>
-                                <hr>
-                                <div class="columns">
-                                    <div class="column is-3 is-marginless">
-                                        <div class="image">
-                                            <img src="https://placehold.it/200x200">
+                                <p><span class="title is-5">Who to follow</span> · <a href="/stream">Refresh</a>
+                                    <hr>
+                                    <div class="columns">
+                                        <div class="column is-3 is-marginless">
+                                            <div class="image is-circle">
+                                                <a href="/profile/<%=followers[0]._id%>"><img src="<%= followers[0].picProfile%>"></a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="column is-9">
-                                        <p>
-                                            <a href="#">
-                                                <strong>John Smith</strong> &commat;jsmith
-                                            </a>
-                                            <a href="#">
-                                                <i class="fa fa-times x"></i>
-                                            </a>
-                                        </p>
-                                        <a class="button is-primary is-small">
-                                            <span>
+                                        <div class="column is-9">
+                                            <p>
+                                                <a href="/profile/<%=followers[0]._id%>">
+                                                    <strong>&commat;<%= followers[0].local.username%></strong>
+                                                </a>
+                                                <a href="/follow/<%=followers[0]._id%>">
+                                                    <i class="fa fa-times x"></i>
+                                                </a>
+                                            </p>
+                                            <a class="button is-primary is-small">
+                                                <span>
                     + Follow
                   </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="columns">
-                                    <div class="column is-3 is-marginless">
-                                        <div class="image">
-                                            <img src="https://placehold.it/200x200">
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="column is-9">
-                                        <p>
-                                            <a href="#">
-                                                <strong>Jane Smith</strong> &commat;janesmith
-                                            </a>
-                                            <a href="#">
-                                                <i class="fa fa-times x"></i>
-                                            </a>
-                                        </p>
-                                        <a class="button is-primary is-small">
-                                            <span>
+                                    <div class="columns">
+                                        <div class="column is-3 is-marginless">
+                                            <div class="image is-circle">
+                                                <a href="/profile/<%=followers[1]._id%>"><img src="<%= followers[1].picProfile%>"></a>
+                                            </div>
+                                        </div>
+                                        <div class="column is-9">
+                                            <p>
+                                                <a href="/profile/<%=followers[1]._id%">
+                                                    <strong>&commat;<%= followers[1].local.username%></strong>
+                                                </a>
+                                                <a href="/follow/<%=followers[1]._id%>">
+                                                    <i class="fa fa-times x"></i>
+                                                </a>
+                                            </p>
+                                            <a class="button is-primary is-small">
+                                                <span>
                     + Follow
                   </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="columns">
-                                    <div class="column is-3 is-marginless">
-                                        <div class="image">
-                                            <img src="https://placehold.it/200x200">
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="column is-9">
-                                        <p>
-                                            <a href="#">
-                                                <strong>Mike Scott</strong> &commat;mscott
-                                            </a>
-                                            <a href="#">
-                                                <i class="fa fa-times x"></i>
-                                            </a>
-                                        </p>
-                                        <a class="button is-primary is-small">
-                                            <span>
+                                    <div class="columns">
+                                        <div class="column is-3 is-marginless">
+                                            <div class="image is-circle">
+                                                <a href="/profile/<%=followers[2]._id%>"><img src="<%= followers[2].picProfile%>"></a>
+                                            </div>
+                                        </div>
+                                        <div class="column is-9">
+                                            <p>
+                                                <a href="/profile/<%=followers[2]._id%>">
+                                                    <strong>&commat;<%= followers[2].local.username%></strong>
+                                                </a>
+                                                <a href="/follow/<%=followers[2]._id%>">
+                                                    <i class="fa fa-times x"></i>
+                                                </a>
+                                            </p>
+                                            <a class="button is-primary is-small">
+                                                <span>
                     + Follow
                   </span>
-                                        </a>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
                             </div>
                         </div>
@@ -398,6 +398,7 @@
                 const user = <%- JSON.stringify(user) %>;
                 const timeline = <%- JSON.stringify(timeline) %>;
                 const moment = <%- (moment) %>;
+                const followers = <%- JSON.stringify(followers) %>;
             </script>
 
             <script type="text/javascript" src="JS/search.js"></script>
