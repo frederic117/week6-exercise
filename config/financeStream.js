@@ -11,22 +11,24 @@ const request = require("request");
 getStockPrice("http://www.boursorama.com/cours.phtml?symbole=1rPDG");
 
 function getStockPrice(url) {
-  request(url, function(error, response, html) {
-    if (!error && response.statusCode == 200) {
-      // console.log(html);
-      const regex = /itemprop="price"\s+content="([^"]+)/;
-      // let $ = cheerio.load(html);
-      const price = [];
-      while (price.length < 1) {
-        const match = regex.exec(html);
-        if (match === null) {
-          break;
-        } else {
-          price.push(match[1]);
-          return price;
-        }
+  return new Promise((resolve, reject) => {
+    request(url, function(error, response, html) {
+      if (error) reject(error);
+      if (!error && response.statusCode == 200) {
+        // console.log(html);
+        const priceRegex = /itemprop="price"\s+content="([^"]+)/;
+        const percentRegex = /<span class="color3 variation">([^"]+)%<\/span>/;
+        // let $ = cheerio.load(html);
+        const priceMatch = priceRegex.exec(html);
+        const percentMatch = percentRegex.exec(html);
+        const data = {
+          price: priceMatch ? priceMatch[1] : undefined,
+          percent: percentMatch ? percentMatch[1] : undefined
+        };
+
+        resolve(data);
       }
-    }
+    });
   });
 }
 

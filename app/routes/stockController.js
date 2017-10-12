@@ -6,6 +6,7 @@ const Babble = require("../models/babble");
 const WatchItem = require("../models/watchitem");
 const moment = require("moment");
 const getStockPrice = require("../../config/financeStream");
+
 const {
   ensureLoggedIn,
   ensureLoggedOut
@@ -18,19 +19,22 @@ stockController.get("/:name", ensureLoggedIn, function(req, res, next) {
 
   Stock.findOne({ longName: stock }, (err, stock) => {
     if (err) return next(err);
-
-    Babble.find({ stockLink: stock._id })
-      .sort({ created_at: -1 })
-      .populate("user_id")
-      .exec((err, timeline) => {
-        res.render("stock/stock", {
-          stockId,
-          stock,
-          timeline,
-          moment,
-          user: req.user
+    getStockPrice(stock.url_price).then(({ price, percent }) => {
+      Babble.find({ stockLink: stock._id })
+        .sort({ created_at: -1 })
+        .populate("user_id")
+        .exec((err, timeline) => {
+          res.render("stock/stock", {
+            stockId,
+            stock,
+            timeline,
+            moment,
+            user: req.user,
+            price,
+            percent
+          });
         });
-      });
+    });
   });
 });
 
@@ -113,7 +117,7 @@ stockController.post("/:name/like", ensureLoggedIn, (req, res, next) => {
       // GAMIFICATION => receive 10 points because receive 1 like
       User.findByIdAndUpdate(user.user_id._id, { $inc: { score: 10 } }).exec();
       if (err) return next(err);
-      res.redirect(`stock/${stockId}`);
+      res.redirect(`/stock/${stockId}`);
     });
 });
 
@@ -121,21 +125,32 @@ stockController.post("/:name/like", ensureLoggedIn, (req, res, next) => {
 stockController.post("/:name/watchlist", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
   const stockId = req.params.name;
+  Stock.findOne({ longName: stockId.toUpperCase() })
+    .then(stock => {
+      if (!stock) {
+        res.redirect("/stock/" + stockId);
+      }
+      const newWatchItem = new WatchItem({
+        username: user.local.username,
+        stockId: stock._id,
+        position: "none"
+      });
 
-  Stock.findOne({ longName: stockId }).then(stock => {
-    const newWatchItem = new WatchItem({
-      username: user.local.username,
-      stockId: stock._id,
-      position: "none"
-    });
-
-    newWatchItem.save(newItem => {
-      User.findByIdAndUpdate(user._id, {
-        $push: { watchList: newItem }
-      }).exec();
-      res.redirect(`/stock/${stockId}`);
-    });
-  });
+      newWatchItem.save().then(newItem => {
+        User.findByIdAndUpdate(
+          user._id,
+          {
+            $addToSet: { watchList: newItem._id }
+          },
+          { new: true }
+        ).then(user => {
+          req.user = user;
+          res.locals.user = user;
+          res.redirect(`/stock/${stockId}`);
+        });
+      });
+    })
+    .catch(err => console.error(err));
 });
 
 // Post a bull
