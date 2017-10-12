@@ -8,13 +8,10 @@ const cheerio = require("cheerio");
 const request = require("request");
 
 // example with "http://www.boursorama.com/cours.phtml?symbole=1rPDG"
+getStockPrice("http://www.boursorama.com/cours.phtml?symbole=1rPDG");
 
 function getStockPrice(url) {
-  request(, function(
-    error,
-    response,
-    html
-  ) {
+  request(url, function(error, response, html) {
     if (!error && response.statusCode == 200) {
       // console.log(html);
       const regex = /itemprop="price"\s+content="([^"]+)/;
@@ -26,11 +23,11 @@ function getStockPrice(url) {
           break;
         } else {
           price.push(match[1]);
-          console.log(price);
+          return price;
         }
       }
     }
   });
 }
 
-module.exports = getStockPrice();
+module.exports = getStockPrice;

@@ -5,6 +5,7 @@ const User = require("../models/user");
 const Babble = require("../models/babble");
 const WatchItem = require("../models/watchitem");
 const moment = require("moment");
+const getStockPrice = require("../../config/financeStream");
 const {
   ensureLoggedIn,
   ensureLoggedOut
@@ -17,6 +18,7 @@ stockController.get("/:name", ensureLoggedIn, function(req, res, next) {
 
   Stock.findOne({ longName: stock }, (err, stock) => {
     if (err) return next(err);
+
     Babble.find({ stockLink: stock._id })
       .sort({ created_at: -1 })
       .populate("user_id")
@@ -120,22 +122,21 @@ stockController.post("/:name/watchlist", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
   const stockId = req.params.name;
 
-  Stock.findOne({"longName":stockId }).then(stock =>{
+  Stock.findOne({ longName: stockId }).then(stock => {
     const newWatchItem = new WatchItem({
       username: user.local.username,
-      stockId: stock._id;
-      position: "none",
+      stockId: stock._id,
+      position: "none"
     });
 
     newWatchItem.save(newItem => {
-
-        User.findByIdAndUpdate(user._id, {$ push: {watchList: newItem}}).exec();
-        res.redirect(`/stock/${stockId}`);
-      });
+      User.findByIdAndUpdate(user._id, {
+        $push: { watchList: newItem }
+      }).exec();
+      res.redirect(`/stock/${stockId}`);
     });
-
   });
-
+});
 
 // Post a bull
 stockController.post("/:name/bull", ensureLoggedIn, (req, res, next) => {

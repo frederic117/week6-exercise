@@ -28,5 +28,5 @@ const watchItemSchema = new Schema(
 
 //
 
-var WatchItem = mongoose.model("WatchItem", stockSchema);
+var WatchItem = mongoose.model("WatchItem", watchItemSchema);
 module.exports = WatchItem;
