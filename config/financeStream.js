@@ -25,7 +25,7 @@ function getStockPrice(url) {
 
         const priceMatch = priceRegex.exec(html);
         const percentMatch = percentRegex.exec(html);
-        console.log("********HELLO REGEX", percentMatch);
+
         const data = {
           price: priceMatch ? priceMatch[1] : undefined,
           percent: percentMatch ? percentMatch[1] : undefined

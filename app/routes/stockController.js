@@ -16,7 +16,6 @@ const {
 stockController.get("/:name", ensureLoggedIn, function(req, res, next) {
   const stock = req.params.name.toUpperCase();
   const stockId = req.params.name;
-  console.log("********** NOM DE L4ACTIO", stockId);
 
   Stock.findOne({ longName: stock }, (err, stock) => {
     if (err) return next(err);
@@ -48,6 +47,14 @@ stockController.get("/:name", ensureLoggedIn, function(req, res, next) {
         });
     });
   });
+});
+
+// Follow an insiders
+stockController.post("/follow/:id", ensureLoggedIn, (req, res, next) => {
+  const user = req.user;
+  const insiderId = req.params.name;
+
+  // User.find()
 });
 
 // Post a babble

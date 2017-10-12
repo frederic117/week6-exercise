@@ -12,16 +12,25 @@ const findStock = require("../../config/stockIdentifier");
 
 // STREAM SECTION =========================
 streamController.get("/", ensureLoggedIn, function(req, res) {
-  Babble.find({})
-    .sort({ created_at: -1 })
-    .populate("user_id")
-    .populate("reply.user_id")
-    .exec((err, timeline) => {
-      res.render("stream", {
-        user: req.user,
-        timeline: timeline,
-        moment: moment
-      });
+  const avoidPeople = req.user.following;
+  avoidPeople.push(req.user._id);
+
+  User.find({ _id: { $nin: avoidPeople } })
+    .sort({ score: -1 })
+    .exec((err, followers) => {
+      Babble.find({})
+        .sort({ created_at: -1 })
+        .populate("user_id")
+        .populate("reply.user_id")
+        .exec((err, timeline) => {
+          console.log("followers*******", followers);
+          res.render("stream", {
+            user: req.user,
+            timeline: timeline,
+            moment: moment,
+            followers: followers
+          });
+        });
     });
 });
 
