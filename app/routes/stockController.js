@@ -3,6 +3,7 @@ const stockController = express.Router();
 const Stock = require("../models/stock");
 const User = require("../models/user");
 const Babble = require("../models/babble");
+const WatchItem = require("../models/watchitem");
 const moment = require("moment");
 const {
   ensureLoggedIn,
@@ -112,6 +113,39 @@ stockController.post("/:name/like", ensureLoggedIn, (req, res, next) => {
       if (err) return next(err);
       res.redirect(`stock/${stockId}`);
     });
+});
+
+// Add to watchList
+stockController.post("/:name/watchlist", ensureLoggedIn, (req, res, next) => {
+  const user = req.user;
+  const stockId = req.params.name;
+
+  Stock.findOne({"longName":stockId }).then(stock =>{
+    const newWatchItem = new WatchItem({
+      username: user.local.username,
+      stockId: stock._id;
+      position: "none",
+    });
+
+    newWatchItem.save(newItem => {
+
+        User.findByIdAndUpdate(user._id, {$ push: {watchList: newItem}}).exec();
+        res.redirect(`/stock/${stockId}`);
+      });
+    });
+
+  });
+
+
+// Post a bull
+stockController.post("/:name/bull", ensureLoggedIn, (req, res, next) => {
+  const stockId = req.params.name;
+  const user = req.user;
+
+  User.findByIdAndUpdate(user._id).exec((err, user) => {
+    if (err) return next(err);
+    res.redirect(`stock/${stockId}`);
+  });
 });
 
 module.exports = stockController;

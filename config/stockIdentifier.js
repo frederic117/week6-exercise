@@ -33,7 +33,6 @@ function findLinkableStocks(hashtags) {
   })
     .distinct("_id")
     .then(res => {
-      console.log("RES**********", res);
       return res;
     });
 }

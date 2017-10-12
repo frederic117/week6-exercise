@@ -85,20 +85,6 @@ streamController.post("/reply", ensureLoggedIn, (req, res, next) => {
   });
 });
 
-// New babble
-// streamController.get("/newBabble", ensureLoggedIn, function(req, res) {
-//   Babble.find({})
-//     .sort({ created_at: -1 })
-//     .populate("user_id")
-//     .exec((err, timeline) => {
-//       res.render("stream", {
-//         user: req.user,
-//         timeline: timeline,
-//         moment: moment
-//       });
-//     });
-// });
-
 // New like
 streamController.post("/like", ensureLoggedIn, (req, res, next) => {
   const babble = req.body.likeInput;
