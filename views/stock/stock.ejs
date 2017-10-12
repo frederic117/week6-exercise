@@ -11,14 +11,14 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <style>
-.ui-autocomplete-loading {
-  background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
-}
-</style>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        .ui-autocomplete-loading {
+            background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+        }
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -34,12 +34,12 @@
             </div>
             <div class="nav" id="formNav">
                 <div class="nav-item field" id="formNav1">
-                  <form method="post" class="control has-icons-right" id="formNav2">
-                      <input id="search-query" class="input is-hovered" type="text" placeholder="Stock or Username">
-                      <span id="loupe" class="icon is-small is-right">
+                    <form method="post" class="control has-icons-right" id="formNav2">
+                        <input id="search-query" class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <span id="loupe" class="icon is-small is-right">
                   <i id="quicksearch" type="submit"  class="fa fa-search" ></i>
                 </span>
-                  </form>
+                    </form>
                 </div>
             </div>
 
@@ -51,14 +51,14 @@
             <div class="nav-right nav-menu">
                 <div id="menu">
                     <a href="/stream" class="nav-item is-tab is-active">
-        Stream
-        </a>
-                    <a href="/trending"class="nav-item is-tab">
-        Trending
-        </a>
+                     Stream
+                     </a>
+                    <a href="/trending" class="nav-item is-tab">
+                    Trending
+                     </a>
                     <a href="/leaderboard" class="nav-item is-tab">
-        Leaderboard
-        </a>
+                    Leaderboard
+                     </a>
                 </div>
                 <span class="nav-item">
                         <% if(!user) { %>
@@ -68,7 +68,7 @@
                         <a href="/signup" class="button">
                           Sign up
                         </a>
-                      </span>
+                </span>
                 <%} else { %>
                     <div class="nav-profile">
                         <a id="profile-pic" href="/profile">
@@ -85,92 +85,115 @@
                                 <a href="/logout">Logout</a>
                             </div>
                         </div>
-
                         <%  } %>
                     </div>
             </div>
-    </nav>
-    <section class="section main">
-        <div class="container">
-          <h1><%= stock.longName%></h1>
-          <br>
-          <p><%= stock.isin%></p>
-          <p><%= stock.shortName%></p>
-          <p><%= stock.price%></p>
-          <p><%= stock.variation%></p>
-          <br>
-          <h3>About <%= stock.longName%></h3>
-          <p><%= stock.description%></p>
-          <br>
-          <br>
-          <p>Insiders consensus</p>
-          <p>Bull</p>
-          <%= stock.trend[0]%> %
-          <p>Bear</p>
-          <%= stock.trend[1]%> %
-          <br>
-          <button id="add-watchlist">Add to watch list</button>
         </div>
-    </section>
+    </nav>
 
     <section class="section main">
+        <div class="column is-6" id="ActionCard">
+            <div class="card profile-card">
+                <div class="card-content">
+                    <div class="media" id="stockInfo">
+                        <div class="media-left">
+                            <figure class="image is-64x64 is-circle">
+                                <img src="<%= stock.stock_img %>" alt="">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-5">
+                                <%= stock.longName%>
+                            </p>
+                            <p class="subtitle is-6">
+                                <a class="">
+                                    <%= stock.isin%>
+                                </a>
+                                <a class="">
+                                    <%= stock.shortName%>
+                                </a>
+                                <p id="descr" class="is-6 has-text-grey-light">
+                                    <a href="/stock/<%= stock.description%>" class="">
+                                        See description</a>
+                                </p>
+                                <form id="BBull" action="/" method="post">
+                                    <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Be Bull</button>
+                                </form>
+                            </p>
+
+                            <div class="media" id="priceStock">
+                                <strong class=""><%= stock.price%></strong> &nbsp &nbsp
+                                <small class=""><%= stock.variation%></small> &nbsp &nbsp
+                                <small class=""><%= stock.variationProcent%></small>
+                            </div>
+                        </div>
+                    </div>
+                    <nav id="bandB" class="level">
+                        <div id="bullsAndBears">
+                            <form id="BBull" action="/" method="post">
+                                <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Be Bull</button>
+                            </form>
+                            <span id="bandbdigit1"> <%= stock.trend[0]%> %</span>
+                            <div id="bullsAndBearsPic">
+                                <img src="/images/bulls-and-bears.png" alt="">
+                            </div>
+                            <span id="bandbdigit2"> <%= stock.trend[1]%> %</span>
+                            <form id="BBear" action="/" method="post">
+                                <button id="Bbear" type="submit" class="button is-small is-outlined is-primary">Be Bear</button>
+                            </form>
+                        </div>
+                    </nav>
+                    <div id='Last'>
+                        <div class="level-item has-text-centered">
+                            <p class="is-6 has-text-grey-light"><small>Last 6 hours</small> &nbsp &nbsp <small>|</small> &nbsp &nbsp</p>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <p class="is-6 has-text-grey-light"><small>Last 24 hours</small> &nbsp &nbsp <small>|</small> &nbsp &nbsp</p>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <p class="is-6 has-text-grey-light"><small>Last Week</small></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
         <div class="container">
             <div class="columns">
                 <div class="column is-3">
                     <div class="is-sticky">
-                        <div class="card profile-card">
-                            <div class="card-image">
-                                <figure class="image">My Watch List</figure>
-                            </div>
-                            <div class="card-content">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <figure class="image is-64x64 is-circle">
-                                            <a href="#/@WBuffet" class=""><img src="/images/warren.jpg" alt=""></a>
-                                        </figure>
-                                    </div>
-                                    <div class="media-content">
-                                        <p class="title is-5">
-                                            Warren Buffet
-                                        </p>
-                                        <p class="subtitle is-6"><a href="#/@WBuffet" class="">
-                                    @WBuffet
-                                </a></p>
+                        <div class="card-image">
+                            <nav class="navbar is-dark">
+                                <div>
+                                    <div class="babblesMenu">
+                                        <a id="WatchList" class="babMenu navbar-item is-tab "> My Watch List</a>
+                                        <a id="currentInsight" class="babMenu navbar-item is-tab is-active">Current Insights</a>
                                     </div>
                                 </div>
-                                <nav class="level">
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                            <a href="#/@WBuffet" class="">
-                                                <p class="is-6 has-text-grey-light"><small>Babbles</small></p>
-                                                <p class="is-4">40</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                            <a href="#/@WBuffet/following" class="">
-                                                <p class="is-6 has-text-grey-light"><small>Following</small></p>
-                                                <p class="is-4">51</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="level-item has-text-centered">
-                                        <div>
-                                            <a href="#/@WBuffet/followers" class="">
-                                                <p class="is-6 has-text-grey-light"><small>Followers</small></p>
-                                                <p class="is-4">5</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </nav>
+                            </nav>
+
+                        </div>
+                        <div class="card profile-card">
+
+                            <div id="watchList" class="card-content">
+                                <div class="Symbol">
+                                    <h1 class="stockName" data-replace="Symbol">Air Liquide</h1>
+                                    <b class="price is-6">104.87</b><i data-replace="BidRealtime"></i>
+                                    <b id="variation" class="is-6 has-text-greEN"><span class= "indice">+20.7</span>&nbsp; <span class="indice">(10.8%)</span>
+                                        </b>
+                                </div>
+                                <div id="bullAndBear"><img src="/images/bulls.png" alt="bulls-and-bears"></div>
+
+                                <div id="position">
+                                    <span class="stockName">Performance</span>
+                                    <h1 id="WinOrLoss">(10.8%)</h1>
+                                    <form id="close" action="/" method="post">
+                                        <button id="Bclose" type="submit" class="button is-small is-outlined is-primary">Close</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="spacer"></div>
-                    <div class="box trending">
-                        <p class="trend-title"><span class="title is-5">Trends</span> · <a href="#">change</a></p>
-                        <p class="trend-hashtag"><a href="#">#hashtag1</a><br>13k statuses</p>
                     </div>
                 </div>
 
@@ -207,7 +230,8 @@
                                 <a class="babMenu navbar-item">Insiders Mates</a>
                                 <a class="babMenu navbar-item">Watch List</a>
                                 <a class="babMenu navbar-item">My Posts</a>
-                                <a><a id="reload1" class="babMenu navbar-item"><i href="/stream" id="reload" class="fa fa-refresh"></i></a></a>
+                                <a id="vide"></a>
+                                <a id="reload1" class="babMenu"><i href="/stream" id="reload" class="navbar-item fa fa-refresh"></i></a>
                             </div>
                         </div>
                     </nav>
@@ -443,9 +467,9 @@
                 const moment = <%- (moment) %>;
             </script>
 
-        <script type="text/javascript" src="JS/search.js"></script>
-        <script type="text/javascript" src="/JS/JSforCSS.js"></script>
-        <script type="text/javascript" src="/JS/modal.js"></script>
-  </body>
+            <script type="text/javascript" src="/JS/search.js"></script>
+            <script type="text/javascript" src="/JS/JSforCSS.js"></script>
+            <script type="text/javascript" src="/JS/modal.js"></script>
+</body>
 
-  </html>
+</html>

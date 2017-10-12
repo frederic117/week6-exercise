@@ -15,42 +15,42 @@
 </head>
 
 <body>
-  <nav class="nav has-shadow " id="top">
-      <div class="container" id="top2">
-          <div class="nav">
-              <a class="nav-item" href="/">
-                  <img id="logo" src="images/logo.png" alt="Description">
-              </a>
-          </div>
-          <div class="nav" id="formNav">
-              <div class="nav-item field" id="formNav1">
-                  <form method="post" class="control has-icons-right" id="formNav2">
-                      <input class="input is-hovered" type="text" placeholder="Stock or Username">
-                      <span id="loupe" class="icon is-small is-right">
+    <nav class="nav has-shadow " id="top">
+        <div class="container" id="top2">
+            <div class="nav">
+                <a class="nav-item" href="/">
+                    <img id="logo" src="images/logo.png" alt="Description">
+                </a>
+            </div>
+            <div class="nav" id="formNav">
+                <div class="nav-item field" id="formNav1">
+                    <form method="post" class="control has-icons-right" id="formNav2">
+                        <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <span id="loupe" class="icon is-small is-right">
                   <i type="submit"  class="fa fa-search" ></i>
                 </span>
-                  </form>
-              </div>
-          </div>
+                    </form>
+                </div>
+            </div>
 
-          <span class="nav-toggle">
+            <span class="nav-toggle">
                   <span></span>
-          <span></span>
-          <span></span>
-          </span>
-          <div class="nav-right nav-menu">
-              <div id="menu">
-                  <a href="/stream" class="nav-item is-tab ">
+            <span></span>
+            <span></span>
+            </span>
+            <div class="nav-right nav-menu">
+                <div id="menu">
+                    <a href="/stream" class="nav-item is-tab ">
       Stream
       </a>
-                  <a href="/trending" class="nav-item is-tab ">
+                    <a href="/trending" class="nav-item is-tab ">
       Trending
       </a>
-                  <a href="/leaderboard"class="nav-item is-tab is-active">
+                    <a href="/leaderboard" class="nav-item is-tab is-active">
       Leaderboard
       </a>
-              </div>
-              <span class="nav-item">
+                </div>
+                <span class="nav-item">
                       <% if(!user) { %>
                       <a href="/login" class="button">
                         Log in
@@ -59,29 +59,158 @@
                         Sign up
                       </a>
                     </span>
-              <%} else { %>
-                  <div class="nav-profile">
-                      <a id="profile-pic" href="/profile">
-                          <div class="nav-photo-profil">
-                              <img src="<%= user.picProfile%>" alt="">
-                          </div>
-                      </a>
-                      <div class="nav-user-profile">
-                          <div id="nav-username" class="nav-user-name">@
-                              <%= user.local.username%>
-                          </div>
-                          <div class="nav-status">
-                              <div class="nav-status-light"></div>
-                              <a href="/logout">Logout</a>
-                          </div>
-                      </div>
+                <%} else { %>
+                    <div class="nav-profile">
+                        <a id="profile-pic" href="/profile">
+                            <div class="nav-photo-profil">
+                                <img src="<%= user.picProfile%>" alt="">
+                            </div>
+                        </a>
+                        <div class="nav-user-profile">
+                            <div id="nav-username" class="nav-user-name">@
+                                <%= user.local.username%>
+                            </div>
+                            <div class="nav-status">
+                                <div class="nav-status-light"></div>
+                                <a href="/logout">Logout</a>
+                            </div>
+                        </div>
 
-                      <%  } %>
-                  </div>
-          </div>
-  </nav>
+                        <%  } %>
+                    </div>
+            </div>
+    </nav>
     <section class="section main">
         <div class="container">
+            <!--leaderboard game over-->
+            <div class="leaderboard">
+                <h1> Your performance </h1>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img class="profile-pic" src="img/avatar.png" alt=""></a>
+                        <div class="rankInfo">
+                            <a class="fullName name">Georges Soros</a>
+                            <div class=" points profit"> erf </div>
+                            <div class="points profitPourcent"> ezf </div>
+                        </div>
+                    </div>
+                </div>
+                <h1> Greatest trader in history</h1>
+
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/Warren.jpg" alt="Warren"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/Warren_Buffett" class="name">Warren Buffet</a>
+                            <div class="points"> +200 % </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/Georges.jpg" alt="Georges"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/George_Soros" class="name">Georges Sorros</a>
+                            <div class="points"> +180 % </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/paul.jpg" alt="paul"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/Paul_Tudor_Jones" class="name">Paul Tudor Jones</a>
+                            <div class="points"> +150 % </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/Ed.jpg" alt="ed"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/Ed_Seykota" class="name">Ed Seykota</a>
+                            <div class="points"> +100 % </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/Jesse.jpg" alt="Jesse"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/Jesse_Lauriston_Livermore" class="name">Jesse Livermore</a>
+                            <div class="points"> +80 % </div>
+                        </div>
+                    </div>
+                </div>
+                <h1>.... & worst trader in history </h1>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/nick.jpg" alt="nick"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/Nick_Leeson" class="name">Nick Leeson</a>
+                            <div class="points"> -20 % </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/john.jpg" alt="John"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/John_Meriwether" class="name">John Meriwether</a>
+                            <div class="points"> -40 % </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/sean.jpg" alt="sean"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/Se%C3%A1n_Quinn" class="name">Seán Quinn</a>
+                            <div class="points"> -60 % </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/brian.jpg" alt="Brian"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/Brian_Hunter_(trader)" class="name">Brian Hunter</a>
+                            <div class="points"> -80 % </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item ">
+                    <div class="rank" style="min-width:30px"></div>
+                    <div class="content">
+                        <a class="avatar default">
+                            <img src="img/jerome.png" alt="Jerome"> </a>
+                        <div class="rankInfo">
+                            <a href="https://en.wikipedia.org/wiki/Jerome_Kerviel" class="name">Jerome Kerviel</a>
+                            <div class="points"> -100 % </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </body>
