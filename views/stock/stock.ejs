@@ -134,11 +134,11 @@
                                 <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Be Bull</button>
                                 <input type="text" style="display: none;" name="priceToSend" value="<%=price%>">
                             </form>
-                            <span id="bandbdigit1"> <%= stock.trend[0]%> %</span>
+                            <span id="bandbdigit1"> <%= bullPercent%> %</span>
                             <div id="bullsAndBearsPic">
                                 <img src="/images/bulls-and-bears.png" alt="bull and bear">
                             </div>
-                            <span id="bandbdigit2"> <%= stock.trend[1]%> %</span>
+                            <span id="bandbdigit2"> <%= bearPercent%> %</span>
                             <form id="BBear" action="/stock/<%= stockId%>/bear" method="post">
                                 <button id="Bbear" type="submit" class="button is-small is-outlined is-primary">Be Bear</button>
                                 <input type="text" style="display: none;" name="priceToSend" value="<%=price%>">

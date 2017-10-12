@@ -16,9 +16,19 @@ const {
 stockController.get("/:name", ensureLoggedIn, function(req, res, next) {
   const stock = req.params.name.toUpperCase();
   const stockId = req.params.name;
+  console.log("********** NOM DE L4ACTIO", stockId);
 
   Stock.findOne({ longName: stock }, (err, stock) => {
     if (err) return next(err);
+
+    // Calculate Bull / Bear percentage
+
+    const bull = Number(stock.trend[0]);
+    const bear = Number(stock.trend[1]);
+
+    const bullPercent = (100 * bull / (bull + bear)).toFixed(2);
+    const bearPercent = (100 * bear / (bull + bear)).toFixed(2);
+
     getStockPrice(stock.url_price).then(({ price, percent }) => {
       Babble.find({ stockLink: stock._id })
         .sort({ created_at: -1 })
@@ -31,7 +41,9 @@ stockController.get("/:name", ensureLoggedIn, function(req, res, next) {
             moment,
             user: req.user,
             price,
-            percent
+            percent,
+            bullPercent,
+            bearPercent
           });
         });
     });
@@ -158,12 +170,17 @@ stockController.post("/:name/bull", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
   const stockId = req.params.name.toUpperCase();
   const price = req.body.priceToSend;
-  console.log("*********PRICE", price);
+
   Stock.findOne({ longName: stockId })
     .then(stock => {
       if (!stock) {
         res.redirect("/stock/" + stockId);
       }
+      const updateBull = Number(stock.trend[0]) + 1;
+      const updateBear = Number(stock.trend[1]);
+
+      stock.trend = [updateBull, updateBear];
+      stock.save();
 
       const newWatchItem = new WatchItem({
         username: user.local.username,
@@ -190,17 +207,22 @@ stockController.post("/:name/bull", ensureLoggedIn, (req, res, next) => {
 });
 
 // Post a bear
-// Post a bull
-stockController.post("/:name/bull", ensureLoggedIn, (req, res, next) => {
+stockController.post("/:name/bear", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
   const stockId = req.params.name.toUpperCase();
   const price = req.body.priceToSend;
-  console.log("*********PRICE", price);
+
   Stock.findOne({ longName: stockId })
     .then(stock => {
       if (!stock) {
         res.redirect("/stock/" + stockId);
       }
+
+      const updateBull = Number(stock.trend[0]);
+      const updateBear = Number(stock.trend[1]) + 1;
+
+      stock.trend = [updateBull, updateBear];
+      stock.save();
 
       const newWatchItem = new WatchItem({
         username: user.local.username,
