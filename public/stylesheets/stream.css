@@ -240,7 +240,7 @@ a {
 }
 
 
-/* ACTION**********************************************/
+/* WATCHLIST**********************************************/
 
 #Stocks {
     display: flex;
@@ -294,9 +294,26 @@ a {
 
 #WinOrLoss {
     color: #ff6026;
-    font-weight: bold;
+    font-weight: bolder;
     padding-bottom: 5px;
     padding-top: 10px;
+    padding-left: 15px;
+}
+
+#Bclose {
+    PADDING-LEFT: 30PX;
+    PADDING-RIGHT: 30PX;
+    font-weight: bolder;
+    color: #ff6026;
+    box-shadow: 0 0 0 0.125em #ff6026;
+    border-color: #ff6026;
+}
+
+#Bclose.is-outlined:focus,
+#Bclose.is-outlined:hover {
+    background-color: #ff6026;
+    border-color: #ff6026;
+    color: #fff;
 }
 
 .indice {
@@ -316,4 +333,179 @@ a {
 
 #WatchList {
     padding-right: 40px;
+}
+
+
+/*STOCK************************/
+
+#descr {
+    margin-top: -1.5rem;
+    font-size: 0.7rem;
+}
+
+#bullsAndBearsPic {
+    width: 35%;
+}
+
+#bullsAndBears {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#bandB {
+    justify-content: center;
+}
+
+#Last {
+    display: flex;
+    justify-content: center;
+}
+
+#bandbdigit1 {
+    font-size: 2REM;
+    color: #21ce99;
+}
+
+#bandbdigit2 {
+    font-size: 2REM;
+    color: #ff6026;
+}
+
+#priceStock {
+    display: flex;
+    font-size: 2REM;
+    align-items: center;
+}
+
+#ActionCard {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.title.is-5 {
+    font-size: 1.5REM;
+}
+
+#stockInfo {
+    display: flex;
+}
+
+#Bbull {
+    PADDING-LEFT: 30PX;
+    PADDING-RIGHT: 30PX;
+    font-weight: bolder;
+    color: #21ce99;
+    box-shadow: 0 0 0 0.125em #21ce99;
+    border-color: #21ce99;
+}
+
+#Bbull.is-outlined:focus,
+#Bbull.is-outlined:hover {
+    background-color: #21ce99;
+    border-color: #21ce99;
+    color: #fff;
+}
+
+#Bbear {
+    PADDING-LEFT: 30PX;
+    PADDING-RIGHT: 30PX;
+    font-weight: bolder;
+    color: #ff6026;
+    box-shadow: 0 0 0 0.125em #ff6026;
+    border-color: #ff6026;
+}
+
+#Bbear.is-outlined:focus,
+#Bbear.is-outlined:hover {
+    background-color: #ff6026;
+    border-color: #ff6026;
+    color: #fff;
+}
+
+
+/*LEADERBOARD***************************************/
+
+.leaderboard {
+    padding: 15%;
+    padding-top: 5%;
+    z-index: 10;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+}
+
+.leaderboard .item {
+    width: 80%;
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 5%;
+    margin: 5%;
+    overflow: hidden;
+    border-bottom: solid 1px #192b41;
+    padding: 10px 0 10px 10px;
+}
+
+.leaderboard .rank {
+    float: left;
+    font-size: 20px;
+    margin-top: 30px;
+    min-width: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.leaderboard .content {
+    overflow: hidden;
+}
+
+.leaderboard .leaderboardList a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.leaderboard .avatar {
+    float: left;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 5px;
+    margin-right: 10px;
+    background-color: #192b41;
+    overflow: hidden;
+}
+
+.leaderboard .avatar img {
+    max-height: 100%;
+    max-width: 100%;
+    border: none;
+}
+
+.leaderboard .rankInfo {
+    overflow: hidden;
+}
+
+.leaderboard .leaderboardList a {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+}
+
+.leaderboard .name {
+    display: inline-block;
+    font-size: 20px;
+    padding-top: 20px;
+    float: left;
+    color: #192b41;
+}
+
+.leaderboard .points {
+    font-size: 18px;
+    color: #192b41;
+    padding-right: 20px;
+    white-space: nowrap;
+    float: right;
+    margin-top: 20px;
 }

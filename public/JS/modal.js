@@ -8,18 +8,14 @@ function updateModal(index) {
     $("#parent-modal").val(timeline[index]._id);
 
     const currentReplies = timeline[index].reply;
-    currentReplies.forEach(createReplyHtml)
+    currentReplies.forEach(createReplyHtml);
 }
-
 
 function createReplyHtml(reply) {
     console.log("reply", reply);
     console.log(reply.length);
 
-
-
-
-    $('#babbleModal').before(`
+    $("#babbleModal").before(`
 <div id="modalSecondParent" class="tweets card-content p-x-1">
   <article id ="modalThirdParent" class="media tweet">
       <figure class="media-left">
@@ -38,42 +34,17 @@ function createReplyHtml(reply) {
                 ${reply.babble}
               </p>
           </div>
-          <nav class="media-right">
-              <div class="level-right">
-                  <a class="level-item has-text-grey-light">
-                      <span class="icon is-small"><i class="fa fa-reply modal-button" data-target="#modal"></i></span>
-                      <small id="dynamiqueReplyReply"> </small>
-                  </a>
-                  <a class="level-item has-text-grey-light">
-                      <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
-                      <small id="dynamiqueReplyLike">110000</small></a>
-          </nav>
+          
           </div>
   </article>
   </div>
-</div>`)
-
-
-
-
-    // $("#dynamiqueReplyUserNameBabble").html(reply.user_name);
-    // $("#dynamiqueReplyContent").html(reply.babble);
-    //$("#dynamiqueReplyTime").html(moments[index]);
-    //$("#dynamiqueReplyUserPic").attr("src", reply.user_name.user_id.picProfile);
-    //$("#dynamiqueReplyReply").attr("src", reply.reply.length);
-    // $("#dynamiqueReplyLike").attr("src", reply.like.length);
-
-
-
+</div>`);
 }
-
-
-
-
 
 // modal BUTTON
 $(".modal-button").click(function() {
     let current = $(this).attr("id");
+    console.log(current);
     updateModal(current);
     var target = $(this).data("target");
     $("html").addClass("is-clipped");
@@ -94,7 +65,16 @@ $(".modal-background").click(function() {
         .removeClass("is-active");
 });
 
+// Like button
+$(".like-input").hide();
 
-function submitform() {
-    document.thumb.submit();
+function updateLike(index) {
+    $(".like-input").val(timeline[index]._id);
 }
+$(".like-btn").click(function() {
+    const current = $(this).attr("id");
+    console.log(current);
+
+    updateLike(current);
+    let form = $("#like-form").submit();
+});
