@@ -93,7 +93,7 @@
 
     <section class="section main">
         <div class="column is-6" id="ActionCard">
-            <div class="card profile-card">
+            <div id="cardAction" class="card profile-card">
                 <div class="card-content">
                     <div class="media" id="stockInfo">
                         <div class="media-left">
@@ -102,277 +102,279 @@
                             </figure>
                         </div>
                         <div class="media-content">
-                            <p class="title is-5">
-                                <%= stock.longName%>
-                            </p>
-                            <p class="subtitle is-6">
-                                <a class="">
-                                    <%= stock.isin%>
-                                </a>
-                                <a class="">
-                                    <%= stock.shortName%>
-                                </a>
-                                <p id="descr" class="is-6 has-text-grey-light">
-                                    <a href="/stock/<%= stock.description%>" class="">
+                            <div class="stock-banner">
+                                <div class="sock-info">
+                                    <p class="title is-5">
+                                        <%= stock.longName%>
+                                    </p>
+                                    <p class="subtitle is-6">
+                                        <a class="">
+                                            <%= stock.isin%>
+                                        </a>
+                                        <a class="">
+                                            <%= stock.shortName%>
+                                        </a>
+                                        <p class="stock-see-desc is-6 has-text-grey-light">
+                                            <a href="/stock/<%= stock.description%>" class="">
                                         See description</a>
-                                </p>
-                                <form id="watchList" action="/stock/<%=stockId%>/watchlist" method="post">
-                                    <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Add to Watchlist</button>
+                                        </p>
+                                </div>
+
+                                <form class="add-to-watchlist" action="/stock/<%=stockId%>/watchlist" method="post">
+                                    <button id="adWL" type="submit" class="button is-small is-outlined is-primary">Add to Watchlist</button>
                                 </form>
-                            </p>
 
-                            <div class="media" id="priceStock">
-                                <strong class=""><%= price%> &nbsp €</strong> &nbsp &nbsp
+                                <div class="stock-price title is-5">
+                                    <strong class=""><%= price%>&nbsp;€</strong>
+                                    <small class="">&nbsp;<%= percent%></small>
+                                </div>
 
-                                <small class=""><%= percent%> &nbsp </small>
                             </div>
-                        </div>
-                    </div>
-                    <nav id="bandB" class="level">
-                        <div id="bullsAndBears">
-                            <form id="BBull" action="/stock/<%= stockId%>/bull" method="post">
-                                <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Be Bull</button>
-                                <input type="text" style="display: none;" name="priceToSend" value="<%=price%>">
-                            </form>
-                            <span id="bandbdigit1"> <%= bullPercent%> %</span>
-                            <div id="bullsAndBearsPic">
-                                <img src="/images/bulls-and-bears.png" alt="bull and bear">
-                            </div>
-                            <span id="bandbdigit2"> <%= bearPercent%> %</span>
-                            <form id="BBear" action="/stock/<%= stockId%>/bear" method="post">
-                                <button id="Bbear" type="submit" class="button is-small is-outlined is-primary">Be Bear</button>
-                                <input type="text" style="display: none;" name="priceToSend" value="<%=price%>">
-                            </form>
-                        </div>
-                    </nav>
-                    <div id='Last'>
-                        <div class="level-item has-text-centered">
-                            <p class="is-6 has-text-grey-light"><small>Last 6 hours</small> &nbsp &nbsp <small>|</small> &nbsp &nbsp</p>
-                        </div>
-                        <div class="level-item has-text-centered">
-                            <p class="is-6 has-text-grey-light"><small>Last 24 hours</small> &nbsp &nbsp <small>|</small> &nbsp &nbsp</p>
-                        </div>
-                        <div class="level-item has-text-centered">
-                            <p class="is-6 has-text-grey-light"><small>Last Week</small></p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-        <div class="container">
-            <div class="columns">
-                <div class="column is-3">
-                    <div class="is-sticky">
-                        <div class="card-image">
-                            <nav class="navbar is-dark">
-                                <div>
-                                    <div class="babblesMenu">
-                                        <a id="WatchList" class="babMenu navbar-item is-tab "> My Watch List</a>
-                                        <a id="currentInsight" class="babMenu navbar-item is-tab is-active">Current Insights</a>
+                            <nav id="bandB" class="level media">
+                                <div id="bullsAndBears">
+                                    <form id="BBull" action="/stock/<%= stockId%>/bull" method="post">
+                                        <button id="Bbull" type="submit" class="button is-small is-outlined is-primary">Be Bull</button>
+                                        <input type="text" style="display: none;" name="priceToSend" value="<%=price%>">
+                                    </form>
+                                    <span id="bandbdigit1"> <%= bullPercent%> %</span>
+                                    <div id="bullsAndBearsPic">
+                                        <img src="/images/bulls-and-bears.png" alt="bull and bear">
                                     </div>
+                                    <span id="bandbdigit2"> <%= bearPercent%> %</span>
+                                    <form id="BBear" action="/stock/<%= stockId%>/bear" method="post">
+                                        <button id="Bbear" type="submit" class="button is-small is-outlined is-primary">Be Bear</button>
+                                        <input type="text" style="display: none;" name="priceToSend" value="<%=price%>">
+                                    </form>
                                 </div>
                             </nav>
-
-                        </div>
-                        <div class="card profile-card">
-
-                            <div id="watchList" class="card-content">
-                                <div class="Symbol">
-                                    <h1 class="stockName" data-replace="Symbol">Air Liquide</h1>
-                                    <b class="price is-6">104.87</b><i data-replace="BidRealtime"></i>
-                                    <b id="variation" class="is-6 has-text-greEN"><span class= "indice">+20.7</span>&nbsp; <span class="indice">(10.8%)</span>
-                                        </b>
+                            <div id='Last'>
+                                <div class="level-item has-text-centered">
+                                    <p class="is-6 has-text-grey-light"><small>Last 6 hours</small> &nbsp &nbsp <small>|</small> &nbsp &nbsp</p>
                                 </div>
-                                <div id="bullAndBear"><img src="/images/bulls.png" alt="bulls-and-bears"></div>
-
-                                <div id="position">
-                                    <span class="stockName">Performance</span>
-                                    <h1 id="WinOrLoss">(10.8%)</h1>
-                                    <form id="close" action="/" method="post">
-                                        <button id="Bclose" type="submit" class="button is-small is-outlined is-primary">Close</button>
-                                    </form>
+                                <div class="level-item has-text-centered">
+                                    <p class="is-6 has-text-grey-light"><small>Last 24 hours</small> &nbsp &nbsp <small>|</small> &nbsp &nbsp</p>
+                                </div>
+                                <div class="level-item has-text-centered">
+                                    <p class="is-6 has-text-grey-light"><small>Last Week</small></p>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-3">
+                        <div class="is-sticky">
+                            <div class="card-image">
+                                <nav class="navbar is-dark">
+                                    <div>
+                                        <div class="babblesMenu">
+                                            <a id="WatchList" class="babMenu navbar-item is-tab "> My Watch List</a>
+                                            <a id="currentInsight" class="babMenu navbar-item is-tab is-active">Current Insights</a>
+                                        </div>
+                                    </div>
+                                </nav>
 
-                <div class="column is-6">
-                    <div class="card">
-                        <div class="card-content bg-light">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-32x32 is-circle"><img src="<%= user.picProfile %>" alt="Image"></figure>
-                                </div>
-                                <div class="media-content">
-                                    <form action="/stream" method="post">
-                                        <div class="field">
-                                            <div class="control"><textarea onkeyup="countChar(this)" id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
-                                            <!---->
-                                        </div>
-                                        <div class="level">
-                                            <div class="level-left"><a class="has-text-grey-light"><span class="icon"><i class="fa fa-image"></i></span></a></div>
-                                            <div class="level-right">
-                                                <div class="level-item has-text-grey" id="counter">200</div>
-                                                <div class="level-item"><button id="babble-submit" type="submit" class="button is-outlined is-primary">Babble</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                            </div>
+                            <div class="card profile-card">
+
+                                <div id="watchList" class="card-content">
+                                    <div class="Symbol">
+                                        <h1 class="stockName" data-replace="Symbol">Air Liquide</h1>
+                                        <b class="price is-6">104.87</b><i data-replace="BidRealtime"></i>
+                                        <b id="variation" class="is-6 has-text-greEN"><span class= "indice">+20.7</span>&nbsp; <span class="indice">(10.8%)</span>
+                                        </b>
+                                    </div>
+                                    <div id="bullAndBear"><img src="/images/bulls.png" alt="bulls-and-bears"></div>
+
+                                    <div id="position">
+                                        <span class="stockName">Performance</span>
+                                        <h1 id="WinOrLoss">(10.8%)</h1>
+                                        <form id="close" action="/" method="post">
+                                            <button id="Bclose" type="submit" class="button is-small is-outlined is-primary">Close</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <nav class="navbar is-dark">
-                        <div>
-                            <div class="babblesMenu">
-                                <a class="babMenu navbar-item is-tab is-active">All</a>
-                                <a class="babMenu navbar-item">Insiders Mates</a>
-                                <a class="babMenu navbar-item">Watch List</a>
-                                <a class="babMenu navbar-item">My Posts</a>
-                                <a id="vide"></a>
-                                <a id="reload1" class="babMenu"><i href="/stream" id="reload" class="navbar-item fa fa-refresh"></i></a>
+
+                    <div class="column is-6">
+                        <div class="card">
+                            <div class="card-content bg-light">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-32x32 is-circle"><img src="<%= user.picProfile %>" alt="Image"></figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <form action="/stream" method="post">
+                                            <div class="field">
+                                                <div class="control"><textarea onkeyup="countChar(this)" id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
+                                                <!---->
+                                            </div>
+                                            <div class="level">
+                                                <div class="level-left"><a class="has-text-grey-light"><span class="icon"><i class="fa fa-image"></i></span></a></div>
+                                                <div class="level-right">
+                                                    <div class="level-item has-text-grey" id="counter">200</div>
+                                                    <div class="level-item"><button id="babble-submit" type="submit" class="button is-outlined is-primary">Babble</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </nav>
+                        <nav class="navbar is-dark">
+                            <div>
+                                <div class="babblesMenu">
+                                    <a class="babMenu navbar-item is-tab is-active">All</a>
+                                    <a class="babMenu navbar-item">Insiders Mates</a>
+                                    <a class="babMenu navbar-item">Watch List</a>
+                                    <a class="babMenu navbar-item">My Posts</a>
+                                    <a id="vide"></a>
+                                    <a id="reload1" class="babMenu"><i href="/stream" id="reload" class="navbar-item fa fa-refresh"></i></a>
+                                </div>
+                            </div>
+                        </nav>
 
-                    <%# Zone of Babbles%>
-                        <div class="card">
-                            <div class="babbles-box" id="babble-container">
+                        <%# Zone of Babbles%>
+                            <div class="card">
+                                <div class="babbles-box" id="babble-container">
 
-                                <% if (timeline.length > 0) { %>
-                                    <% timeline.forEach(function(babble, i) { %>
-                                        <script>
-                                            var m = (<%- JSON.stringify(moment(babble.created_at).format('llll')) %>)
-                                            moments.push(m);
-                                        </script>
-                                        <div class="tweets card-content p-x-1">
-                                            <article class="media tweet">
-                                                <figure class="media-left">
-                                                    <p class="image is-64x64 is-circle">
-                                                        <a href="/profile/<%= babble.user_id._id %>" class=""><img src="<%= babble.user_id.picProfile%>"></a>
-                                                    </p>
-                                                </figure>
-                                                <div class="media-content">
-                                                    <div class="content">
-                                                        <p class="tweet-meta">
-                                                            <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
-                                                                <strong><%= babble.user_id.local.username%></strong></a>
-                                                            <small class="media-right has-text-grey-light"><%= moment(babble.created_at).format('llll') %></small>
+                                    <% if (timeline.length > 0) { %>
+                                        <% timeline.forEach(function(babble, i) { %>
+                                            <script>
+                                                var m = (<%- JSON.stringify(moment(babble.created_at).format('llll')) %>)
+                                                moments.push(m);
+                                            </script>
+                                            <div class="tweets card-content p-x-1">
+                                                <article class="media tweet">
+                                                    <figure class="media-left">
+                                                        <p class="image is-64x64 is-circle">
+                                                            <a href="/profile/<%= babble.user_id._id %>" class=""><img src="<%= babble.user_id.picProfile%>"></a>
                                                         </p>
-                                                        <p class="tweet-body has-text-grey babble-body">
-                                                            <%= babble.babble%>
-                                                        </p>
-                                                    </div>
-                                                    <nav class="media-right">
-                                                        <div class="level-right">
-                                                            <a class="level-item has-text-grey-light">
-                                                                <span class="icon is-small"><i id=<%=i%> class="fa fa-reply modal-button" data-target="#modal"></i></span>
-                                                                <small> <%= babble.reply.length%></small>
-                                                            </a>
-                                                            <a class="level-item has-text-grey-light">
+                                                    </figure>
+                                                    <div class="media-content">
+                                                        <div class="content">
+                                                            <p class="tweet-meta">
+                                                                <a href="/profile/<%= babble.user_name %>" class="has-text-dark">
+                                                                    <strong><%= babble.user_id.local.username%></strong></a>
+                                                                <small class="media-right has-text-grey-light"><%= moment(babble.created_at).format('llll') %></small>
+                                                            </p>
+                                                            <p class="tweet-body has-text-grey babble-body">
+                                                                <%= babble.babble%>
+                                                            </p>
+                                                        </div>
+                                                        <nav class="media-right">
+                                                            <div class="level-right">
+                                                                <a class="level-item has-text-grey-light">
+                                                                    <span class="icon is-small"><i id=<%=i%> class="fa fa-reply modal-button" data-target="#modal"></i></span>
+                                                                    <small> <%= babble.reply.length%></small>
+                                                                </a>
+                                                                <a class="level-item has-text-grey-light">
                                                                 <form id="like-form" action="/stock/<%= stockId %>/like" method="post"> <span class="icon is-small"><i id=<%=i%> class="fa fa-thumbs-o-up like-btn"></i></span>
                                                                     <small><%= babble.like%></small>
                                                                     <input class="like-input" name="likeInput" val="">
                                                                 </form>
                                                             </a>
-                                                    </nav>
-                                                    </div>
-                                            </article>
+                                                        </nav>
+                                                        </div>
+                                                </article>
+                                                </div>
+                                                <% }) %>
+                                                    <% } else { %>
+                                                        <div class="babble-container no-babble">
+                                                            <p>The timeline is empty</p>
+                                                        </div>
+                                                        <%  }%>
                                             </div>
-                                            <% }) %>
-                                                <% } else { %>
-                                                    <div class="babble-container no-babble">
-                                                        <p>The timeline is empty</p>
-                                                    </div>
-                                                    <%  }%>
-                                        </div>
-                            </div>
+                                </div>
 
-                            <%# End of babble container%>
-                                <button class="button m-t-1 m-b-1 is-fullwidth">
+                                <%# End of babble container%>
+                                    <button class="button m-t-1 m-b-1 is-fullwidth">
             Load more...
         </button>
-                        </div>
-
-                        <div class="column is-3">
-                            <div class="box">
-                                <p><span class="title is-5">Who to follow</span> · <a href="#">Refresh</a> · <a href="#">View All</a></p>
-                                <hr>
-                                <div class="columns">
-                                    <div class="column is-3 is-marginless">
-                                        <div class="image">
-                                            <img src="https://placehold.it/200x200">
-                                        </div>
-                                    </div>
-                                    <div class="column is-9">
-                                        <p>
-                                            <a href="#">
-                                                <strong>John Smith</strong> &commat;jsmith
-                                            </a>
-                                            <a href="#">
-                                                <i class="fa fa-times x"></i>
-                                            </a>
-                                        </p>
-                                        <a class="button is-primary is-small">
-                                            <span>
-                    + Follow
-                  </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="columns">
-                                    <div class="column is-3 is-marginless">
-                                        <div class="image">
-                                            <img src="https://placehold.it/200x200">
-                                        </div>
-                                    </div>
-                                    <div class="column is-9">
-                                        <p>
-                                            <a href="#">
-                                                <strong>Jane Smith</strong> &commat;janesmith
-                                            </a>
-                                            <a href="#">
-                                                <i class="fa fa-times x"></i>
-                                            </a>
-                                        </p>
-                                        <a class="button is-primary is-small">
-                                            <span>
-                    + Follow
-                  </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="columns">
-                                    <div class="column is-3 is-marginless">
-                                        <div class="image">
-                                            <img src="https://placehold.it/200x200">
-                                        </div>
-                                    </div>
-                                    <div class="column is-9">
-                                        <p>
-                                            <a href="#">
-                                                <strong>Mike Scott</strong> &commat;mscott
-                                            </a>
-                                            <a href="#">
-                                                <i class="fa fa-times x"></i>
-                                            </a>
-                                        </p>
-                                        <a class="button is-primary is-small">
-                                            <span>
-                    + Follow
-                  </span>
-                                        </a>
-                                    </div>
-                                </div>
-
                             </div>
-                        </div>
-                </div>
 
-            </div>
+                            <div class="column is-3">
+                                <div class="box">
+                                    <p><span class="title is-5">Who to follow</span> · <a href="#">Refresh</a> · <a href="#">View All</a></p>
+                                    <hr>
+                                    <div class="columns">
+                                        <div class="column is-3 is-marginless">
+                                            <div class="image">
+                                                <img src="https://placehold.it/200x200">
+                                            </div>
+                                        </div>
+                                        <div class="column is-9">
+                                            <p>
+                                                <a href="#">
+                                                    <strong>John Smith</strong> &commat;jsmith
+                                                </a>
+                                                <a href="#">
+                                                    <i class="fa fa-times x"></i>
+                                                </a>
+                                            </p>
+                                            <a class="button is-primary is-small">
+                                                <span>
+                    + Follow
+                  </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="columns">
+                                        <div class="column is-3 is-marginless">
+                                            <div class="image">
+                                                <img src="https://placehold.it/200x200">
+                                            </div>
+                                        </div>
+                                        <div class="column is-9">
+                                            <p>
+                                                <a href="#">
+                                                    <strong>Jane Smith</strong> &commat;janesmith
+                                                </a>
+                                                <a href="#">
+                                                    <i class="fa fa-times x"></i>
+                                                </a>
+                                            </p>
+                                            <a class="button is-primary is-small">
+                                                <span>
+                    + Follow
+                  </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="columns">
+                                        <div class="column is-3 is-marginless">
+                                            <div class="image">
+                                                <img src="https://placehold.it/200x200">
+                                            </div>
+                                        </div>
+                                        <div class="column is-9">
+                                            <p>
+                                                <a href="#">
+                                                    <strong>Mike Scott</strong> &commat;mscott
+                                                </a>
+                                                <a href="#">
+                                                    <i class="fa fa-times x"></i>
+                                                </a>
+                                            </p>
+                                            <a class="button is-primary is-small">
+                                                <span>
+                    + Follow
+                  </span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
     </section>
 
     <!-- modal content -->

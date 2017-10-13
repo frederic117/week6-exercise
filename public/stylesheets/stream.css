@@ -339,6 +339,27 @@ a {
 
 /*STOCK************************/
 
+.stock-banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .stock-banner {
+        flex-direction: column;
+    }
+}
+
+#cardAction {
+    margin-bottom: 2.5% !important;
+}
+
+.stock-banner .subtitle {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 #descr {
     margin-top: -1.5rem;
     font-size: 0.7rem;
@@ -364,12 +385,12 @@ a {
 }
 
 #bandbdigit1 {
-    font-size: 2REM;
+    font-size: 2vw;
     color: #21ce99;
 }
 
 #bandbdigit2 {
-    font-size: 2REM;
+    font-size: 2vw;
     color: #ff6026;
 }
 
@@ -424,9 +445,30 @@ a {
     color: #fff;
 }
 
+#adWL.is-outlined:focus,
+#adWL.is-outlined:hover {
+    PADDING-LEFT: 30PX;
+    PADDING-RIGHT: 30PX;
+    font-weight: bolder;
+    color: #fff;
+    box-shadow: 0 0 0 0.125em #192b41;
+    border-color: #192b41;
+}
+
+#adWL {
+    background-color: #192b41;
+    border-color: #192b41;
+    color: #fff;
+    PADDING-LEFT: 30PX;
+    PADDING-RIGHT: 30PX;
+    font-weight: bolder;
+    font-size: 1.2vw;
+}
+
+
+}
 
 /*LEADERBOARD***************************************/
-
 .leaderboard {
     padding: 15%;
     padding-top: 0%;
@@ -435,7 +477,6 @@ a {
     top: 0px;
     bottom: 0px;
 }
-
 .leaderboard .item {
     width: 80%;
     border-collapse: collapse;
@@ -447,7 +488,6 @@ a {
     border-bottom: solid 1px #192b41;
     padding: 10px 0 10px 10px;
 }
-
 .leaderboard .rank {
     float: left;
     font-size: 20px;
@@ -457,16 +497,13 @@ a {
     vertical-align: middle;
     white-space: nowrap;
 }
-
 .leaderboard .content {
     overflow: hidden;
 }
-
 .leaderboard .leaderboardList a {
     text-decoration: none;
     color: inherit;
 }
-
 .leaderboard .avatar {
     float: left;
     width: 72px;
@@ -477,23 +514,19 @@ a {
     background-color: #192b41;
     overflow: hidden;
 }
-
 .leaderboard .avatar img {
     max-height: 100%;
     max-width: 100%;
     border: none;
 }
-
 .leaderboard .rankInfo {
     overflow: hidden;
 }
-
 .leaderboard .leaderboardList a {
     text-decoration: none;
     color: inherit;
     outline: none;
 }
-
 .leaderboard .name {
     display: inline-block;
     font-size: 20px;
@@ -501,7 +534,6 @@ a {
     float: left;
     color: #192b41;
 }
-
 .leaderboard .points {
     font-size: 18px;
     color: #192b41;
@@ -510,7 +542,6 @@ a {
     float: right;
     margin-top: 20px;
 }
-
 
 }
 
@@ -530,4 +561,9 @@ a {
     ;
     border-color: #21ce99;
     ;
+}
+
+/*InsidersUser***************************************/
+#InsiderProfile {
+    display: flex;
 }

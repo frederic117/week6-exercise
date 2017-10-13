@@ -11,6 +11,8 @@ const {
 } = require("../../middlewares/user-roles-auth");
 const multer = require("multer");
 const upload = multer({ dest: "./public/uploads/" });
+const Stock = require("../models/stock");
+const getStockPrice = require("../../config/financeStream");
 
 // MY PROFILE SECTION =========================
 profileController.get("/", ensureLoggedIn, function(req, res) {
@@ -61,9 +63,18 @@ profileController.post(
 profileController.get("/:id", ensureLoggedIn, function(req, res, next) {
     const userId = req.params.id;
     User.findById(userId).then(insider => {
-        return insider.populate("watchList").execPopulate()
+        return insider.populate({
+            path: "watchlist",
+            populate: {
+                path: stockId
+            }
+        }).populate("following").execPopulate()
     }).then(populatedInsider => {
-        res.render("profile/insider", { insider: populatedInsider });
+        res.render("profile/insider", {
+            insider: populatedInsider,
+            price,
+            percent,
+        });
     });
 });
 

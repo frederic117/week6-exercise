@@ -81,7 +81,7 @@
     </nav>
 
     <section class="section main">
-        <div class="column is-6" id="ActionCard">
+        <div class="column is-12" id="ActionCard">
             <div class="card profile-card">
                 <div class="card-content">
                     <div class="media">
@@ -145,37 +145,76 @@
                 </div>
             </div>
         </div>
-        <div class="column is-6">
-            <div class="is-sticky">
-                <div class="card-image">
-                    <nav class="navbar is-dark">
-                        <a id="WatchList" class="babMenu navbar-item is-tab "> My Watch List</a>
-                        <a id="currentInsight" class="babMenu navbar-item is-tab is-active">Current Insights</a>
-                    </nav>
-                </div>
-                <div class="card profile-card">
-
-                    <div id="watchList" class="card-content">
-                        <div class="Symbol">
-                            <h1 class="stockName" data-replace="Symbol">Air Liquide</h1>
-                            <b class="price is-6">104.87</b><i data-replace="BidRealtime"></i>
-                            <b id="variation" class="is-6 has-text-greEN"><span class= "indice">+20.7</span>&nbsp; <span class="indice">(10.8%)</span>
+        <section id="InsiderProfile">
+            <div class="column is-6">
+                <div class="is-sticky">
+                    <div class="card-image">
+                        <nav class="navbar is-dark">
+                            <a id="WatchList" class="babMenu navbar-item is-tab "> My Watch List</a>
+                            <a id="currentInsight" class="babMenu navbar-item is-tab is-active">Current Insights</a>
+                        </nav>
+                    </div>
+                    <div class="card profile-card">
+                        <% if (insider.watchList.length > 0) { %>
+                            <% (insider.watchLists.forEach(function((watchList, i) { %>
+                                <div id="watchList" class="card-content">
+                                    <div class="Symbol">
+                                        <h1 class="stockName" data-replace="Symbol">
+                                            <%=insider.watchList.stockId.shortName%>
+                                        </h1>
+                                        <b class="price is-6"><%=price%></b><i data-replace="BidRealtime"></i>
+                                        <b id="variation" class="is-6 has-text-greEN"><span class= "indice"><%=percent%></span>&nbsp; <span class="indice">(10.8%)</span>
                             </b>
-                        </div>
-                        <div id="bullAndBear"><img src="/images/bulls.png" alt="bulls-and-bears"></div>
+                                    </div>
+                                    <div id="bullAndBear"><img src="/images/bulls.png" alt="bulls-and-bears"></div>
 
-                        <div id="position">
-                            <span class="stockName">Performance</span>
-                            <h1 id="WinOrLoss">(10.8%)</h1>
-                            <form id="close" action="/" method="post">
-                                <button id="Bclose" type="submit" class="button is-small is-outlined is-primary">Close</button>
-                            </form>
-                        </div>
+                                    <div id="position">
+                                        <span class="stockName">Performance</span>
+                                        <h1 id="WinOrLoss">
+                                            <%=(price-insider.watchList.initialPrice)/insider.watchList.initialPrice</h1>
+                                        <form id="close" action="/" method="post">
+                                            <button id="Bclose" type="submit" class="button is-small is-outlined is-primary">Close</button>
+                                        </form>
+                                    </div>
+                                </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div class="column is-6">
+                <div class="box">
+                    <p><span class="title is-5">Following</span>
+                        <hr>
+                        <% if (insider.following.length > 0) { %>
+                                                <% insider.following.forEach(function(following, i) { %>
+
+                                                    <div class="columns">
+                                                        <div class="column is-3 is-marginless">
+                                                            <div class="image is-circle">
+                                                                <a href="/profile/<%=insider.following._id%>"><img src="<%= insider.following.picProfile%>"></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="column is-9">
+                                                            <p>
+                                                                <a href="/profile/<%=insider.following._id%>">
+                                                                    <strong>&commat;<%= insider.following.local.username%></strong>
+                                                                </a>
+                                                                <a href="#">
+                                                                    <i class="fa fa-times x"></i>
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <div class="babble-container no-babble">
+                                                                <p>
+                                                                    <%= insider.local.username%> follows nobody !</p>
+                                                            </div>
+                                                            <%  }%>
+                                    </div>
+                                </div>
+        </section>
 
 
 
