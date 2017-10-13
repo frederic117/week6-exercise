@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
+require("dotenv").config();
 
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -23,7 +24,8 @@ const leaderboardController = require("./app/routes/leaderboardController.js");
 const searchController = require("./app/routes/searchController.js");
 
 // configuration ===============================================================
-mongoose.connect("mongodb://localhost/insidersDb", {
+// mongodb://localhost/insidersDb
+mongoose.connect(process.env.MONGODB_URI, {
   useMongoClient: true
 }); // connect to our database
 
