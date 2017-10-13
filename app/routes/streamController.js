@@ -39,20 +39,18 @@ streamController.get("/", ensureLoggedIn, function(req, res) {
 streamController.post("/follow/:id", ensureLoggedIn, (req, res, next) => {
   const user = req.user;
   console.log("USER", user);
-  const insiderId = req.params.name;
+  const insiderId = req.params.id;
   console.log("INSIDER", insiderId);
   // GAMIFICATION => Add 20 points per people that follow you
   User.findByIdAndUpdate(insiderId, { $inc: { score: 20 } }).exec();
 
   User.findByIdAndUpdate(
-    { _id: user._id },
-    { $push: { following: insiderId } },
+    user._id,
+    { $addToSet: { following: insiderId } },
     err => {
       if (err) {
         return next(err);
       }
-      // GAMIFICATION => +10 points per babble replied posted
-      User.findByIdAndUpdate(user._id, { $inc: { score: 10 } }).exec();
       return res.redirect(`/stream`);
     }
   );

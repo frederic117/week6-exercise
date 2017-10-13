@@ -1,21 +1,21 @@
 function updateModal(index) {
-    $("#dynamiqueUserNameBabble").html(timeline[index].user_name);
-    $("#dynamiqueContent").html(timeline[index].babble);
-    $("#dynamiqueTime").html(moments[index]);
-    $("#dynamiqueUserPic").attr("src", timeline[index].user_id.picProfile);
-    $("#dynamiqueReply").attr("src", timeline[index].reply.length);
-    $("#dynamiqueLike").attr("src", timeline[index].like.length);
-    $("#parent-modal").val(timeline[index]._id);
+  $("#dynamiqueUserNameBabble").html(timeline[index].user_name);
+  $("#dynamiqueContent").html(timeline[index].babble);
+  $("#dynamiqueTime").html(moments[index]);
+  $("#dynamiqueUserPic").attr("src", timeline[index].user_id.picProfile);
+  $("#dynamiqueReply").attr("src", timeline[index].reply.length);
+  $("#dynamiqueLike").attr("src", timeline[index].like.length);
+  $("#parent-modal").val(timeline[index]._id);
 
-    const currentReplies = timeline[index].reply;
-    currentReplies.forEach(createReplyHtml);
+  const currentReplies = timeline[index].reply;
+  currentReplies.forEach(createReplyHtml);
 }
 
 function createReplyHtml(reply) {
-    console.log("reply", reply);
-    console.log(reply.length);
+  console.log("reply", reply);
+  console.log(reply.length);
 
-    $("#babbleModal").before(`
+  $("#babbleModal").before(`
 <div id="modalSecondParent" class="tweets card-content p-x-1">
   <article id ="modalThirdParent" class="media tweet">
       <figure class="media-left">
@@ -34,7 +34,7 @@ function createReplyHtml(reply) {
                 ${reply.babble}
               </p>
           </div>
-          
+
           </div>
   </article>
   </div>
@@ -43,38 +43,38 @@ function createReplyHtml(reply) {
 
 // modal BUTTON
 $(".modal-button").click(function() {
-    let current = $(this).attr("id");
-    console.log(current);
-    updateModal(current);
-    var target = $(this).data("target");
-    $("html").addClass("is-clipped");
-    $(target).addClass("is-active");
+  let current = $(this).attr("id");
+  console.log(current);
+  updateModal(current);
+  var target = $(this).data("target");
+  $("html").addClass("is-clipped");
+  $(target).addClass("is-active");
 });
 
 $(".modal-close").click(function() {
-    $("html").removeClass("is-clipped");
-    $(this)
-        .parent()
-        .removeClass("is-active");
+  $("html").removeClass("is-clipped");
+  $(this)
+    .parent()
+    .removeClass("is-active");
 });
 
 $(".modal-background").click(function() {
-    $("html").removeClass("is-clipped");
-    $(this)
-        .parent()
-        .removeClass("is-active");
+  $("html").removeClass("is-clipped");
+  $(this)
+    .parent()
+    .removeClass("is-active");
 });
 
 // Like button
 $(".like-input").hide();
 
 function updateLike(index) {
-    $(".like-input").val(timeline[index]._id);
+  $(".like-input").val(timeline[index]._id);
 }
 $(".like-btn").click(function() {
-    const current = $(this).attr("id");
-    console.log(current);
+  const current = $(this).attr("id");
+  console.log(current);
 
-    updateLike(current);
-    let form = $("#like-form").submit();
+  updateLike(current);
+  let form = $("#like-form").submit();
 });
