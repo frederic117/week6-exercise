@@ -137,13 +137,13 @@
                                 <div class="media-content">
                                     <form action="/stream" method="post">
                                         <div class="field">
-                                            <div class="control"><textarea onkeyup="countChar(this)" id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
+                                            <div class="control"><textarea id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
                                             <!---->
                                         </div>
                                         <div class="level">
                                             <div class="level-left"><a class="has-text-grey-light"><span class="icon"><i class="fa fa-image"></i></span></a></div>
                                             <div class="level-right">
-                                                <div class="level-item has-text-grey" id="counter">200</div>
+                                                <div class="level-item has-text-grey">200</div>
                                                 <div class="level-item"><button id="babble-submit" type="submit" class="button is-outlined is-primary">Babble</button>
                                                 </div>
                                             </div>
@@ -240,15 +240,19 @@
                                                 <a href="/profile/<%=followers[0]._id%>">
                                                     <strong>&commat;<%= followers[0].local.username%></strong>
                                                 </a>
-                                                <a href="/follow/<%=followers[0]._id%>">
+                                                <a href="#">
                                                     <i class="fa fa-times x"></i>
                                                 </a>
                                             </p>
-                                            <a class="button is-primary is-small">
-                                                <span>
+                                            <form action="/stream/follow/<%=followers[0]._id%>" method="post">
+
+
+                                                <button type="submit" class="button is-primary is-small">
+                                            <span>
                     + Follow
                   </span>
-                                            </a>
+                </button>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="columns">
@@ -259,18 +263,22 @@
                                         </div>
                                         <div class="column is-9">
                                             <p>
-                                                <a href="/profile/<%=followers[1]._id%" %>
+                                                <a href="/profile/<%=followers[1]._id%>">
                                                     <strong>&commat;<%= followers[1].local.username%></strong>
                                                 </a>
-                                                <a href="/follow/<%=followers[1]._id%>">
+                                                <a href="#">
                                                     <i class="fa fa-times x"></i>
                                                 </a>
                                             </p>
-                                            <a class="button is-primary is-small">
-                                                <span>
+                                            <form action="/stream/follow/<%=followers[1]._id%>" method="post">
+
+
+                                                <button type="submit" class="button is-primary is-small">
+                                            <span>
                     + Follow
                   </span>
-                                            </a>
+                </button>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="columns">
@@ -284,15 +292,19 @@
                                                 <a href="/profile/<%=followers[2]._id%>">
                                                     <strong>&commat;<%= followers[2].local.username%></strong>
                                                 </a>
-                                                <a href="/follow/<%=followers[2]._id%>">
+                                                <a href="#">
                                                     <i class="fa fa-times x"></i>
                                                 </a>
                                             </p>
-                                            <a class="button is-primary is-small">
-                                                <span>
+                                            <form action="/stream/follow/<%=followers[2]._id%>" method="post">
+
+
+                                                <button type="submit" class="button is-primary is-small">
+                                            <span>
                     + Follow
                   </span>
-                                            </a>
+                </button>
+                                            </form>
                                         </div>
                                     </div>
 
@@ -370,13 +382,13 @@
                                                         <%# Gros hack%>
                                                             <input id="parent-modal" name="parentModal" val="">
                                                             <div class="field">
-                                                                <div class="control"><textarea onkeyup="countChar(this)" id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
+                                                                <div class="control"><textarea id="babble-text" name="babble" maxlength="200" rows="3" placeholder="Whats happening?" class="textarea"></textarea></div>
                                                                 <!---->
                                                             </div>
                                                             <div class="level">
                                                                 <div class="level-left"><a class="has-text-grey-light"><span class="icon"><i class="fa fa-image"></i></span></a></div>
                                                                 <div class="level-right">
-                                                                    <div class="level-item has-text-grey" id="counter2">200</div>
+                                                                    <div class="level-item has-text-grey">200</div>
                                                                     <div class="level-item"><button id="babble-submit" type="submit" class="button is-outlined is-primary">Babble</button>
                                                                     </div>
                                                                 </div>
