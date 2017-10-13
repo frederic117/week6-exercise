@@ -227,6 +227,7 @@
 
                         <div class="column is-3">
                             <div class="box">
+                              <% if(followers.length>0){ %>
                                 <p><span class="title is-5">Who to follow</span> · <a href="/stream">Refresh</a>
                                     <hr>
                                     <div class="columns">
@@ -307,7 +308,7 @@
                                             </form>
                                         </div>
                                     </div>
-
+                                    <% }%>
                             </div>
                         </div>
                 </div>
@@ -329,7 +330,7 @@
                         <div class="babbles-box" id="babble-container">
 
 
-
+    <% if (timeline.length > 0) { %>
                             <% let babble = timeline[0]  %>
 
 
@@ -402,7 +403,10 @@
                         </div>
 
                     </div>
+                    <% } else { %>
 
+                    <p>Timeline is empty </p>
+                    <%  } %>
                     <button class="modal-close"></button>
             </div>
             <!-- modal content -->
