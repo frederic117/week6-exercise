@@ -98,6 +98,7 @@
                                     <%  } else { %>
                                         <img src="/images/avatar.png" alt="my picture">
                                         <%  } %>
+                            </figure>
                         </div>
                         <div class="media-content">
                             <p class="title is-5">
@@ -106,7 +107,7 @@
                             <p class="subtitle is-6">
                                 <%= user.local.email %>
                             </p>
-                            <a href="/profile/edit"><button type="button" name="button">Update my profile</button></a>
+                            <a href="/profile/edit"><button id="BEditFollow" class="button is-small is-outlined is-primary" type="button" name="button">Update my profile</button></a>
                         </div>
                     </div>
                     <nav class="level">
@@ -134,7 +135,6 @@
                                 <p class="is-4">
                                     <%= user.bio ? user.bio : "Secret..." %>
                                 </p>
-                                </a>
                             </div>
                         </div>
 
@@ -144,14 +144,13 @@
                                 <p class="is-4">
                                     <%= user.website ? user.website : "Secret..." %>
                                 </p>
-                                </a>
                             </div>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-        </div>
+
         <div class="container">
             <div class="columns">
                 <div class="column is-3">

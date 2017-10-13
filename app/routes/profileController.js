@@ -2,6 +2,7 @@ const express = require("express");
 const profileController = express.Router();
 const User = require("../models/user");
 const Babble = require("../models/babble");
+const WatchItem = require("../models/watchitem");
 // Moment to format dates
 const moment = require("moment");
 const {
@@ -58,12 +59,11 @@ profileController.post(
 
 // OTHER INSIDERS PROFILE SECTION =========================
 profileController.get("/:id", ensureLoggedIn, function(req, res, next) {
-    const id = req.params.id;
-    User.findById(id, (err, insider) => {
-        if (err) return next(err);
-        res.render("profile/insider", {
-            insider
-        });
+    const userId = req.params.id;
+    User.findById(userId).then(insider => {
+        return insider.populate("watchList").execPopulate()
+    }).then(populatedInsider => {
+        res.render("profile/insider", { insider: populatedInsider });
     });
 });
 

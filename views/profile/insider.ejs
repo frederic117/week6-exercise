@@ -79,46 +79,110 @@
                     </div>
             </div>
     </nav>
-    <section class="section main">
-        <div class="container">
-            <fieldset>
-                <legend>
-                    <%= insider.local.username %> profile</legend>
-                <%if (insider.picProfile) { %>
-                    <img src="<%= insider.picProfile %>" alt=" picture">
-                    <%  } else { %>
-                        <img src="/images/avatar.png" alt=" picture">
-                        <%  } %>
 
-                            <h1><strong>REPUTATION POINTS</strong></h1>
-                            <p>
-                                <%= insider.score %>
-                            </p>
-                            <br>
-                            <p><strong>User name</strong></p>
-                            <p>
+    <section class="section main">
+        <div class="column is-6" id="ActionCard">
+            <div class="card profile-card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64 is-circle">
+                                <%if (insider.picProfile) { %>
+                                    <img src="<%= insider.picProfile %>" alt="my picture">
+                                    <%  } else { %>
+                                        <img src="/images/avatar.png" alt="my picture">
+                                        <%  } %>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-5">
                                 <%= insider.local.username %>
                             </p>
-                            <br>
-                            <p><strong>Email</strong></p>
-                            <p>
+                            <p class="subtitle is-6">
                                 <%= insider.local.email %>
                             </p>
-                            <br>
-                            <p><strong>Location</strong></p>
-                            <p>
-                                <%= insider.location ? insider.location : "Secret..." %>
-                            </p>
-                            <br>
-                            <p><strong>Website</strong></p>
-                            <p>
-                                <%= insider.website ? insider.website : "Secret..." %>
-                            </p>
-                            <br>
-                            <p><strong>Bio</strong></p>
-                            <p>
-                                <%= insider.bio ? insider.bio : "Secret..." %>
-                            </p>
-                            <br>
-                            <a href="/follow"><button type="button" name="button">Follow</button></a>
-            </fieldset>
+                            <a href="/follow"><button id="BEditFollow" class="button is-small is-outlined is-primary" type="button" name="button">Follow</button></a>
+                        </div>
+                    </div>
+                    <nav class="level">
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="is-6 has-text-grey-light"><strong>REPUTATION POINTS</strong></p>
+                                <p class="is-4">
+                                    <%= insider.score %>
+                                </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="is-6 has-text-grey-light"><small>Location</small></p>
+                                <p class="is-4">
+                                    <%= insider.location ? insider.location : "Secret..." %>
+                                </p>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="is-6 has-text-grey-light">Bio</p>
+                                <p class="is-4">
+                                    <%= insider.bio ? insider.bio : "Secret..." %>
+                                </p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="is-6 has-text-grey-light">Website</p>
+                                <p class="is-4">
+                                    <%= insider.website ? insider.website : "Secret..." %>
+                                </p>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="column is-6">
+            <div class="is-sticky">
+                <div class="card-image">
+                    <nav class="navbar is-dark">
+                        <a id="WatchList" class="babMenu navbar-item is-tab "> My Watch List</a>
+                        <a id="currentInsight" class="babMenu navbar-item is-tab is-active">Current Insights</a>
+                    </nav>
+                </div>
+                <div class="card profile-card">
+
+                    <div id="watchList" class="card-content">
+                        <div class="Symbol">
+                            <h1 class="stockName" data-replace="Symbol">Air Liquide</h1>
+                            <b class="price is-6">104.87</b><i data-replace="BidRealtime"></i>
+                            <b id="variation" class="is-6 has-text-greEN"><span class= "indice">+20.7</span>&nbsp; <span class="indice">(10.8%)</span>
+                            </b>
+                        </div>
+                        <div id="bullAndBear"><img src="/images/bulls.png" alt="bulls-and-bears"></div>
+
+                        <div id="position">
+                            <span class="stockName">Performance</span>
+                            <h1 id="WinOrLoss">(10.8%)</h1>
+                            <form id="close" action="/" method="post">
+                                <button id="Bclose" type="submit" class="button is-small is-outlined is-primary">Close</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </section>
+    <script type="text/javascript" src="/JS/search.js"></script>
+    <script type="text/javascript" src="/JS/JSforCSS.js"></script>
+    <script type="text/javascript" src="/JS/modal.js"></script>
+</body>
+
+</html>

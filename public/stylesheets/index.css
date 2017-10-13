@@ -6,49 +6,33 @@ section {
     height: 100%;
     background-position: center;
     z-index: -1;
-    background-image: url("/images/hoodInsider.jpg");
+    background-image: url("/images/Landing photo.jpg");
     background-size: cover;
-    filter: grayscale(1);
-    -webkit-filter: grayscale(1);
-    -moz-filter: grayscale(1);
-    -o-filter: grayscale(1);
-    -ms-filter: grayscale(1);
-}
-
-.citation {
-    margin-top: 40px;
-    padding-top: 150PX;
-    PADDING-RIGHT: 65PX;
-    color: #192b41 !important;
-    z-index: 1;
-    opacity: 1;
-    font-size: 3.5REM !important;
 }
 
 #but {
-    padding-right: 37%;
-    padding-top: 8%;
+    padding-right: 45%;
+    padding-top: 30%;
 }
 
 .btn {
-    background-color: #192b41!important;
+    background: rgba(154, 163, 172, 0.9)!important;
     border-color: #192b41!important;
-    color: #fff!important;
+    color: #f9f9f9!important;
     display: inline-block;
     margin-bottom: 0;
-    font-weight: 700;
+    font-weight: 4.5REM;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     background-image: none;
     border: 1px solid;
     white-space: nowrap;
-    padding: 6px 12px;
+    padding: 6px 50px;
     font-size: 2.5rem;
     line-height: 1.33333333;
     border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    background-color: Transparent;
+    outline: none;
+    transition: all 0.3s ease-out;
 }

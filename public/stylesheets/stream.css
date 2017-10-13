@@ -510,3 +510,24 @@ a {
     float: right;
     margin-top: 20px;
 }
+
+
+}
+
+/*Profile button***************************************/
+#BEditFollow.is-outlined:focus,
+#BEditFollow.is-outlined:hover {
+    background-color: #21ce99;
+    border-color: #21ce99;
+    color: #fff;
+}
+#BEditFollow {
+    PADDING-LEFT: 30PX;
+    PADDING-RIGHT: 30PX;
+    font-weight: bolder;
+    color: #21ce99;
+    box-shadow: 0 0 0 0.125em #21ce99;
+    ;
+    border-color: #21ce99;
+    ;
+}
