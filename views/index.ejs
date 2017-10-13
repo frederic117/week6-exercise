@@ -8,18 +8,18 @@
     <title> Insiders Stream page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
-    <%# <link rel="stylesheet" type="text/css" href="minireset.min.css">%>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <style>
-.ui-autocomplete-loading {
-  background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
-}
-</style>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        .ui-autocomplete-loading {
+            background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+        }
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 </head>
@@ -32,74 +32,46 @@
                     <img id="logo" src="images/logo.png" alt="Description">
                 </a>
             </div>
-            <div class="nav" id="formNav">
-                <div class="nav-item field" id="formNav1">
-                    <form method="post" action="/search-stock" class="control has-icons-right" id="formNav2">
-                        <input id="search-query" name ="search" class="input is-hovered" type="text" placeholder="Stock or Username">
-                        <span id="loupe" class="icon is-small is-right">
-                    <i id="quicksearch" type="submit"  class="fa fa-search" ></i>
-                  </span>
-                    </form>
-                </div>
-            </div>
 
-            <span class="nav-toggle">
-                    <span></span>
-            <span></span>
-            <span></span>
-            </span>
-            <div class="nav-right nav-menu">
-                <div id="menu">
-                    <a href="/stream" class="nav-item is-tab ">
-        Stream
-        </a>
-                    <a href="/trending"class="nav-item is-tab">
-        Trending
-        </a>
-                    <a href="/leaderboard" class="nav-item is-tab">
-        Leaderboard
-        </a>
-                </div>
-                <span class="nav-item">
-                        <% if(!user) { %>
-                        <a href="/login" class="button">
-                          Log in
-                        </a>
-                        <a href="/signup" class="button">
-                          Sign up
-                        </a>
-                      </span>
-                <%} else { %>
-                    <div class="nav-profile">
-                        <a id="profile-pic" href="/profile">
-                            <div class="nav-photo-profil">
-                                <img src="./images/Warren.jpg" alt="">
-                            </div>
-                        </a>
-                        <div class="nav-user-profile">
-                            <div id="nav-username" class="nav-user-name">@
-                                <%= user.local.username%>
-                            </div>
-                            <div class="nav-status">
-                                <div class="nav-status-light"></div>
-                                <a href="/logout">Logout</a>
-                            </div>
+            <span class="nav-item">
+                                      <% if(!user) { %>
+                                      <a href="/login" class="button">
+                                        Log in
+                                      </a>
+                                      
+                                    </span>
+            <%} else { %>
+                <div class="nav-profile">
+                    <a id="profile-pic" href="/profile">
+                        <div class="nav-photo-profil">
+                            <img src="<%= user.picProfile%>" alt="">
                         </div>
-
-                        <%  } %>
+                    </a>
+                    <div class="nav-user-profile">
+                        <div id="nav-username" class="nav-user-name">@
+                            <%= user.local.username%>
+                        </div>
+                        <div class="nav-status">
+                            <div class="nav-status-light"></div>
+                            <a href="/logout">Logout</a>
+                        </div>
                     </div>
-            </div>
-    </nav>
-    <section class="hero is-fullheight is-dark">
-        <div class="has-text-right">
-            <p class="citation title is-3" style="margin: 200 px"> "Anybody who plays the stock market not as an insider </br>is like a man buying cows in the moonlight." - Daniel Drew</p>
+
+                    <%  } %>
+                </div>
         </div>
+    </nav>
+    <section class="grayscale hero is-fullheight is-dark">
+        <div class="has-text-right">
+            <p class="citation title is-3"> Find out what insiders are saying about your stocks... </br>Right now.</p>
+            <div id="but"><a href="/signup"><button id="babble-submit" type="submit" class="button is-outlined is-primary btn">Become an Insiders</button>
+            </a></div>
+        </div>
+
     </section>
 
 
-
-              <script type="text/javascript" src="JS/search.js"></script>
-              <script type="text/javascript" src="JS/JSforCSS.js"></script>
+    <script type="text/javascript" src="/JS/search.js"></script>
 </body>
 
 </html>

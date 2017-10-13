@@ -8,49 +8,48 @@
     <title> Insider profile page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="minireset.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
 
 </head>
 
 <body>
-  <nav class="nav has-shadow " id="top">
-      <div class="container" id="top2">
-          <div class="nav">
-              <a class="nav-item" href="/">
-                  <img id="logo" src="images/logo.png" alt="Description">
-              </a>
-          </div>
-          <div class="nav" id="formNav">
-              <div class="nav-item field" id="formNav1">
-                  <form method="post" class="control has-icons-right" id="formNav2">
-                      <input class="input is-hovered" type="text" placeholder="Stock or Username">
-                      <span id="loupe" class="icon is-small is-right">
+    <nav class="nav has-shadow " id="top">
+        <div class="container" id="top2">
+            <div class="nav">
+                <a class="nav-item" href="/">
+                    <img id="logo" src="images/logo.png" alt="Description">
+                </a>
+            </div>
+            <div class="nav" id="formNav">
+                <div class="nav-item field" id="formNav1">
+                    <form method="post" class="control has-icons-right" id="formNav2">
+                        <input class="input is-hovered" type="text" placeholder="Stock or Username">
+                        <span id="loupe" class="icon is-small is-right">
                   <i type="submit"  class="fa fa-search" ></i>
                 </span>
-                  </form>
-              </div>
-          </div>
+                    </form>
+                </div>
+            </div>
 
-          <span class="nav-toggle">
+            <span class="nav-toggle">
                   <span></span>
-          <span></span>
-          <span></span>
-          </span>
-          <div class="nav-right nav-menu">
-              <div id="menu">
-                  <a href="/stream" class="nav-item is-tab ">
+            <span></span>
+            <span></span>
+            </span>
+            <div class="nav-right nav-menu">
+                <div id="menu">
+                    <a href="/stream" class="nav-item is-tab ">
       Stream
       </a>
-                  <a href="/trending" class="nav-item is-tab">
+                    <a href="/trending" class="nav-item is-tab">
       Trending
       </a>
-                  <a href="/leaderboard"class="nav-item is-tab">
+                    <a href="/leaderboard" class="nav-item is-tab">
       Leaderboard
       </a>
-              </div>
-              <span class="nav-item">
+                </div>
+                <span class="nav-item">
                       <% if(!user) { %>
                       <a href="/login" class="button">
                         Log in
@@ -59,54 +58,67 @@
                         Sign up
                       </a>
                     </span>
-              <%} else { %>
-                  <div class="nav-profile">
-                      <a id="profile-pic" href="/profile">
-                          <div class="nav-photo-profil">
-                              <img src="<%= user.picProfile%>" alt="">
-                          </div>
-                      </a>
-                      <div class="nav-user-profile">
-                          <div id="nav-username" class="nav-user-name">@
-                              <%= user.local.username%>
-                          </div>
-                          <div class="nav-status">
-                              <div class="nav-status-light"></div>
-                              <a href="/logout">Logout</a>
-                          </div>
-                      </div>
+                <%} else { %>
+                    <div class="nav-profile">
+                        <a id="profile-pic" href="/profile">
+                            <div class="nav-photo-profil">
+                                <img src="<%= user.picProfile%>" alt="">
+                            </div>
+                        </a>
+                        <div class="nav-user-profile">
+                            <div id="nav-username" class="nav-user-name">@
+                                <%= user.local.username%>
+                            </div>
+                            <div class="nav-status">
+                                <div class="nav-status-light"></div>
+                                <a href="/logout">Logout</a>
+                            </div>
+                        </div>
 
-                      <%  } %>
-                  </div>
-          </div>
-  </nav>
+                        <%  } %>
+                    </div>
+            </div>
+    </nav>
     <section class="section main">
         <div class="container">
-    <fieldset>
-      <legend><%= insider.local.username %> profile</legend>
-      <%if (insider.picProfile) { %>
-        <img src="<%= insider.picProfile %>" alt=" picture">
-    <%  } else { %>
-        <img src="/images/avatar.png" alt=" picture">
-    <%  } %>
+            <fieldset>
+                <legend>
+                    <%= insider.local.username %> profile</legend>
+                <%if (insider.picProfile) { %>
+                    <img src="<%= insider.picProfile %>" alt=" picture">
+                    <%  } else { %>
+                        <img src="/images/avatar.png" alt=" picture">
+                        <%  } %>
 
-      <h1><strong>REPUTATION POINTS</strong></h1>
-      <p><%= insider.score %></p>
-      <br>
-      <p><strong>User name</strong></p>
-      <p><%= insider.local.username %></p>
-      <br>
-      <p><strong>Email</strong></p>
-      <p><%= insider.local.email %></p>
-      <br>
-      <p><strong>Location</strong></p>
-      <p><%= insider.location ? insider.location : "Secret..." %></p>
-      <br>
-      <p><strong>Website</strong></p>
-      <p><%= insider.website ? insider.website : "Secret..." %></p>
-      <br>
-      <p><strong>Bio</strong></p>
-      <p><%= insider.bio ? insider.bio : "Secret..." %></p>
-      <br>
-      <a href="/follow"><button type="button" name="button">Follow</button></a>
-    </fieldset>
+                            <h1><strong>REPUTATION POINTS</strong></h1>
+                            <p>
+                                <%= insider.score %>
+                            </p>
+                            <br>
+                            <p><strong>User name</strong></p>
+                            <p>
+                                <%= insider.local.username %>
+                            </p>
+                            <br>
+                            <p><strong>Email</strong></p>
+                            <p>
+                                <%= insider.local.email %>
+                            </p>
+                            <br>
+                            <p><strong>Location</strong></p>
+                            <p>
+                                <%= insider.location ? insider.location : "Secret..." %>
+                            </p>
+                            <br>
+                            <p><strong>Website</strong></p>
+                            <p>
+                                <%= insider.website ? insider.website : "Secret..." %>
+                            </p>
+                            <br>
+                            <p><strong>Bio</strong></p>
+                            <p>
+                                <%= insider.bio ? insider.bio : "Secret..." %>
+                            </p>
+                            <br>
+                            <a href="/follow"><button type="button" name="button">Follow</button></a>
+            </fieldset>
